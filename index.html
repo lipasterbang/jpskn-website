@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jabatan Pengairan dan Saliran Kuala Nerus</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css">
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Laman rasmi JPS Kuala Nerus dengan maklumat cuaca, borang permohonan, panduan banjir, dan interaksi komuniti.">
+	<meta name="author" content="Jabatan Pengairan dan Saliran Kuala Nerus">
+	<title>JPS Kuala Nerus | Laman Rasmi</title>
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="style.css">
+</head>
 	
-    <style>
+ <style>
 	        body {
 	            font-family: 'Roboto', Arial, sans-serif;
 	            margin: 0;
@@ -65,7 +67,7 @@
 	            padding: 1rem;
 	        }
 	
-	        section {
+	        section, .section {
 	            margin: 2rem auto;
 	            padding: 1.5rem;
 	            background: #ffffff;
@@ -331,16 +333,6 @@
 		    font-size: 0.95rem;
 		    margin-top: 1rem;
 		}
-		/* Improved Section UI Styling */
-		.section {
-		    margin: 2rem auto;
-		    padding: 1.5rem;
-		    max-width: 800px;
-		    background: #fff;
-		    border-radius: 10px;
-		    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-		    transition: box-shadow 0.3s ease;
-		}
 		
 		.section:hover {
 		    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
@@ -551,24 +543,26 @@
 		}
 
    </style>
-</head>
 
 <body>
     <!-- Header -->
     <header>
 		<img src="jpslogo.png" width="300" height="125" alt="JPS Kuala Nerus Logo">
+        	<p>Selamat datang ke laman rasmi JPS Kuala Nerus</p>
 		<h1>JABATAN PENGAIRAN DAN SALIRAN DAERAH KUALA NERUS</h1>
     </header>
 	
-    	<!-- Navigation -->
-	    <nav>
+	<nav>
 	        <ul>
-	            <li><a href="#about">About</a></li>
-	            <li><a href="#news">News</a></li>
-	            <li><a href="#services">Services</a></li>
-	            <li><a href="#map-section">Interactive Map</a></li>
-	            <li><a href="#forms">Forms</a></li>
-	            <li><a href="#resources">Resources</a></li>
+	            <li><a href="#about">Tentang Kami</a></li>
+	            <li><a href="#news">Berita</a></li>
+	            <li><a href="#services">Perkhidmatan</a></li>
+	            <li><a href="#map">Peta</a></li>
+	            <li><a href="#forms">Borang</a></li>
+	            <li><a href="#weather">Cuaca</a></li>
+	            <li><a href="#documents">Dokumen</a></li>
+	            <li><a href="#feedback">Maklum Balas</a></li>
+	            <li><a href="#faq">FAQ</a></li>
 	        </ul>
 	    </nav>
 
@@ -578,7 +572,7 @@
 	        <input type="text" id="search" placeholder="🔍 Cari maklumat..." onkeyup="searchContent()" />
 	        <button onclick="searchContent()">Cari</button>
 	    </div>
-	    <p id="search-results" class=".search-error"></p>
+	    <p id="search-results" class="search-error"></p>
 	</div>
 
         <section id="about" class="section">
@@ -879,6 +873,9 @@
 				</table>
 			</div>
 		</section>
+	<section>
+            <button onclick="document.body.classList.toggle('dark')">🌓 Gelap/Cerah</button>
+        </section>
     </div>
 
     <!-- Footer -->
@@ -886,8 +883,8 @@
         <p>&copy; 2025 Jabatan Pengairan dan Saliran Kuala Nerus. All rights reserved.</p>
     </footer>
 
-		   <!-- Leaflet JS (only one version needed) -->
-		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- Leaflet JS (only one version needed) -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 		
 <script>
 		  // Search content function
@@ -936,6 +933,15 @@
 		      document.getElementById("weather-info").innerHTML = `<p>⚠️ Gagal memuatkan data cuaca.</p>`;
 		      console.error("Weather error:", error);
 		    });
+
+			!function (d, s, id) {
+		            var js, fjs = d.getElementsByTagName(s)[0];
+		            if (!d.getElementById(id)) {
+		                js = d.createElement(s); js.id = id;
+		                js.src = 'https://weatherwidget.io/js/widget.min.js';
+		                fjs.parentNode.insertBefore(js, fjs);
+		            }
+		        }(document, 'script', 'weatherwidget-io-js');
 		
 		  // Toggle map view
 		  let mapInitialized = false;
