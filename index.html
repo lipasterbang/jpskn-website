@@ -10,172 +10,286 @@
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="style.css">
 </head>
+	<style>
+	        body {
+	            font-family: 'Roboto', Arial, sans-serif;
+	            margin: 0;
+	            padding: 0;
+	            line-height: 1.6;
+	            background-color: #f5f5f5;
+	            color: #333;
+	        }
 	
-		 <style>
-		/* Base styles */
-		body {
-		    font-family: 'Roboto', Arial, sans-serif;
-		    margin: 0;
-		    padding: 0;
-		    line-height: 1.6;
-		    background-color: #f5f5f5;
-		    color: #333;
+	        header {
+	            background-color: #004d99;
+	            color: #fff;
+	            text-align: center;
+	            padding: 1rem 0;
+	        }
+	
+	        nav {
+	            background-color: #0073e6;
+	            padding: 0.5rem 1rem;
+			position: sticky;
+			top: 0;
+			z-index: 1000;
+	        }
+	
+	        nav ul {
+	            list-style: none;
+	            margin: 0;
+	            padding: 0;
+	            display: flex;
+	            justify-content: space-around;
+	        }
+	
+	        nav ul li {
+	            margin: 0;
+	        }
+	
+	        nav ul li a {
+	            color: #fff;
+	            text-decoration: none;
+	            font-weight: bold;
+	            padding: 0.5rem 1rem;
+	            border-radius: 5px;
+	            transition: background 0.3s ease;
+	        }
+	
+	        nav ul li a:hover {
+	            background-color: #005bb5;
+	        }
+	
+	        .container {
+	            max-width: 1200px;
+	            margin: 0 auto;
+	            padding: 1rem;
+	        }
+	
+	        section, .section {
+	            margin: 2rem auto;
+	            padding: 1.5rem;
+	            background: #ffffff;
+	            border-radius: 10px;
+	            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	        }
+	
+	        section h2 {
+	            color: #004d99;
+	        }
+	
+	        #map {
+	            width: 100%;
+	            height: 400px;
+	            margin-top: 1rem;
+	            border-radius: 10px;
+	            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	        }
+	
+	        footer {
+	            background-color: #004d99;
+	            color: #fff;
+	            text-align: center;
+	            padding: 1rem;
+	        }
+		
+		#iframe {
+			width: 100%;
+			height: 250px;
+			border-radius: 10px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 		}
 		
-		h2, h3 {
-		    color: #004d99;
+		#documents h3 {
+			color: #0073e6;
+		}
+
+		#documents ul {
+			list-style: none;
+			padding: 0;
+		}
+
+		#documents ul li {
+			margin: 0.5rem 0;
+			font-size: 16px;
+		}
+
+		#documents ul li a {
+			text-decoration: none;
+			color: #0073e6;
+			font-weight: bold;
+			display: flex;
+			align-items: center;
+		}
+
+		#documents ul li a:hover {
+			text-decoration: underline;
+		}
+
+		#documents ul li::before {
+			content: "📥 ";
+			font-size: 18px;
+			margin-right: 8px;
 		}
 		
-		/* Header */
-		header, footer {
-		    background-color: #004d99;
-		    color: #fff;
+		#feedback h3 {
+			color: #004d99;
+		}
+
+		form {
+			background: #f9f9f9;
+			padding: 1rem;
+			border-radius: 10px;
+			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		input, textarea, select, button {
+			width: 100%;
+			padding: 0.7rem;
+			margin: 0.5rem 0;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+		}
+
+		button {
+			background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+			  border: none;
+			  color: white;
+			  padding: 12px 24px;
+			  font-size: 16px;
+			  font-weight: 600;
+			  border-radius: 8px;
+			  cursor: pointer;
+			  box-shadow: 0 4px 15px rgba(37, 117, 252, 0.4);
+			  transition: background 0.3s ease, box-shadow 0.3s ease;
+			  user-select: none;
+		}
+
+		button:hover {
+			background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+  			box-shadow: 0 6px 20px rgba(37, 117, 252, 0.7);
+		}
+
+	    	button:active {
+		  transform: scale(0.98);
+		  box-shadow: 0 3px 10px rgba(37, 117, 252, 0.5);
+		}
+
+		details {
+			margin-bottom: 1rem;
+			background: #f1f1f1;
+			padding: 0.7rem;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		
+		#services h3, #request-services h2, #service-fees h2 {
+			color: #004d99;
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 20px;
+		}
+
+		article {
+			background: #f9f9f9;
+			padding: 1rem;
+			border-radius: 10px;
+			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		ul {
+			list-style: none;
+			padding: 0;
+		}
+
+		ul li {
+			padding: 0.5rem 0;
+			font-size: 16px;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 1rem;
+		}
+
+		table, th, td {
+			border: 1px solid #ccc;
+		}
+
+		th, td {
+			padding: 0.7rem;
+			text-align: left;
+		}
+
+		th {
+			background: #0073e6;
+			color: white;
+		}
+
+		 #map-section {
+		    padding: 40px 20px;
 		    text-align: center;
-		    padding: 1rem 0;
-		}
+		  }
 		
-		/* Navigation */
-		nav {
-		    background-color: #0073e6;
-		    padding: 0.5rem 1rem;
-		    position: sticky;
-		    top: 0;
-		    z-index: 1000;
-		}
-		nav ul {
-		    list-style: none;
-		    margin: 0;
-		    padding: 0;
-		    display: flex;
-		    justify-content: space-around;
-		}
-		nav ul li a {
-		    color: #fff;
-		    text-decoration: none;
-		    font-weight: bold;
-		    padding: 0.5rem 1rem;
-		    border-radius: 5px;
+		  .map-toggle-btn {
+		    background: #2575fc;
+		    color: white;
+		    border: none;
+		    padding: 12px 24px;
+		    margin-bottom: 20px;
+		    font-size: 16px;
+		    border-radius: 6px;
+		    cursor: pointer;
+		    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 		    transition: background 0.3s ease;
-		}
-		nav ul li a:hover {
-		    background-color: #005bb5;
-		}
+		  }
 		
-		/* Container and sections */
-		.container, .section, .search-section {
-		    max-width: 1200px;
-		    margin: 0 auto;
-		    padding: 1.5rem;
-		    background: #fff;
-		    border-radius: 10px;
-		    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-		}
-		.section:hover {
-		    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
-		}
+		  .map-toggle-btn:hover {
+		    background: #6a11cb;
+		  }
 		
-		/* Map */
-		#map {
-		    width: 100%;
-		    height: 400px;
-		    margin-top: 1rem;
-		    border-radius: 10px;
-		    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-		}
-		.map-container {
+		  .map-container {
 		    display: none;
+		    width: 100%;
 		    height: 500px;
 		    max-width: 900px;
 		    margin: 0 auto;
 		    border-radius: 12px;
 		    overflow: hidden;
 		    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-		}
+		    transition: max-height 0.5s ease;
+		  }
 		
-		/* Buttons */
-		button, .map-toggle-btn {
-		    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-		    color: white;
-		    border: none;
-		    padding: 12px 24px;
-		    font-size: 16px;
-		    font-weight: 600;
-		    border-radius: 8px;
-		    cursor: pointer;
-		    box-shadow: 0 4px 15px rgba(37, 117, 252, 0.4);
-		    transition: background 0.3s ease, box-shadow 0.3s ease;
-		}
-		button:hover, .map-toggle-btn:hover {
-		    background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
-		    box-shadow: 0 6px 20px rgba(37, 117, 252, 0.7);
-		}
-		button:active {
-		    transform: scale(0.98);
-		}
+		  #map {
+		    width: 100%;
+		    height: 100%;
+		  }
 		
-		/* Forms */
-		form {
-		    background: #f9f9f9;
-		    padding: 1rem;
+		  @media screen and (max-width: 600px) {
+		    .map-container {
+		      height: 300px;
+		    }
+		
+		    .map-toggle-btn {
+		      width: 100%;
+		      font-size: 14px;
+		    }
+		  }
+		
+		.search-section {
+		    margin: 2rem auto;
+		    padding: 1.5rem;
+		    background-color: #ffffff;
 		    border-radius: 10px;
-		    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-		}
-		input, textarea, select {
-		    width: 100%;
-		    padding: 0.7rem;
-		    margin: 0.5rem 0;
-		    border-radius: 5px;
-		    border: 1px solid #ccc;
-		}
-		.form-group {
-		    margin-bottom: 1.5rem;
+		    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		    max-width: 800px;
+		    text-align: center;
 		}
 		
-		/* Documents */
-		#documents h3 {
-		    color: #0073e6;
-		}
-		#documents ul {
-		    list-style: none;
-		    padding: 0;
-		}
-		#documents ul li {
-		    margin: 0.5rem 0;
-		    font-size: 16px;
-		}
-		#documents ul li a {
-		    text-decoration: none;
-		    color: #0073e6;
-		    font-weight: bold;
-		    display: flex;
-		    align-items: center;
-		}
-		#documents ul li a:hover {
-		    text-decoration: underline;
-		}
-		#documents ul li::before {
-		    content: "📥 ";
-		    font-size: 18px;
-		    margin-right: 8px;
-		}
-		
-		/* Tables */
-		table {
-		    width: 100%;
-		    border-collapse: collapse;
-		    margin-top: 1rem;
-		}
-		th, td {
-		    padding: 0.7rem;
-		    text-align: left;
-		    border: 1px solid #ccc;
-		}
-		th {
-		    background: #0073e6;
-		    color: white;
-		}
-		
-		/* Search */
 		.search-container {
 		    display: flex;
 		    flex-wrap: wrap;
@@ -183,36 +297,73 @@
 		    gap: 1rem;
 		    align-items: center;
 		}
-		.search-container input, .search-container button {
-		    padding: 0.8rem 1.2rem;
-		    font-size: 1rem;
-		    border-radius: 8px;
-		}
+		
 		.search-container input {
 		    flex: 1 1 300px;
+		    padding: 0.8rem 1rem;
+		    font-size: 1rem;
 		    border: 1px solid #ccc;
+		    border-radius: 8px;
 		    transition: border 0.3s;
 		}
+		
 		.search-container input:focus {
 		    border-color: #0073e6;
 		    outline: none;
 		}
+		
 		.search-container button {
+		    padding: 0.8rem 1.2rem;
 		    background-color: #0073e6;
 		    color: #fff;
 		    border: none;
+		    border-radius: 8px;
 		    font-weight: bold;
+		    cursor: pointer;
+		    transition: background 0.3s ease;
 		}
+		
 		.search-container button:hover {
 		    background-color: #005bb5;
 		}
+		
 		.search-error {
 		    color: red;
 		    font-size: 0.95rem;
 		    margin-top: 1rem;
 		}
 		
-		/* Back to Top Button */
+		.section:hover {
+		    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+		}
+		
+		.section h2 {
+		    font-size: 2rem;
+		    margin-bottom: 1rem;
+		    color: #004d99;
+		}
+		
+		.section p, .section ul li {
+		    line-height: 1.7;
+		    font-size: 1rem;
+		    color: #333;
+		}
+		
+		.section ul {
+		    padding-left: 1.2rem;
+		}
+		
+		hr.section-divider {
+		    border: 0;
+		    height: 1px;
+		    background: #ccc;
+		    margin: 4rem 0;
+		}
+		
+		.form-group {
+		    margin-bottom: 1.5rem;
+		}
+
 		#backToTop {
 		    position: fixed;
 		    bottom: 30px;
@@ -229,26 +380,165 @@
 		    display: none;
 		    transition: all 0.3s ease;
 		}
+		
 		#backToTop:hover {
 		    background-color: #005bb5;
 		    transform: scale(1.1);
 		}
 		
-		/* Responsive */
-		@media screen and (max-width: 768px) {
-		    .map-container {
-		        height: 300px;
-		    }
-		    .map-toggle-btn {
-		        width: 100%;
-		        font-size: 14px;
-		    }
+		@media (max-width: 768px) {
 		    #backToTop {
 		        bottom: 20px;
 		        right: 20px;
 		        padding: 0.65rem 0.85rem;
-		        font-size: 1.8rem;
+		        font-size: 1rem;
 		    }
+		}
+
+	    	/* Floating Help Button */
+		#help-button {
+		    position: fixed;
+		    bottom: 30px;
+		    left: 30px;
+		    background-color: #28a745;
+		    color: white;
+		    padding: 12px 16px;
+		    border-radius: 30px;
+		    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+		    cursor: pointer;
+		    font-weight: bold;
+		    z-index: 1000;
+		    transition: background 0.3s ease;
+		}
+		
+		#help-button:hover {
+		    background-color: #218838;
+		}
+		
+		/* Help Popup Box */
+		#help-popup {
+		    position: fixed;
+		    bottom: 80px;
+		    left: 30px;
+		    width: 300px;
+		    background: white;
+		    border-radius: 10px;
+		    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+		    padding: 1rem;
+		    display: none;
+		    z-index: 1001;
+		}
+		
+		.help-header {
+		    display: flex;
+		    justify-content: space-between;
+		    align-items: center;
+		    border-bottom: 1px solid #ddd;
+		    padding-bottom: 0.5rem;
+		    margin-bottom: 1rem;
+		}
+		
+		.help-header h3 {
+		    margin: 0;
+		    font-size: 1.1rem;
+		    color: #0073e6;
+		}
+		
+		#close-help {
+		    font-size: 1.4rem;
+		    cursor: pointer;
+		}
+		
+		.help-options a.whatsapp-link {
+		    display: inline-block;
+		    margin-bottom: 1rem;
+		    background-color: #25D366;
+		    color: white;
+		    padding: 8px 12px;
+		    border-radius: 5px;
+		    text-decoration: none;
+		    font-weight: bold;
+		    transition: background 0.3s ease;
+		}
+		
+		.help-options a.whatsapp-link:hover {
+		    background-color: #1ebe5b;
+		}
+		
+		#helpForm input,
+		#helpForm textarea {
+		    width: 100%;
+		    padding: 0.5rem;
+		    margin-bottom: 0.7rem;
+		    border: 1px solid #ccc;
+		    border-radius: 5px;
+		}
+		
+		#helpForm button {
+		    width: 100%;
+		    background-color: #0073e6;
+		    color: white;
+		    border: none;
+		    padding: 0.7rem;
+		    border-radius: 5px;
+		    cursor: pointer;
+		    font-weight: bold;
+		}
+		
+		#helpForm button:hover {
+		    background-color: #005bb5;
+		}
+
+	    /* Section Styling */
+		#map-section {
+		  padding: 40px 20px;
+		  text-align: center;
+		}
+		
+		/* Toggle Button */
+		.map-toggle-btn {
+		  background: #2575fc;
+		  color: white;
+		  border: none;
+		  padding: 12px 24px;
+		  margin-bottom: 20px;
+		  font-size: 16px;
+		  border-radius: 6px;
+		  cursor: pointer;
+		  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+		  transition: background 0.3s ease;
+		}
+		
+		.map-toggle-btn:hover {
+		  background: #6a11cb;
+		}
+		
+		/* Map Container */
+		.map-container {
+		  display: none;
+		  width: 100%;
+		  height: 500px;
+		  margin: auto;
+		  border-radius: 12px;
+		  overflow: hidden;
+		  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+		  transition: max-height 0.5s ease;
+		}
+		
+		#map {
+		  width: 100%;
+		  height: 100%;
+		}
+
+	    @media screen and (max-width: 600px) {
+		  .map-container {
+		    height: 300px;
+		  }
+		
+		  .map-toggle-btn {
+		    width: 100%;
+		    font-size: 14px;
+		  }
 		}
    </style>
 
