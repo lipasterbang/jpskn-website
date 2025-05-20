@@ -571,20 +571,31 @@
     
 	<script>
 		
-		function searchContent() {
-            let query = document.getElementById("search").value.toLowerCase();
-            let sections = document.querySelectorAll(".section");
-            let results = document.getElementById("search-results");
-            let found = false;
-            
-            sections.forEach(section => {
-                if (section.textContent.toLowerCase().includes(query)) {
-                    section.style.display = "block";
-                    found = true;
-                } else {
-                    section.style.display = "none";
-                }
-            });
+	function searchContent() {
+	    let searchTerm = document.getElementById("search").value.toLowerCase();
+	    let allItems = document.querySelectorAll("#news article, #documents ul li, #services ul li");
+	
+	    let resultsFound = false;
+	
+	    allItems.forEach(item => {
+	        if (item.innerText.toLowerCase().includes(searchTerm)) {
+	            item.style.display = "block"; // Show matching items
+	            resultsFound = true;
+	        } else {
+	            item.style.display = "none"; // Hide non-matching items
+	        }
+	    });
+
+    // Show a message if no results found
+    if (!resultsFound) {
+        document.getElementById("search-results").innerHTML = `<p>Tiada hasil ditemui untuk: "<strong>${searchTerm}</strong>"</p>`;
+    } else {
+        document.getElementById("search-results").innerHTML = "";
+    }
+}
+
+// Ensure the function runs on every key press
+document.getElementById("search").addEventListener("keyup", searchContent);
             
             results.innerHTML = found ? "" : "Maklumat tidak dijumpai.";
         }
@@ -592,48 +603,43 @@
 		// Ensure the function runs on every key press
 		document.getElementById("search").addEventListener("keyup", searchContent);
 
-		 let map;
-        document.getElementById("toggleMap").addEventListener("click", function () {
-            let mapContainer = document.getElementById("mapContainer");
-            if (mapContainer.style.display === "none" || mapContainer.style.display === "") {
-                mapContainer.style.display = "block";
-                if (!map) {
-                    map = L.map('map').setView([5.3851, 103.1021], 12);
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: '&copy; OpenStreetMap contributors'
-                    }).addTo(map);
-                    L.marker([5.3851, 103.1021]).addTo(map).bindPopup('JPS Kuala Nerus Office').openPopup();
-                }
-            } else {
-                mapContainer.style.display = "none";
-            }
-        });
+		let map;
+	        document.getElementById("toggleMap").addEventListener("click", function () {
+	            let mapContainer = document.getElementById("mapContainer");
+	            if (mapContainer.style.display === "none" || mapContainer.style.display === "") {
+	                mapContainer.style.display = "block";
+	                if (!map) {
+	                    map = L.map('map').setView([5.3851, 103.1021], 12);
+	                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	                        attribution: '&copy; OpenStreetMap contributors'
+	                    }).addTo(map);
+	                    L.marker([5.3851, 103.1021]).addTo(map).bindPopup('JPS Kuala Nerus Office').openPopup();
+	                }
+	            } else {
+	                mapContainer.style.display = "none";
+	            }
+	        });
 		
-		document.addEventListener("DOMContentLoaded", function () {
-			// Load WeatherWidget.io script dynamically
-			var script = document.createElement("script");
-			script.src = "https://weatherwidget.io/js/widget.min.js";
-			script.async = true;
-			document.body.appendChild(script);
-
-			// Fetch Live Weather Data from OpenWeatherMap API
-			const apiKey = "YOUR_OPENWEATHERMAP_API_KEY"; // Get your API key from https://home.openweathermap.org/users/sign_up
-			const city = "Kuala Nerus";
-			const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
-			fetch(url)
-				.then(response => response.json())
-				.then(data => {
-					document.getElementById("weather-info").innerHTML = `
-						<p><strong>🌡️ Suhu:</strong> ${data.main.temp}°C</p>
-						<p><strong>💨 Kelembapan:</strong> ${data.main.humidity}%</p>
-						<p><strong>🌥️ Cuaca:</strong> ${data.weather[0].description}</p>
-					`;
-				})
-				.catch(error => {
-					document.getElementById("weather-info").innerHTML = `<p>⚠️ Gagal memuatkan data cuaca.</p>`;
-					console.error("Error fetching weather data:", error);
-				});
+		document.addEventListener("DOMContentLoaded", () => {
+		    const map = L.map('map').setView([5.417, 103.385], 12);
+		
+		    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+		        attribution: '&copy; OpenStreetMap contributors'
+		    }).addTo(map);
+		
+		    const locations = [
+		        { name: "Pejabat Tapak Projek Tebatan Banjir UMT", lat: 5.387100151174325, lng: 103.07614105767188 },
+		        { name: "PROJEK TEBATAN BANJIR DAN SISTEM PENCEGAHAN HAKISAN PANTAI DI UNIVERSITI MALAYSIA TERENGGANU (UMT)", lat: 5.4078811146430805, lng: 103.08861976649742 },
+		        { name: "Empangan Kuala Nerus", lat: 5.445, lng: 103.400 }
+		    ];
+		
+		    const markers = L.markerClusterGroup();
+		    locations.forEach(location => {
+		        const marker = L.marker([location.lat, location.lng]).bindPopup(`<strong>${location.name}</strong>`);
+		        markers.addLayer(marker);
+		    });
+		
+		    map.addLayer(markers);
 		});
 		
 		async function fetchJPSNews() {
