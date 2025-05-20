@@ -7,6 +7,8 @@
     <title>Jabatan Pengairan dan Saliran Kuala Nerus</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+	
     <style>
 	        body {
 	            font-family: 'Roboto', Arial, sans-serif;
@@ -27,9 +29,9 @@
 	        nav {
 	            background-color: #0073e6;
 	            padding: 0.5rem 1rem;
-				position: sticky;
-				top: 0;
-				z-index: 1000;
+			position: sticky;
+			top: 0;
+			z-index: 1000;
 	        }
 	
 	        nav ul {
@@ -226,6 +228,56 @@
 			background: #0073e6;
 			color: white;
 		}
+
+		 #map-section {
+		    padding: 40px 20px;
+		    text-align: center;
+		  }
+		
+		  .map-toggle-btn {
+		    background: #2575fc;
+		    color: white;
+		    border: none;
+		    padding: 12px 24px;
+		    margin-bottom: 20px;
+		    font-size: 16px;
+		    border-radius: 6px;
+		    cursor: pointer;
+		    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+		    transition: background 0.3s ease;
+		  }
+		
+		  .map-toggle-btn:hover {
+		    background: #6a11cb;
+		  }
+		
+		  .map-container {
+		    display: none;
+		    width: 100%;
+		    height: 500px;
+		    max-width: 900px;
+		    margin: 0 auto;
+		    border-radius: 12px;
+		    overflow: hidden;
+		    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+		    transition: max-height 0.5s ease;
+		  }
+		
+		  #map {
+		    width: 100%;
+		    height: 100%;
+		  }
+		
+		  @media screen and (max-width: 600px) {
+		    .map-container {
+		      height: 300px;
+		    }
+		
+		    .map-toggle-btn {
+		      width: 100%;
+		      font-size: 14px;
+		    }
+		  }
 		
 		.search-section {
 		    margin: 2rem auto;
@@ -497,7 +549,6 @@
 		    font-size: 14px;
 		  }
 		}
-
 
    </style>
 </head>
@@ -836,7 +887,7 @@
     </footer>
 
     <!-- Map Scripts -->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
     
 	<script>
@@ -861,9 +912,8 @@
 
 		// Ensure the function runs on every key press
 		document.getElementById("search").addEventListener("keyup", searchContent);
-		
-		document.addEventListener("DOMContentLoaded", function () {
-			// Load WeatherWidget.io script dynamically
+			
+		// Load WeatherWidget.io script dynamically
 			var script = document.createElement("script");
 			script.src = "https://weatherwidget.io/js/widget.min.js";
 			script.async = true;
@@ -887,7 +937,7 @@
 					document.getElementById("weather-info").innerHTML = `<p>⚠️ Gagal memuatkan data cuaca.</p>`;
 					console.error("Error fetching weather data:", error);
 				});
-		});
+			});
 		
 			async function fetchJPSNews() {
 				const newsList = document.getElementById("news-list");
@@ -916,60 +966,36 @@
 			}
 		
 		    // === Add markers ===
-		    let map; // Declare map globally
-			const mapContainer = document.getElementById("mapContainer");
-			const toggleBtn = document.getElementById("toggleMap");
+		    let mapInitialized = false;
+		    let map;
 			
-			// Toggle map visibility
-			toggleBtn.addEventListener("click", function () {
-			  const isHidden = mapContainer.style.display === "none" || mapContainer.style.display === "";
+			  document.getElementById("toggleMap").addEventListener("click", function () {
+			    const mapContainer = document.getElementById("mapContainer");
+			    const toggleBtn = document.getElementById("toggleMap");
 			
-			  mapContainer.style.display = isHidden ? "block" : "none";
-			  toggleBtn.textContent = isHidden ? "Hide Map" : "Show Map";
+			    if (mapContainer.style.display === "none" || mapContainer.style.display === "") {
+			      mapContainer.style.display = "block";
+			      toggleBtn.textContent = "Hide Map";
 			
-			  if (isHidden && !map) {
-			    // Initialize the map only once
-			    map = L.map('map').setView([5.394483317854787, 103.06308398698182], 13);
+			      if (!mapInitialized) {
+			        map = L.map('map').setView([5.3851, 103.1021], 13);
 			
-			    // Add OpenStreetMap tiles
-			    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-			      attribution: '&copy; OpenStreetMap contributors'
-			    }).addTo(map);
+			        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			          attribution: '&copy; OpenStreetMap contributors'
+			        }).addTo(map);
 			
-			    // === Add markers ===
-			    const markers = [
-			      {
-			        coords: [5.394483317854787, 103.06308398698182],
-			        label: 'JPS Kuala Nerus Office',
-			        open: true
-			      },
-			      {
-			        coords: [5.387100151174325, 103.07614105767188],
-			        label: 'Tapak Projek Tebatan Banjir UMT'
-			      },
-			      {
-			        coords: [5.4078811146430805, 103.08861976649742],
-			        label: 'Projek Tebatan Banjir & Pencegahan Hakisan UMT'
-			      },
-			      {
-			        coords: [5.445, 103.400],
-			        label: 'Empangan Kuala Nerus'
+			        // Add markers
+			        L.marker([5.39448, 103.06308]).addTo(map).bindPopup('📍 JPS Kuala Nerus Office').openPopup();
+			        L.marker([5.38710, 103.07614]).addTo(map).bindPopup('📍 Tapak Projek Tebatan Banjir UMT');
+			        L.marker([5.40788, 103.08862]).addTo(map).bindPopup('📍 Projek Pencegahan Hakisan Pantai UMT');
+			
+			        mapInitialized = true;
 			      }
-			    ];
-			
-			    markers.forEach(marker => {
-			      const m = L.marker(marker.coords)
-			        .addTo(map)
-			        .bindPopup(marker.label);
-			
-			      if (marker.open) m.openPopup();
-			    });
-			  }
-			});
-
-			const bounds = L.latLngBounds([]);
-			markers.forEach(marker => bounds.extend(marker.coords));
-			map.fitBounds(bounds);
+			    } else {
+			      mapContainer.style.display = "none";
+			      toggleBtn.textContent = "Show Map";
+			    }
+			  });
 
 			// When the user scrolls down 200px from the top, show the button
 			window.onscroll = function() {
