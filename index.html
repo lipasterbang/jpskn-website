@@ -888,7 +888,6 @@
 
     <!-- Map Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
     
 	<script>
 		
@@ -937,9 +936,11 @@
 					document.getElementById("weather-info").innerHTML = `<p>⚠️ Gagal memuatkan data cuaca.</p>`;
 					console.error("Error fetching weather data:", error);
 				});
-			});
+				document.addEventListener("DOMContentLoaded", () => {
+				    // All your initialization code here (e.g., weather fetch, event listeners)
+				});
 		
-			async function fetchJPSNews() {
+				async function fetchJPSNews() {
 				const newsList = document.getElementById("news-list");
 				newsList.innerHTML = "<li>Fetching latest news...</li>";
 	
@@ -996,6 +997,8 @@
 			      toggleBtn.textContent = "Show Map";
 			    }
 			  });
+		
+			const backToTop = document.getElementById("backToTop");
 
 			// When the user scrolls down 200px from the top, show the button
 			window.onscroll = function() {
@@ -1034,7 +1037,7 @@
     </script>
 	
 			<!-- Back to Top Button -->
-			<button id="#backToTop" aria-label="Kembali ke atas" title="Kembali ke atas">⬆</button>
+			<button id="backToTop" aria-label="Kembali ke atas" title="Kembali ke atas">⬆</button>
 
 			<!-- Floating Help Button -->
 			<div id="help-button">
@@ -1042,7 +1045,7 @@
 			</div>
 			
 			<!-- Help Popup -->
-			<div id="help-popup">
+			<div id="help-popup" style="display:none;">
 			  <div class="help-header">
 			    <h3>Bantuan Segera</h3>
 			    <span id="close-help">&times;</span>
