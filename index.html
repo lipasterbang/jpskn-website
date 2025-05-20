@@ -611,11 +611,11 @@
 				</a>
 				<div id="weather-info"></div>
 			</div>
-		</section>
+			</section>
 	
-		<hr class="section-divider">
+				<hr class="section-divider">
 
-	<section id="documents" class="section">
+			<section id="documents" class="section">
 				<div class="container">
 				<hgroup>
 					<h2>Repositori Dokumen</h2>
@@ -948,17 +948,48 @@
 			}
 
 			// Fetch news on page load
-			document.addEventListener("DOMContentLoaded", fetchJPSNews);
-			
-			document.getElementById("complaintForm").addEventListener("submit", function(event) {
-			event.preventDefault(); // Prevent form from refreshing the page
-			document.getElementById("responseMessage").style.display = "block"; // Show success message
-			setTimeout(() => { document.getElementById("responseMessage").style.display = "none"; }, 5000); // Hide after 5s
-			this.reset(); // Reset form fields
-			});
-	
-			// Get the button
-			const backToTop = document.getElementById("backToTop");
+			yle.display = isHidden ? "block" : "none";
+		  toggleBtn.textContent = isHidden ? "Hide Map" : "Show Map";
+		
+		  if (isHidden && !map) {
+		    // Initialize the map only once
+		    map = L.map('map').setView([5.394483317854787, 103.06308398698182], 13);
+		
+		    // Add OpenStreetMap tiles
+		    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		      attribution: '&copy; OpenStreetMap contributors'
+		    }).addTo(map);
+		
+		    // === Add markers ===
+		    const markers = [
+		      {
+		        coords: [5.394483317854787, 103.06308398698182],
+		        label: 'JPS Kuala Nerus Office',
+		        open: true
+		      },
+		      {
+		        coords: [5.387100151174325, 103.07614105767188],
+		        label: 'Tapak Projek Tebatan Banjir UMT'
+		      },
+		      {
+		        coords: [5.4078811146430805, 103.08861976649742],
+		        label: 'Projek Tebatan Banjir & Pencegahan Hakisan UMT'
+		      },
+		      {
+		        coords: [5.445, 103.400],
+		        label: 'Empangan Kuala Nerus'
+		      }
+		    ];
+		
+		    markers.forEach(marker => {
+		      const m = L.marker(marker.coords)
+		        .addTo(map)
+		        .bindPopup(marker.label);
+		
+		      if (marker.open) m.openPopup();
+		    });
+		  }
+		});
 			
 			// When the user scrolls down 200px from the top, show the button
 			window.onscroll = function() {
