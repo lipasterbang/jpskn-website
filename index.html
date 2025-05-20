@@ -861,38 +861,6 @@
 
 		// Ensure the function runs on every key press
 		document.getElementById("search").addEventListener("keyup", searchContent);
-	
-		let map;
-		  const mapContainer = document.getElementById("mapContainer");
-		  const toggleBtn = document.getElementById("toggleMap");
-		
-		  toggleBtn.addEventListener("click", function () {
-		    const isHidden = mapContainer.style.display === "none" || mapContainer.style.display === "";
-		    
-		    mapContainer.style.display = isHidden ? "block" : "none";
-		    toggleBtn.textContent = isHidden ? "Hide Map" : "Show Map";
-		
-		    if (isHidden && !map) {
-		      map = L.map('map').setView([5.3851, 103.1021], 12);
-		
-		      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		        attribution: '&copy; OpenStreetMap contributors'
-		      }).addTo(map);
-		
-		      L.marker([5.394483317854787, 103.06308398698182])
-		        .addTo(map)
-		        .bindPopup('JPS Kuala Nerus Office')
-		        .openPopup();
-		
-		      L.marker([5.387100151174325, 103.07614105767188])
-		        .addTo(map)
-		        .bindPopup('Tapak Projek Tebatan Banjir UMT');
-		
-		      L.marker([5.4078811146430805, 103.08861976649742])
-		        .addTo(map)
-		        .bindPopup('Projek Tebatan Banjir & Pencegahan Hakisan UMT');
-		    }
-		  });
 		
 		document.addEventListener("DOMContentLoaded", function () {
 			// Load WeatherWidget.io script dynamically
@@ -946,7 +914,6 @@
 					console.error("Error fetching news:", error);
 				}
 			}
-
 		
 		    // === Add markers ===
 		    let map; // Declare map globally
