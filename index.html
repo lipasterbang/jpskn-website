@@ -558,12 +558,12 @@
             <p>We provide a range of water management and drainage services to support the community.</p>
         </section>
 
-	<section id="map-section">
-			<h2>Interactive Map</h2>
-			<button id="toggleMap">Show/Hide Map</button>
-			<div id="mapContainer">
-				<div id="map"></div>
-			</div>
+	<section id="map-section" class="section">
+		  <h2>Peta Interaktif</h2>
+		  <button id="toggleMap">Show Map</button>
+		  <div id="mapContainer" style="display:none;">
+		    <div id="map" style="height: 400px; border-radius: 10px; margin-top: 1rem;"></div>
+		  </div>
 		</section>
 
 	<hr class="section-divider">
@@ -947,50 +947,63 @@
 				}
 			}
 
-			// Fetch news on page load
-			yle.display = isHidden ? "block" : "none";
-		  toggleBtn.textContent = isHidden ? "Hide Map" : "Show Map";
-		
-		  if (isHidden && !map) {
-		    // Initialize the map only once
-		    map = L.map('map').setView([5.394483317854787, 103.06308398698182], 13);
-		
-		    // Add OpenStreetMap tiles
-		    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		      attribution: '&copy; OpenStreetMap contributors'
-		    }).addTo(map);
 		
 		    // === Add markers ===
-		    const markers = [
-		      {
-		        coords: [5.394483317854787, 103.06308398698182],
-		        label: 'JPS Kuala Nerus Office',
-		        open: true
-		      },
-		      {
-		        coords: [5.387100151174325, 103.07614105767188],
-		        label: 'Tapak Projek Tebatan Banjir UMT'
-		      },
-		      {
-		        coords: [5.4078811146430805, 103.08861976649742],
-		        label: 'Projek Tebatan Banjir & Pencegahan Hakisan UMT'
-		      },
-		      {
-		        coords: [5.445, 103.400],
-		        label: 'Empangan Kuala Nerus'
-		      }
-		    ];
-		
-		    markers.forEach(marker => {
-		      const m = L.marker(marker.coords)
-		        .addTo(map)
-		        .bindPopup(marker.label);
-		
-		      if (marker.open) m.openPopup();
-		    });
-		  }
-		});
+		    let map; // Declare map globally
+			const mapContainer = document.getElementById("mapContainer");
+			const toggleBtn = document.getElementById("toggleMap");
 			
+			// Toggle map visibility
+			toggleBtn.addEventListener("click", function () {
+			  const isHidden = mapContainer.style.display === "none" || mapContainer.style.display === "";
+			
+			  mapContainer.style.display = isHidden ? "block" : "none";
+			  toggleBtn.textContent = isHidden ? "Hide Map" : "Show Map";
+			
+			  if (isHidden && !map) {
+			    // Initialize the map only once
+			    map = L.map('map').setView([5.394483317854787, 103.06308398698182], 13);
+			
+			    // Add OpenStreetMap tiles
+			    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			      attribution: '&copy; OpenStreetMap contributors'
+			    }).addTo(map);
+			
+			    // === Add markers ===
+			    const markers = [
+			      {
+			        coords: [5.394483317854787, 103.06308398698182],
+			        label: 'JPS Kuala Nerus Office',
+			        open: true
+			      },
+			      {
+			        coords: [5.387100151174325, 103.07614105767188],
+			        label: 'Tapak Projek Tebatan Banjir UMT'
+			      },
+			      {
+			        coords: [5.4078811146430805, 103.08861976649742],
+			        label: 'Projek Tebatan Banjir & Pencegahan Hakisan UMT'
+			      },
+			      {
+			        coords: [5.445, 103.400],
+			        label: 'Empangan Kuala Nerus'
+			      }
+			    ];
+			
+			    markers.forEach(marker => {
+			      const m = L.marker(marker.coords)
+			        .addTo(map)
+			        .bindPopup(marker.label);
+			
+			      if (marker.open) m.openPopup();
+			    });
+			  }
+			});
+
+			const bounds = L.latLngBounds([]);
+			markers.forEach(marker => bounds.extend(marker.coords));
+			map.fitBounds(bounds);
+
 			// When the user scrolls down 200px from the top, show the button
 			window.onscroll = function() {
 			  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
