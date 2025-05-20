@@ -320,10 +320,10 @@
 		    right: 30px;
 		    z-index: 9999;
 		    background-color: #0073e6;
-		    color: #fff;
+		    color: white;
 		    border: none;
 		    padding: 0.75rem 1rem;
-		    border-radius: 50%;
+		    border-radius: 5px;
 		    font-size: 1.2rem;
 		    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 		    cursor: pointer;
@@ -812,7 +812,8 @@
 	                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	                        attribution: '&copy; OpenStreetMap contributors'
 	                    }).addTo(map);
-	                    L.marker([5.3851, 103.1021]).addTo(map).bindPopup('JPS Kuala Nerus Office').openPopup();
+	                    L.marker([5.395472943588443, 103.0614516511679]).addTo(map).bindPopup('JPS Kuala Nerus Office').openPopup();
+				L.marker([5.445, 103.400]).addTo(map).bindPopup('JPS').openPopup();
 	                }
 	            } else {
 	                mapContainer.style.display = "none";
