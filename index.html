@@ -150,15 +150,15 @@
 
 		button {
 			background: #28a745;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-            display: block;
-            margin: 20px auto;
-            text-align: center;
+		            color: white;
+		            border: none;
+		            padding: 10px 20px;
+		            cursor: pointer;
+		            border-radius: 5px;
+		            transition: 0.3s;
+		            display: block;
+		            margin: 20px auto;
+		            text-align: center;
 		}
 
 		button:hover {
@@ -220,30 +220,57 @@
 			color: white;
 		}
 		
+		.search-section {
+		    margin: 2rem auto;
+		    padding: 1.5rem;
+		    background-color: #ffffff;
+		    border-radius: 10px;
+		    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		    max-width: 800px;
+		    text-align: center;
+		}
+		
 		.search-container {
-			display: flex;
-			justify-content: center;
-			margin-top: 10px;
+		    display: flex;
+		    flex-wrap: wrap;
+		    justify-content: center;
+		    gap: 1rem;
+		    align-items: center;
 		}
-
+		
 		.search-container input {
-			width: 60%;
-			padding: 8px;
-			border: 1px solid #ccc;
-			border-radius: 5px;
+		    flex: 1 1 300px;
+		    padding: 0.8rem 1rem;
+		    font-size: 1rem;
+		    border: 1px solid #ccc;
+		    border-radius: 8px;
+		    transition: border 0.3s;
 		}
-
+		
+		.search-container input:focus {
+		    border-color: #0073e6;
+		    outline: none;
+		}
+		
 		.search-container button {
-			background-color: #0073e6;
-			color: white;
-			padding: 8px 12px;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
+		    padding: 0.8rem 1.2rem;
+		    background-color: #0073e6;
+		    color: #fff;
+		    border: none;
+		    border-radius: 8px;
+		    font-weight: bold;
+		    cursor: pointer;
+		    transition: background 0.3s ease;
 		}
-
+		
 		.search-container button:hover {
-			background-color: #005bb5;
+		    background-color: #005bb5;
+		}
+		
+		.search-error {
+		    color: red;
+		    font-size: 0.95rem;
+		    margin-top: 1rem;
 		}
 
    </style>
@@ -269,12 +296,14 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container">
-	<div class="search-container">
-			<input type="text" id="search" placeholder="Cari maklumat..." onkeyup="searchContent()">
-			<button onclick="searchContent()">Cari</button>
-		</div>
-		<p id="search-results" class="search-error"></p>
+    <div class="search-section">
+    <div class="search-container">
+        <input type="text" id="search" placeholder="🔍 Cari maklumat..." onkeyup="searchContent()" />
+        <button onclick="searchContent()">Cari</button>
+    </div>
+    <p id="search-results" class="search-error"></p>
+</div>
+
         <section id="about">
             <h2>About Us</h2>
             <p>We ensure efficient and sustainable water management for the benefit of the community.</p>
