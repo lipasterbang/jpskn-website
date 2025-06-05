@@ -174,31 +174,34 @@
 </head>
 
 <body>
-
+  <!-- Header -->
   <header>
-   <div class="logo-container">
-    <img src="jpslogo.png" alt="Logo JPS Kuala Nerus">
-    <img src="trglogo.png" alt="Logo SUK Terengganu">
-  </div>
-    <h1>JABATAN PENGAIRAN DAN SALIRAN DAERAH KUALA NERUS</h1>
+    <div class="logo-container" style="display: flex; justify-content: center; align-items: center; gap: 2rem; padding: 1rem 0;">
+      <img src="jpslogo.png" alt="Logo JPS Kuala Nerus" style="height: 80px;" />
+      <img src="trglogo.png" alt="Logo SUK Terengganu" style="height: 80px;" />
+    </div>
+    <h1 style="text-align: center; color: #004d99;">JABATAN PENGAIRAN DAN SALIRAN DAERAH KUALA NERUS</h1>
   </header>
 
+  <!-- Navigation -->
   <nav>
     <a href="#about">Tentang</a>
     <a href="#services">Perkhidmatan</a>
     <a href="#map-section">Peta</a>
     <a href="#contact">Hubungi</a>
-    <a href="#hydrology-data">Taburan Hujan & Aras Sungai</a>
-    <a href="#repositori-dokumen">Repositori Dokumen</a>
+    <a href="#hydrology-data">Taburan Hujan</a>
+    <a href="#repositori-dokumen">Dokumen</a>
   </nav>
 
-  <div class="container">
-    <section id="about">
+  <main class="container">
+    <!-- Tentang Kami -->
+    <section id="about" class="section">
       <h2>Tentang Kami</h2>
       <p>Kami komited dalam pengurusan sumber air, saliran, dan mitigasi banjir untuk kesejahteraan rakyat Kuala Nerus.</p>
     </section>
 
-    <section id="services">
+    <!-- Perkhidmatan -->
+    <section id="services" class="section">
       <h2>Perkhidmatan Kami</h2>
       <ul>
         <li>🌊 Pengurusan & Pencegahan Banjir</li>
@@ -208,162 +211,132 @@
       </ul>
     </section>
 
-   <section id="map-section">
-  <h2>🗺️ Peta Interaktif</h2>
-  <button id="toggleMap">Sembunyikan Peta</button>
-  <div id="mapContainer">
-    <div id="map" style="height: 400px; border-radius: 10px;"></div>
-  </div>
-</section>
+    <!-- Map Section -->
+    <section id="map-section" class="section">
+      <h2>🗺️ Peta Interaktif</h2>
+      <button id="toggleMap" class="map-toggle-btn">Sembunyikan Peta</button>
+      <div id="mapContainer" style="display: block;">
+        <div id="map" style="height: 400px; border-radius: 10px; margin-top: 1rem;"></div>
+      </div>
+    </section>
 
-    <section id="contact">
+    <!-- Contact -->
+    <section id="contact" class="section">
       <h2>Hubungi Kami</h2>
       <p>📞 Hotline: +60 9-XXXX XXXX</p>
       <p>📱 WhatsApp: <a href="https://wa.me/60123456789" target="_blank">+60 12-345 6789</a></p>
       <p>📧 Emel: <a href="mailto:jps.kualanerus@terengganu.gov.my">jps.kualanerus@terengganu.gov.my</a></p>
     </section>
-  </div>
 
-	<section id="hydrology-data">
-            <h2>🌧️ Taburan Hujan & Aras Air Sungai – Kuala Nerus</h2>
-            <p>Dapatkan data terkini berkaitan taburan hujan dan aras air sungai di daerah Kuala Nerus daripada laman rasmi JPS Malaysia:</p>
+    <!-- Rainfall Table (Static) -->
+    <section id="hydrology-data" class="section">
+      <h2>🌧️ Taburan Hujan & Aras Air Sungai – Kuala Nerus</h2>
 
-            <h3>📍 Taburan Air Hujan</h3>
-            <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
-                <thead>
-                    <tr style="background-color: #0073e6; color: white;">
-                        <th style="padding: 0.8rem; text-align: left;">Stesen</th>
-                        <th style="padding: 0.8rem; text-align: left;">Jumlah Hujan (mm)</th>
-                        <th style="padding: 0.8rem; text-align: left;">Kemaskini Terakhir</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="padding: 0.8rem;">Gong Badak</td>
-                        <td style="padding: 0.8rem;">12.5</td>
-                        <td style="padding: 0.8rem;">21/05/2025 15:00</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 0.8rem;">Batu Rakit</td>
-                        <td style="padding: 0.8rem;">8.0</td>
-                        <td style="padding: 0.8rem;">21/05/2025 14:45</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 0.8rem;">Seberang Takir</td>
-                        <td style="padding: 0.8rem;">10.2</td>
-                        <td style="padding: 0.8rem;">21/05/2025 14:30</td>
-                    </tr>
-                </tbody>
-            </table>
+      <h3>📍 Taburan Air Hujan</h3>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Stesen</th>
+            <th>Jumlah Hujan (mm)</th>
+            <th>Kemaskini Terakhir</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Gong Badak</td>
+            <td>12.5</td>
+            <td>21/05/2025 15:00</td>
+          </tr>
+          <tr>
+            <td>Batu Rakit</td>
+            <td>8.0</td>
+            <td>21/05/2025 14:45</td>
+          </tr>
+          <tr>
+            <td>Seberang Takir</td>
+            <td>10.2</td>
+            <td>21/05/2025 14:30</td>
+          </tr>
+        </tbody>
+      </table>
 
-            <h3 style="margin-top: 2rem;">🌊 Aras Air Sungai</h3>
-            <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
-                <thead>
-                    <tr style="background-color: #0073e6; color: white;">
-                        <th style="padding: 0.8rem; text-align: left;">Stesen</th>
-                        <th style="padding: 0.8rem; text-align: left;">Paras Air (m)</th>
-                        <th style="padding: 0.8rem; text-align: left;">Status</th>
-                        <th style="padding: 0.8rem; text-align: left;">Kemaskini Terakhir</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="padding: 0.8rem;">Sungai Nerus</td>
-                        <td style="padding: 0.8rem;">1.8</td>
-                        <td style="padding: 0.8rem; background-color: #d4edda; color: #155724;">🟢 Normal</td>
-                        <td style="padding: 0.8rem;">21/05/2025 15:00</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 0.8rem;">Sungai Tepoh</td>
-                        <td style="padding: 0.8rem;">2.5</td>
-                        <td style="padding: 0.8rem; background-color: #fff3cd; color: #856404;">🟡 Amaran</td>
-                        <td style="padding: 0.8rem;">21/05/2025 14:45</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 0.8rem;">Sungai Batu Rakit</td>
-                        <td style="padding: 0.8rem;">3.1</td>
-                        <td style="padding: 0.8rem; background-color: #f8d7da; color: #721c24;">🔴 Bahaya</td>
-                        <td style="padding: 0.8rem;">21/05/2025 14:30</td>
-                    </tr>
-                </tbody>
-            </table>
+      <h3>🌊 Aras Air Sungai</h3>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Stesen</th>
+            <th>Paras Air (m)</th>
+            <th>Status</th>
+            <th>Kemaskini Terakhir</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sungai Nerus</td>
+            <td>1.8</td>
+            <td style="background-color:#d4edda; color:#155724;">🟢 Normal</td>
+            <td>21/05/2025 15:00</td>
+          </tr>
+          <tr>
+            <td>Sungai Tepoh</td>
+            <td>2.5</td>
+            <td style="background-color:#fff3cd; color:#856404;">🟡 Amaran</td>
+            <td>21/05/2025 14:45</td>
+          </tr>
+          <tr>
+            <td>Sungai Batu Rakit</td>
+            <td>3.1</td>
+            <td style="background-color:#f8d7da; color:#721c24;">🔴 Bahaya</td>
+            <td>21/05/2025 14:30</td>
+          </tr>
+        </tbody>
+      </table>
 
-            <p style="margin-top: 1rem;"><strong>Legenda:</strong><br>
-                🟢 Normal = Paras selamat<br>
-                🟡 Amaran = Hampir melepasi tahap amaran<br>
-                🔴 Bahaya = Melepasi tahap bahaya</p>
-        </section>
+      <p><strong>Legenda:</strong><br>
+        🟢 Normal = Paras selamat<br>
+        🟡 Amaran = Hampir melepasi tahap amaran<br>
+        🔴 Bahaya = Melepasi tahap bahaya</p>
+    </section>
 
-<section id="repositori-dokumen" class="section">
-  <div class="container">
-    <h2>📂 Repositori Dokumen</h2>
-    <p>Muat turun dokumen rasmi seperti borang permohonan, garis panduan teknikal, dan dokumen rujukan JPS Kuala Nerus.</p>
+    <!-- Repositori Dokumen -->
+    <section id="repositori-dokumen" class="section">
+      <h2>📂 Repositori Dokumen</h2>
+      <p>Muat turun dokumen rasmi seperti borang permohonan, garis panduan teknikal, dan dokumen rujukan JPS Kuala Nerus.</p>
 
-    <div class="grid">
-      <!-- Category 1: Borang Permohonan -->
-      <article>
-        <h3>📄 Borang Permohonan</h3>
-        <ul>
-          <li>📥 <a href="documents/permit-sungai.pdf" download>Permohonan Rezab Sungai (PDF)</a></li>
-          <li>📥 <a href="documents/water-extraction.pdf" download>Permohonan Pengekstrakan Air (PDF)</a></li>
-        </ul>
-      </article>
+      <div class="grid">
+        <article>
+          <h3>📄 Borang Permohonan</h3>
+          <ul>
+            <li>📥 <a href="documents/permit-sungai.pdf" download>Permohonan Rezab Sungai (PDF)</a></li>
+            <li>📥 <a href="documents/water-extraction.pdf" download>Permohonan Pengekstrakan Air (PDF)</a></li>
+          </ul>
+        </article>
+        <article>
+          <h3>📘 Garis Panduan Banjir</h3>
+          <ul>
+            <li>📥 <a href="documents/flood-safety.pdf" download>Panduan Pengurusan Banjir (PDF)</a></li>
+            <li>📥 <a href="documents/emergency-plan.pdf" download>Pelan Kecemasan Banjir (PDF)</a></li>
+          </ul>
+        </article>
+        <article>
+          <h3>📑 Dokumen Tender</h3>
+          <ul>
+            <li>📥 <a href="documents/tender-guidelines.pdf" download>Garis Panduan Tender (PDF)</a></li>
+            <li>📥 <a href="documents/bid-requirements.pdf" download>Keperluan Bidaan Projek (PDF)</a></li>
+          </ul>
+        </article>
+        <article>
+          <h3>🛠️ Manual Teknikal</h3>
+          <ul>
+            <li>📥 <a href="documents/hydrology-manual.pdf" download>Manual Hidrologi (PDF)</a></li>
+            <li>📥 <a href="documents/drainage-planning.pdf" download>Perancangan Sistem Saliran (PDF)</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
 
-      <!-- Category 2: Garis Panduan Banjir -->
-      <article>
-        <h3>📘 Garis Panduan Banjir</h3>
-        <ul>
-          <li>📥 <a href="documents/flood-safety.pdf" download>Panduan Pengurusan Banjir (PDF)</a></li>
-          <li>📥 <a href="documents/emergency-plan.pdf" download>Pelan Kecemasan Banjir (PDF)</a></li>
-        </ul>
-      </article>
-
-      <!-- Category 3: Dokumen Tender -->
-      <article>
-        <h3>📑 Dokumen Tender</h3>
-        <ul>
-          <li>📥 <a href="documents/tender-guidelines.pdf" download>Garis Panduan Tender (PDF)</a></li>
-          <li>📥 <a href="documents/bid-requirements.pdf" download>Keperluan Bidaan Projek (PDF)</a></li>
-        </ul>
-      </article>
-
-      <!-- Category 4: Manual Teknikal -->
-      <article>
-        <h3>🛠️ Manual Teknikal</h3>
-        <ul>
-          <li>📥 <a href="documents/hydrology-manual.pdf" download>Manual Hidrologi (PDF)</a></li>
-          <li>📥 <a href="documents/drainage-planning.pdf" download>Perancangan Sistem Saliran (PDF)</a></li>
-        </ul>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- Rainfall Live Section -->
-<section id="live-rainfall" class="section">
-  <h2>🌧️ Taburan Air Hujan Terkini - Kuala Nerus</h2>
-
-  <button id="toggleView" class="map-toggle-btn">Tukar kepada Carta 📈</button>
-
-  <div id="rainfall-table-view">
-    <table id="rainfallTable">
-      <thead>
-        <tr>
-          <th>Stesen</th>
-          <th>Jumlah Hujan (mm)</th>
-          <th>Kemaskini</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Filled via JS -->
-      </tbody>
-    </table>
-  </div>
-
-  <div id="rainfall-chart-view" style="display:none;">
-    <canvas id="rainChart" height="300"></canvas>
-  </div>
-</section>
 
 
   <footer>
