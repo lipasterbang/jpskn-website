@@ -387,6 +387,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+
   // 1. SEARCH FUNCTION
   document.getElementById("searchInput").addEventListener("keyup", function () {
     const input = this.value.toLowerCase();
@@ -404,7 +405,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("search-results").textContent = found ? "Maklumat dijumpai." : "Maklumat tidak dijumpai.";
   });
 
-  // 2. MAP INITIALIZATION (VISIBLE BY DEFAULT)
+ // Map visible by default
   const mapContainer = document.getElementById("mapContainer");
   const toggleMapBtn = document.getElementById("toggleMap");
 
@@ -420,7 +421,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const isHidden = mapContainer.style.display === "none";
     mapContainer.style.display = isHidden ? "block" : "none";
     toggleMapBtn.textContent = isHidden ? "Sembunyikan Peta" : "Lihat Peta";
-    if (!isHidden) map.invalidateSize(); // Refresh layout if visible
+    if (!isHidden) map.invalidateSize();
   });
 
   // 3. BACK TO TOP BUTTON
