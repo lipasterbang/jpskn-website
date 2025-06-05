@@ -388,87 +388,60 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>>
 
 
-  <script>
-	
-	function searchContent() {
-            const input = document.getElementById("searchInput").value.toLowerCase();
-            const sections = document.querySelectorAll("main section");
-            let found = false;
-            sections.forEach(section => {
-                if (section.innerText.toLowerCase().includes(input)) {
-                    section.scrollIntoView({ behavior: "smooth" });
-                    section.style.border = "2px solid red";
-                    found = true;
-                } else {
-                    section.style.border = "none";
-                }
-            });
-            document.getElementById("search-results").textContent = found ? "Maklumat dijumpai." : "Maklumat tidak dijumpai.";
-        }
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // 1. SEARCH FUNCTION
+  document.getElementById("searchInput").addEventListener("keyup", function () {
+    const input = this.value.toLowerCase();
+    const sections = document.querySelectorAll("main section");
+    let found = false;
+    sections.forEach(section => {
+      if (section.innerText.toLowerCase().includes(input)) {
+        section.scrollIntoView({ behavior: "smooth" });
+        section.style.border = "2px solid red";
+        found = true;
+      } else {
+        section.style.border = "none";
+      }
+    });
+    document.getElementById("search-results").textContent = found ? "Maklumat dijumpai." : "Maklumat tidak dijumpai.";
+  });
 
-      document.addEventListener("DOMContentLoaded", function () {
-  // Ensure Leaflet library is loaded
-  if (typeof L === "undefined") {
-    console.error("Leaflet library not loaded.");
-    return;
-  }
-
-  // Set up map immediately since we want it to be visible on load
+  // 2. MAP INITIALIZATION (VISIBLE BY DEFAULT)
   const mapContainer = document.getElementById("mapContainer");
   const toggleMapBtn = document.getElementById("toggleMap");
 
-  // Initialize map on page load
   const map = L.map("map").setView([5.39448, 103.06308], 13);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  // Add markers
-  L.marker([5.39448, 103.06308])
-    .addTo(map)
-    .bindPopup("Pejabat JPS Kuala Nerus")
-    .openPopup();
+  L.marker([5.39448, 103.06308]).addTo(map).bindPopup("Pejabat JPS Kuala Nerus").openPopup();
+  L.marker([5.40788, 103.0886]).addTo(map).bindPopup("Projek Tebatan Banjir UMT");
 
-  L.marker([5.40788, 103.0886])
-    .addTo(map)
-    .bindPopup("Projek Tebatan Banjir UMT");
-
-  // Toggle button
   toggleMapBtn.addEventListener("click", () => {
     const isHidden = mapContainer.style.display === "none";
     mapContainer.style.display = isHidden ? "block" : "none";
     toggleMapBtn.textContent = isHidden ? "Sembunyikan Peta" : "Lihat Peta";
-    if (isHidden) {
-      map.invalidateSize(); // Refresh layout if container was hidden before
-    }
+    if (!isHidden) map.invalidateSize(); // Refresh layout if visible
   });
-});
 
-    // Back to top button logic
-    const backToTop = document.getElementById("backToTop");
-    window.onscroll = () => {
-      if (document.documentElement.scrollTop > 300) {
-        backToTop.style.display = "block";
-      } else {
-        backToTop.style.display = "none";
-      }
-    };
-    backToTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+  // 3. BACK TO TOP BUTTON
+  const backToTop = document.getElementById("backToTop");
+  window.addEventListener("scroll", () => {
+    backToTop.style.display = window.scrollY > 300 ? "block" : "none";
+  });
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
-!function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (!d.getElementById(id)) {
-                js = d.createElement(s); js.id = id;
-                js.src = 'https://weatherwidget.io/js/widget.min.js';
-                fjs.parentNode.insertBefore(js, fjs);
-            }
-        }(document, 'script', 'weatherwidget-io-js');
+  // 4. WEATHER WIDGET
+  const widgetScript = document.createElement("script");
+  widgetScript.src = "https://weatherwidget.io/js/widget.min.js";
+  document.body.appendChild(widgetScript);
 
-
-document.addEventListener("DOMContentLoaded", function () {
-  const API_URL = "documents/rainfall-data.json"; // Replace with real API URL if available
+  // 5. RAINFALL DATA FETCH
+  const API_URL = "documents/rainfall-data.json"; // Replace if needed
   const tableBody = document.querySelector("#rainfallTable tbody");
   const toggleBtn = document.getElementById("toggleView");
   const chartView = document.getElementById("rainfall-chart-view");
@@ -482,12 +455,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       tableBody.innerHTML = "";
       data.forEach(station => {
-        const row = `<tr>
-          <td>${station.station}</td>
-          <td>${station.rainfall}</td>
-          <td>${station.last_update}</td>
-        </tr>`;
-        tableBody.innerHTML += row;
+        tableBody.innerHTML += `
+          <tr>
+            <td>${station.station}</td>
+            <td>${station.rainfall}</td>
+            <td>${station.last_update}</td>
+          </tr>`;
       });
 
       const labels = data.map(s => s.station);
@@ -495,7 +468,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const updates = data.map(s => s.last_update);
 
       if (chart) chart.destroy();
-
       const ctx = document.getElementById("rainChart").getContext("2d");
       chart = new Chart(ctx, {
         type: 'bar',
@@ -515,9 +487,7 @@ document.addEventListener("DOMContentLoaded", function () {
               }
             }
           },
-          scales: {
-            y: { beginAtZero: true }
-          }
+          scales: { y: { beginAtZero: true } }
         }
       });
     } catch (err) {
@@ -527,16 +497,16 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   toggleBtn.addEventListener("click", () => {
-    const isTableVisible = tableView.style.display !== "none";
-    tableView.style.display = isTableVisible ? "none" : "block";
-    chartView.style.display = isTableVisible ? "block" : "none";
-    toggleBtn.textContent = isTableVisible ? "Tukar kepada Jadual 📋" : "Tukar kepada Carta 📈";
+    const showChart = tableView.style.display !== "none";
+    tableView.style.display = showChart ? "none" : "block";
+    chartView.style.display = showChart ? "block" : "none";
+    toggleBtn.textContent = showChart ? "Tukar kepada Jadual 📋" : "Tukar kepada Carta 📈";
   });
 
   fetchRainfallData();
-  setInterval(fetchRainfallData, 300000); // every 5 minutes
-
-  </script>
+  setInterval(fetchRainfallData, 300000); // Refresh every 5 min
+});
+</script>
   </body>
 
 </html>
