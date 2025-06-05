@@ -200,13 +200,14 @@
       </ul>
     </section>
 
-    <section id="map-section">
-      <h2>Peta Interaktif</h2>
-      <button id="toggleMap">Lihat Peta</button>
-      <div id="mapContainer" style="display:none">
-        <div id="map"></div>
-      </div>
-    </section>
+    <!-- Map Section -->
+<section id="map-section" class="section">
+  <h2>🗺️ Peta Interaktif</h2>
+  <button id="toggleMap" class="map-toggle-btn">Sembunyikan Peta</button>
+  <div id="mapContainer">
+    <div id="map" style="height: 400px; border-radius: 10px; margin-top: 1rem;"></div>
+  </div>
+</section>
 
     <section id="contact">
       <h2>Hubungi Kami</h2>
@@ -370,8 +371,12 @@
   <!-- Floating Help Button -->
   <div id="help-button" onclick="window.open('https://wa.me/60123456789','_blank')">❓ Bantuan</div>
 
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Leaflet.js CDN -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>>
 
 
   <script>
@@ -392,24 +397,25 @@
             document.getElementById("search-results").textContent = found ? "Maklumat dijumpai." : "Maklumat tidak dijumpai.";
         }
 
-    let map;
-    const toggleBtn = document.getElementById("toggleMap");
-    const mapContainer = document.getElementById("mapContainer");
+      // Map logic
+  let map;
+  const toggleMapBtn = document.getElementById("toggleMap");
+  const mapContainer = document.getElementById("mapContainer");
 
-    toggleBtn.addEventListener("click", () => {
-      const isHidden = mapContainer.style.display === "none" || mapContainer.style.display === "";
-      mapContainer.style.display = isHidden ? "block" : "none";
-      toggleBtn.textContent = isHidden ? "Sembunyikan Peta" : "Lihat Peta";
+  toggleMapBtn.addEventListener("click", () => {
+    const isHidden = mapContainer.style.display === "none";
+    mapContainer.style.display = isHidden ? "block" : "none";
+    toggleMapBtn.textContent = isHidden ? "Sembunyikan Peta" : "Lihat Peta";
+  });
 
-      if (isHidden && !map) {
-        map = L.map('map').setView([5.39448, 103.06308], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
-        L.marker([5.39448, 103.06308]).addTo(map).bindPopup('Pejabat JPS Kuala Nerus').openPopup();
-        L.marker([5.40788, 103.0886]).addTo(map).bindPopup('Projek Tebatan Banjir UMT');
-      }
-    });
+  // Initialize map on page load
+  map = L.map('map').setView([5.39448, 103.06308], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+  L.marker([5.39448, 103.06308]).addTo(map).bindPopup('Pejabat JPS Kuala Nerus').openPopup();
+  L.marker([5.40788, 103.0886]).addTo(map).bindPopup('Projek Tebatan Banjir UMT');
+});
 
     // Back to top button logic
     const backToTop = document.getElementById("backToTop");
@@ -435,7 +441,7 @@
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  const API_URL = "documents/rainfall-data.json"; // Replace with actual API if available
+  const API_URL = "documents/rainfall-data.json"; // Replace with real API URL if available
   const tableBody = document.querySelector("#rainfallTable tbody");
   const toggleBtn = document.getElementById("toggleView");
   const chartView = document.getElementById("rainfall-chart-view");
@@ -449,12 +455,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       tableBody.innerHTML = "";
       data.forEach(station => {
-        tableBody.innerHTML += `
-          <tr>
-            <td>${station.station}</td>
-            <td>${station.rainfall}</td>
-            <td>${station.last_update}</td>
-          </tr>`;
+        const row = `<tr>
+          <td>${station.station}</td>
+          <td>${station.rainfall}</td>
+          <td>${station.last_update}</td>
+        </tr>`;
+        tableBody.innerHTML += row;
       });
 
       const labels = data.map(s => s.station);
@@ -462,8 +468,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const updates = data.map(s => s.last_update);
 
       if (chart) chart.destroy();
-      const ctx = document.getElementById("rainChart").getContext("2d");
 
+      const ctx = document.getElementById("rainChart").getContext("2d");
       chart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -478,31 +484,32 @@ document.addEventListener("DOMContentLoaded", function () {
           plugins: {
             tooltip: {
               callbacks: {
-                afterLabel: ctx => `Kemaskini: ${updates[ctx.dataIndex]}`
+                afterLabel: (ctx) => `Dikemaskini: ${updates[ctx.dataIndex]}`
               }
             }
           },
-          scales: { y: { beginAtZero: true } }
+          scales: {
+            y: { beginAtZero: true }
+          }
         }
       });
     } catch (err) {
-      console.error("API error:", err);
-      tableBody.innerHTML = "<tr><td colspan='3'>⚠️ Gagal memuatkan data.</td></tr>";
+      tableBody.innerHTML = "<tr><td colspan='3'>Gagal memuatkan data.</td></tr>";
+      console.error("API Error:", err);
     }
   }
 
   toggleBtn.addEventListener("click", () => {
-    const isTable = tableView.style.display !== "none";
-    tableView.style.display = isTable ? "none" : "block";
-    chartView.style.display = isTable ? "block" : "none";
-    toggleBtn.textContent = isTable ? "Tukar kepada Jadual 📋" : "Tukar kepada Carta 📈";
+    const isTableVisible = tableView.style.display !== "none";
+    tableView.style.display = isTableVisible ? "none" : "block";
+    chartView.style.display = isTableVisible ? "block" : "none";
+    toggleBtn.textContent = isTableVisible ? "Tukar kepada Jadual 📋" : "Tukar kepada Carta 📈";
   });
 
   fetchRainfallData();
-  setInterval(fetchRainfallData, 300000); // Update every 5 minutes
-});
+  setInterval(fetchRainfallData, 300000); // every 5 minutes
 
   </script>
-</body>
+  </body>
 
 </html>
