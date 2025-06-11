@@ -170,37 +170,39 @@
   color: white;
 }
 
-  </style>
+</style>
 </head>
 
 <body>
-  <!-- Header -->
+
+  <!-- Header with Logos -->
   <header>
-    <div class="logo-container" style="display: flex; justify-content: center; align-items: center; gap: 2rem; padding: 1rem 0;">
-      <img src="jpslogo.png" alt="Logo JPS Kuala Nerus" style="height: 80px;" />
-      <img src="trglogo.png" alt="Logo SUK Terengganu" style="height: 80px;" />
+    <div class="logo-container" style="display: flex; justify-content: center; gap: 1rem; align-items: center; padding: 1rem 0;">
+      <img src="jpslogo.png" alt="Logo JPS Kuala Nerus" style="height: 70px;">
+      <img src="trglogo.png" alt="Logo SUK Terengganu" style="height: 70px;">
     </div>
     <h1 style="text-align: center; color: #004d99;">JABATAN PENGAIRAN DAN SALIRAN DAERAH KUALA NERUS</h1>
   </header>
 
   <!-- Navigation -->
-  <nav>
-    <a href="#about">Tentang</a>
-    <a href="#services">Perkhidmatan</a>
-    <a href="#map-section">Peta</a>
-    <a href="#contact">Hubungi</a>
-    <a href="#hydrology-data">Taburan Hujan</a>
-    <a href="#repositori-dokumen">Dokumen</a>
+  <nav style="background-color: #0073e6; padding: 0.8rem; text-align: center;">
+    <a href="#about" style="color: white; font-weight: bold; margin: 0 1rem;">Tentang</a>
+    <a href="#services" style="color: white; font-weight: bold; margin: 0 1rem;">Perkhidmatan</a>
+    <a href="#map-section" style="color: white; font-weight: bold; margin: 0 1rem;">Peta</a>
+    <a href="#contact" style="color: white; font-weight: bold; margin: 0 1rem;">Hubungi</a>
+    <a href="#hydrology-data" style="color: white; font-weight: bold; margin: 0 1rem;">Taburan Hujan</a>
+    <a href="#repositori-dokumen" style="color: white; font-weight: bold; margin: 0 1rem;">Dokumen</a>
   </nav>
 
-  <main class="container">
-    <!-- Tentang Kami -->
+  <div class="container" style="max-width: 1200px; margin: auto; padding: 2rem;">
+
+    <!-- About Section -->
     <section id="about" class="section">
       <h2>Tentang Kami</h2>
       <p>Kami komited dalam pengurusan sumber air, saliran, dan mitigasi banjir untuk kesejahteraan rakyat Kuala Nerus.</p>
     </section>
 
-    <!-- Perkhidmatan -->
+    <!-- Services Section -->
     <section id="services" class="section">
       <h2>Perkhidmatan Kami</h2>
       <ul>
@@ -220,264 +222,159 @@
       </div>
     </section>
 
-    <!-- Contact -->
+    <!-- Hydrology Data Section -->
+    <section id="hydrology-data" class="section">
+      <h2>🌧️ Taburan Hujan & Aras Air Sungai – Kuala Nerus</h2>
+      <p>Dapatkan data terkini berkaitan taburan hujan dan aras air sungai di daerah Kuala Nerus daripada laman rasmi JPS Malaysia.</p>
+
+      <!-- Rainfall Table & Graph Toggle -->
+      <button id="toggleView" class="map-toggle-btn">Tukar kepada Carta 📈</button>
+      <div id="rainfall-table-view">
+        <table id="rainfallTable">
+          <thead>
+            <tr>
+              <th>Stesen</th>
+              <th>Jumlah Hujan (mm)</th>
+              <th>Kemaskini</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Auto-filled via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+      <div id="rainfall-chart-view" style="display:none;">
+        <canvas id="rainChart" height="300"></canvas>
+      </div>
+    </section>
+
+    <!-- Document Repository Section -->
+    <section id="repositori-dokumen" class="section">
+      <h2>📂 Repositori Dokumen</h2>
+      <p>Muat turun borang rasmi, panduan teknikal, dan dokumen tender terkini daripada JPS Kuala Nerus.</p>
+      <div class="grid">
+        <article>
+          <h3>📄 Borang Permohonan</h3>
+          <ul>
+            <li><a href="documents/permit-sungai.pdf" download>Permohonan Rezab Sungai</a></li>
+            <li><a href="documents/water-extraction.pdf" download>Permohonan Pengekstrakan Air</a></li>
+          </ul>
+        </article>
+        <article>
+          <h3>📘 Panduan Banjir</h3>
+          <ul>
+            <li><a href="documents/flood-safety.pdf" download>Panduan Pengurusan Banjir</a></li>
+            <li><a href="documents/emergency-plan.pdf" download>Pelan Kecemasan</a></li>
+          </ul>
+        </article>
+        <article>
+          <h3>📑 Dokumen Tender</h3>
+          <ul>
+            <li><a href="documents/tender-guidelines.pdf" download>Garis Panduan Tender</a></li>
+            <li><a href="documents/bid-requirements.pdf" download>Keperluan Bidaan</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
     <section id="contact" class="section">
       <h2>Hubungi Kami</h2>
       <p>📞 Hotline: +60 9-XXXX XXXX</p>
       <p>📱 WhatsApp: <a href="https://wa.me/60123456789" target="_blank">+60 12-345 6789</a></p>
       <p>📧 Emel: <a href="mailto:jps.kualanerus@terengganu.gov.my">jps.kualanerus@terengganu.gov.my</a></p>
     </section>
-
-    <!-- Rainfall Table (Static) -->
-    <section id="hydrology-data" class="section">
-      <h2>🌧️ Taburan Hujan & Aras Air Sungai – Kuala Nerus</h2>
-
-      <h3>📍 Taburan Air Hujan</h3>
-      <table class="styled-table">
-        <thead>
-          <tr>
-            <th>Stesen</th>
-            <th>Jumlah Hujan (mm)</th>
-            <th>Kemaskini Terakhir</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Gong Badak</td>
-            <td>12.5</td>
-            <td>21/05/2025 15:00</td>
-          </tr>
-          <tr>
-            <td>Batu Rakit</td>
-            <td>8.0</td>
-            <td>21/05/2025 14:45</td>
-          </tr>
-          <tr>
-            <td>Seberang Takir</td>
-            <td>10.2</td>
-            <td>21/05/2025 14:30</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>🌊 Aras Air Sungai</h3>
-      <table class="styled-table">
-        <thead>
-          <tr>
-            <th>Stesen</th>
-            <th>Paras Air (m)</th>
-            <th>Status</th>
-            <th>Kemaskini Terakhir</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Sungai Nerus</td>
-            <td>1.8</td>
-            <td style="background-color:#d4edda; color:#155724;">🟢 Normal</td>
-            <td>21/05/2025 15:00</td>
-          </tr>
-          <tr>
-            <td>Sungai Tepoh</td>
-            <td>2.5</td>
-            <td style="background-color:#fff3cd; color:#856404;">🟡 Amaran</td>
-            <td>21/05/2025 14:45</td>
-          </tr>
-          <tr>
-            <td>Sungai Batu Rakit</td>
-            <td>3.1</td>
-            <td style="background-color:#f8d7da; color:#721c24;">🔴 Bahaya</td>
-            <td>21/05/2025 14:30</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p><strong>Legenda:</strong><br>
-        🟢 Normal = Paras selamat<br>
-        🟡 Amaran = Hampir melepasi tahap amaran<br>
-        🔴 Bahaya = Melepasi tahap bahaya</p>
-    </section>
-
-    <!-- Repositori Dokumen -->
-    <section id="repositori-dokumen" class="section">
-      <h2>📂 Repositori Dokumen</h2>
-      <p>Muat turun dokumen rasmi seperti borang permohonan, garis panduan teknikal, dan dokumen rujukan JPS Kuala Nerus.</p>
-
-      <div class="grid">
-        <article>
-          <h3>📄 Borang Permohonan</h3>
-          <ul>
-            <li>📥 <a href="documents/permit-sungai.pdf" download>Permohonan Rezab Sungai (PDF)</a></li>
-            <li>📥 <a href="documents/water-extraction.pdf" download>Permohonan Pengekstrakan Air (PDF)</a></li>
-          </ul>
-        </article>
-        <article>
-          <h3>📘 Garis Panduan Banjir</h3>
-          <ul>
-            <li>📥 <a href="documents/flood-safety.pdf" download>Panduan Pengurusan Banjir (PDF)</a></li>
-            <li>📥 <a href="documents/emergency-plan.pdf" download>Pelan Kecemasan Banjir (PDF)</a></li>
-          </ul>
-        </article>
-        <article>
-          <h3>📑 Dokumen Tender</h3>
-          <ul>
-            <li>📥 <a href="documents/tender-guidelines.pdf" download>Garis Panduan Tender (PDF)</a></li>
-            <li>📥 <a href="documents/bid-requirements.pdf" download>Keperluan Bidaan Projek (PDF)</a></li>
-          </ul>
-        </article>
-        <article>
-          <h3>🛠️ Manual Teknikal</h3>
-          <ul>
-            <li>📥 <a href="documents/hydrology-manual.pdf" download>Manual Hidrologi (PDF)</a></li>
-            <li>📥 <a href="documents/drainage-planning.pdf" download>Perancangan Sistem Saliran (PDF)</a></li>
-          </ul>
-        </article>
-      </div>
-    </section>
-  </main>
-</body>
+  </div>
 
 
+  <!-- Scripts (Leaflet + Chart.js) -->
 
-  <footer>
-    <p>&copy; Jabatan Pengaliran Dan Saliran Kuala Nerus. Hak Cipta Terpelihara JPSKN©.</p>
-  </footer>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const mapContainer = document.getElementById("mapContainer");
+      const toggleMapBtn = document.getElementById("toggleMap");
 
+      const map = L.map("map").setView([5.39448, 103.06308], 13);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
 
-  <!-- Back to Top Button -->
-  <button id="backToTop" title="Kembali ke atas">⬆</button>
+      L.marker([5.39448, 103.06308]).addTo(map).bindPopup("Pejabat JPS Kuala Nerus").openPopup();
+      L.marker([5.40788, 103.0886]).addTo(map).bindPopup("Projek Tebatan Banjir UMT");
 
-  <!-- Floating Help Button -->
-  <div id="help-button" onclick="window.open('https://wa.me/60123456789','_blank')">❓ Bantuan</div>
-
-  <!-- Leaflet.js CDN -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-<!-- Chart.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>>
-
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  // 1. SEARCH FUNCTION
-  document.getElementById("searchInput").addEventListener("keyup", function () {
-    const input = this.value.toLowerCase();
-    const sections = document.querySelectorAll("main section");
-    let found = false;
-    sections.forEach(section => {
-      if (section.innerText.toLowerCase().includes(input)) {
-        section.scrollIntoView({ behavior: "smooth" });
-        section.style.border = "2px solid red";
-        found = true;
-      } else {
-        section.style.border = "none";
-      }
-    });
-    document.getElementById("search-results").textContent = found ? "Maklumat dijumpai." : "Maklumat tidak dijumpai.";
-  });
-
- // Map visible by default
-  const mapContainer = document.getElementById("mapContainer");
-  const toggleMapBtn = document.getElementById("toggleMap");
-
-  const map = L.map("map").setView([5.39448, 103.06308], 13);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(map);
-
-  L.marker([5.39448, 103.06308]).addTo(map).bindPopup("Pejabat JPS Kuala Nerus").openPopup();
-  L.marker([5.40788, 103.0886]).addTo(map).bindPopup("Projek Tebatan Banjir UMT");
-
-  toggleMapBtn.addEventListener("click", () => {
-    const isHidden = mapContainer.style.display === "none";
-    mapContainer.style.display = isHidden ? "block" : "none";
-    toggleMapBtn.textContent = isHidden ? "Sembunyikan Peta" : "Lihat Peta";
-    if (!isHidden) map.invalidateSize();
-  });
-
-  // 3. BACK TO TOP BUTTON
-  const backToTop = document.getElementById("backToTop");
-  window.addEventListener("scroll", () => {
-    backToTop.style.display = window.scrollY > 300 ? "block" : "none";
-  });
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  // 4. WEATHER WIDGET
-  const widgetScript = document.createElement("script");
-  widgetScript.src = "https://weatherwidget.io/js/widget.min.js";
-  document.body.appendChild(widgetScript);
-
-  // 5. RAINFALL DATA FETCH
-  const API_URL = "documents/rainfall-data.json"; // Replace if needed
-  const tableBody = document.querySelector("#rainfallTable tbody");
-  const toggleBtn = document.getElementById("toggleView");
-  const chartView = document.getElementById("rainfall-chart-view");
-  const tableView = document.getElementById("rainfall-table-view");
-  let chart;
-
-  async function fetchRainfallData() {
-    try {
-      const response = await fetch(API_URL);
-      const data = await response.json();
-
-      tableBody.innerHTML = "";
-      data.forEach(station => {
-        tableBody.innerHTML += `
-          <tr>
-            <td>${station.station}</td>
-            <td>${station.rainfall}</td>
-            <td>${station.last_update}</td>
-          </tr>`;
+      toggleMapBtn.addEventListener("click", () => {
+        const isHidden = mapContainer.style.display === "none";
+        mapContainer.style.display = isHidden ? "block" : "none";
+        toggleMapBtn.textContent = isHidden ? "Sembunyikan Peta" : "Lihat Peta";
+        if (!isHidden) setTimeout(() => map.invalidateSize(), 200);
       });
 
-      const labels = data.map(s => s.station);
-      const values = data.map(s => s.rainfall);
-      const updates = data.map(s => s.last_update);
+      const API_URL = "documents/rainfall-data.json";
+      const tableBody = document.querySelector("#rainfallTable tbody");
+      const toggleBtn = document.getElementById("toggleView");
+      const chartView = document.getElementById("rainfall-chart-view");
+      const tableView = document.getElementById("rainfall-table-view");
+      let chart;
 
-      if (chart) chart.destroy();
-      const ctx = document.getElementById("rainChart").getContext("2d");
-      chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Jumlah Hujan (mm)',
-            data: values,
-            backgroundColor: '#0073e6'
-          }]
-        },
-        options: {
-          plugins: {
-            tooltip: {
-              callbacks: {
-                afterLabel: (ctx) => `Dikemaskini: ${updates[ctx.dataIndex]}`
+      async function fetchRainfallData() {
+        try {
+          const response = await fetch(API_URL);
+          const data = await response.json();
+
+          tableBody.innerHTML = "";
+          data.forEach(station => {
+            const row = `<tr><td>${station.station}</td><td>${station.rainfall}</td><td>${station.last_update}</td></tr>`;
+            tableBody.innerHTML += row;
+          });
+
+          const labels = data.map(s => s.station);
+          const values = data.map(s => s.rainfall);
+          const updates = data.map(s => s.last_update);
+
+          if (chart) chart.destroy();
+          const ctx = document.getElementById("rainChart").getContext("2d");
+          chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: labels,
+              datasets: [{
+                label: 'Jumlah Hujan (mm)',
+                data: values,
+                backgroundColor: '#0073e6'
+              }]
+            },
+            options: {
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    afterLabel: (ctx) => `Dikemaskini: ${updates[ctx.dataIndex]}`
+                  }
+                }
+              },
+              scales: {
+                y: { beginAtZero: true }
               }
             }
-          },
-          scales: { y: { beginAtZero: true } }
+          });
+        } catch (err) {
+          tableBody.innerHTML = "<tr><td colspan='3'>Gagal memuatkan data.</td></tr>";
+          console.error("API Error:", err);
         }
+      }
+
+      toggleBtn.addEventListener("click", () => {
+        const isTableVisible = tableView.style.display !== "none";
+        tableView.style.display = isTableVisible ? "none" : "block";
+        chartView.style.display = isTableVisible ? "block" : "none";
+        toggleBtn.textContent = isTableVisible ? "Tukar kepada Jadual 📋" : "Tukar kepada Carta 📈";
       });
-    } catch (err) {
-      tableBody.innerHTML = "<tr><td colspan='3'>Gagal memuatkan data.</td></tr>";
-      console.error("API Error:", err);
-    }
-  }
 
-  toggleBtn.addEventListener("click", () => {
-    const showChart = tableView.style.display !== "none";
-    tableView.style.display = showChart ? "none" : "block";
-    chartView.style.display = showChart ? "block" : "none";
-    toggleBtn.textContent = showChart ? "Tukar kepada Jadual 📋" : "Tukar kepada Carta 📈";
-  });
-
-  fetchRainfallData();
-  setInterval(fetchRainfallData, 300000); // Refresh every 5 min
-});
-</script>
-  </body>
+      fetchRainfallData();
+      setInterval(fetchRainfallData, 300000); // every 5 min
+    });
+  </script> 
+</body>
 
 </html>
