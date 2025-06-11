@@ -196,13 +196,11 @@
 
   <div class="container" style="max-width: 1200px; margin: auto; padding: 2rem;">
 
-    <!-- About Section -->
     <section id="about" class="section">
       <h2>Tentang Kami</h2>
       <p>Kami komited dalam pengurusan sumber air, saliran, dan mitigasi banjir untuk kesejahteraan rakyat Kuala Nerus.</p>
     </section>
 
-    <!-- Services Section -->
     <section id="services" class="section">
       <h2>Perkhidmatan Kami</h2>
       <ul>
@@ -213,33 +211,27 @@
       </ul>
     </section>
 
-    <!-- Map Section -->
     <section id="map-section" class="section">
-      <h2>🗺️ Peta Interaktif</h2>
+      <h2>🗘️ Peta Interaktif</h2>
       <button id="toggleMap" class="map-toggle-btn">Sembunyikan Peta</button>
       <div id="mapContainer" style="display: block;">
         <div id="map" style="height: 400px; border-radius: 10px; margin-top: 1rem;"></div>
       </div>
     </section>
 
-    <!-- Hydrology Data Section -->
     <section id="hydrology-data" class="section">
       <h2>🌧️ Taburan Hujan & Aras Air Sungai – Kuala Nerus</h2>
       <p>Dapatkan data terkini berkaitan taburan hujan dan aras air sungai di daerah Kuala Nerus daripada laman rasmi JPS Malaysia.</p>
-
-      <!-- Rainfall Table & Graph Toggle -->
       <button id="toggleView" class="map-toggle-btn">Tukar kepada Carta 📈</button>
       <div id="rainfall-table-view">
         <table id="rainfallTable">
           <thead>
-            <tr>
-              <th>Stesen</th>
-              <th>Jumlah Hujan (mm)</th>
-              <th>Kemaskini</th>
-            </tr>
+            <tr><th>Stesen</th><th>Jumlah Hujan (mm)</th><th>Kemaskini</th></tr>
           </thead>
           <tbody>
-            <!-- Auto-filled via JavaScript -->
+            <tr><td>Gong Badak</td><td>12.5</td><td>21/05/2025 15:00</td></tr>
+            <tr><td>Batu Rakit</td><td>8.0</td><td>21/05/2025 14:45</td></tr>
+            <tr><td>Seberang Takir</td><td>10.2</td><td>21/05/2025 14:30</td></tr>
           </tbody>
         </table>
       </div>
@@ -248,7 +240,6 @@
       </div>
     </section>
 
-    <!-- Document Repository Section -->
     <section id="repositori-dokumen" class="section">
       <h2>📂 Repositori Dokumen</h2>
       <p>Muat turun borang rasmi, panduan teknikal, dan dokumen tender terkini daripada JPS Kuala Nerus.</p>
@@ -268,7 +259,7 @@
           </ul>
         </article>
         <article>
-          <h3>📑 Dokumen Tender</h3>
+          <h3>📋 Dokumen Tender</h3>
           <ul>
             <li><a href="documents/tender-guidelines.pdf" download>Garis Panduan Tender</a></li>
             <li><a href="documents/bid-requirements.pdf" download>Keperluan Bidaan</a></li>
@@ -277,7 +268,6 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="section">
       <h2>Hubungi Kami</h2>
       <p>📞 Hotline: +60 9-XXXX XXXX</p>
@@ -286,11 +276,8 @@
     </section>
   </div>
 
-
-  <!-- Scripts (Leaflet + Chart.js) -->
-
+  <!-- Scripts -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const mapContainer = document.getElementById("mapContainer");
@@ -311,58 +298,9 @@
         if (!isHidden) setTimeout(() => map.invalidateSize(), 200);
       });
 
-      const API_URL = "documents/rainfall-data.json";
-      const tableBody = document.querySelector("#rainfallTable tbody");
       const toggleBtn = document.getElementById("toggleView");
       const chartView = document.getElementById("rainfall-chart-view");
       const tableView = document.getElementById("rainfall-table-view");
-      let chart;
-
-      async function fetchRainfallData() {
-        try {
-          const response = await fetch(API_URL);
-          const data = await response.json();
-
-          tableBody.innerHTML = "";
-          data.forEach(station => {
-            const row = `<tr><td>${station.station}</td><td>${station.rainfall}</td><td>${station.last_update}</td></tr>`;
-            tableBody.innerHTML += row;
-          });
-
-          const labels = data.map(s => s.station);
-          const values = data.map(s => s.rainfall);
-          const updates = data.map(s => s.last_update);
-
-          if (chart) chart.destroy();
-          const ctx = document.getElementById("rainChart").getContext("2d");
-          chart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: labels,
-              datasets: [{
-                label: 'Jumlah Hujan (mm)',
-                data: values,
-                backgroundColor: '#0073e6'
-              }]
-            },
-            options: {
-              plugins: {
-                tooltip: {
-                  callbacks: {
-                    afterLabel: (ctx) => `Dikemaskini: ${updates[ctx.dataIndex]}`
-                  }
-                }
-              },
-              scales: {
-                y: { beginAtZero: true }
-              }
-            }
-          });
-        } catch (err) {
-          tableBody.innerHTML = "<tr><td colspan='3'>Gagal memuatkan data.</td></tr>";
-          console.error("API Error:", err);
-        }
-      }
 
       toggleBtn.addEventListener("click", () => {
         const isTableVisible = tableView.style.display !== "none";
@@ -370,11 +308,9 @@
         chartView.style.display = isTableVisible ? "block" : "none";
         toggleBtn.textContent = isTableVisible ? "Tukar kepada Jadual 📋" : "Tukar kepada Carta 📈";
       });
-
-      fetchRainfallData();
-      setInterval(fetchRainfallData, 300000); // every 5 min
     });
-  </script> 
+  </script>
 </body>
+
 
 </html>
