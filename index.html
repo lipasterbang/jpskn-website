@@ -610,6 +610,11 @@
       </div>
     </section>
   <footer>
+  <div style="text-align:center;margin-top:2rem;">
+    <button id="backToTop" title="Kembali ke atas">↑</button>
+    <button id="help-button" title="Bantuan">Bantuan</button>
+  </div>
+</footer>
 
 <footer>
   <div style="width:100%;padding:1.5rem 0 1rem 0;">
@@ -785,6 +790,35 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+  // Hamburger menu functionality (safe, does not affect other code)
+  document.addEventListener("DOMContentLoaded", function () {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    navToggle.addEventListener('click', function () {
+      navMenu.classList.toggle('open');
+    });
+    // Close menu on link click (mobile)
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 900) navMenu.classList.remove('open');
+      });
+    });
+  });
+  // Back to top button functionality
+  document.addEventListener("DOMContentLoaded", function () {
+    const backToTopBtn = document.getElementById("backToTop");
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > 300) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
+    backToTopBtn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
 
 </script>
 </body>
