@@ -441,6 +441,38 @@
   </section>
 <!-- ...existing code... -->
 
+<section id="services" class="section">
+  <h2>Perkhidmatan Kami</h2>
+  <ul>
+    <li>🌊 Pengurusan & Pencegahan Banjir</li>
+    <li>💧 Pemantauan Sumber Air</li>
+    <li>🛠️ Penyelenggaraan Sistem Saliran</li>
+    <li>📜 Permohonan Permit & Garis Panduan</li>
+  </ul>
+
+  <!-- Ruangan Iklan -->
+  <section id="ruangan-iklan" style="margin-top:2rem;">
+    <h3>📢 Ruangan Iklan</h3>
+    <div style="background:#f8fbff;border-radius:8px;padding:1rem 1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-bottom:1rem;">
+      <!-- Sila masukkan maklumat iklan di sini -->
+      <p><strong>Tiada iklan terkini.</strong> Sila semak semula dari semasa ke semasa untuk makluman terbaru.</p>
+    </div>
+  </section>
+
+  <!-- Ruangan Sebut Harga/Tender -->
+  <section id="ruangan-tender" style="margin-top:2rem;">
+    <h3>📑 Ruangan Sebut Harga / Tender</h3>
+    <div style="background:#f8fbff;border-radius:8px;padding:1rem 1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+      <!-- Sila masukkan maklumat tender di sini -->
+      <p><strong>Tiada sebut harga atau tender dibuka buat masa ini.</strong></p>
+      <ul>
+        <!-- Contoh item tender -->
+        <!-- <li><a href="documents/tender-2025-01.pdf" target="_blank">Tender Projek Tebatan Banjir 2025</a> (Tutup: 30 Jun 2025)</li> -->
+      </ul>
+    </div>
+  </section>
+</section>
+
     <section id="map-section" class="section">
       <h2>🗘️ Peta Interaktif</h2>
       <button id="toggleMap" class="map-toggle-btn">Sembunyikan Peta</button>
@@ -449,26 +481,43 @@
       </div>
     </section>
 
-    <section id="hydrology-data" class="section">
-      <h2>🌧️ Taburan Hujan & Aras Air Sungai – Kuala Nerus</h2>
-      <p>Dapatkan data terkini berkaitan taburan hujan dan aras air sungai di daerah Kuala Nerus daripada laman rasmi JPS Malaysia.</p>
-      <button id="toggleView" class="map-toggle-btn">Tukar kepada Carta 📈</button>
-      <div id="rainfall-table-view">
-        <table id="rainfallTable">
-          <thead>
-            <tr><th>Stesen</th><th>Jumlah Hujan (mm)</th><th>Kemaskini</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Gong Badak</td><td>12.5</td><td>21/05/2025 15:00</td></tr>
-            <tr><td>Batu Rakit</td><td>8.0</td><td>21/05/2025 14:45</td></tr>
-            <tr><td>Seberang Takir</td><td>10.2</td><td>21/05/2025 14:30</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div id="rainfall-chart-view" style="display:none;">
-        <canvas id="rainChart" height="300"></canvas>
-      </div>
-    </section>
+<section id="hydrology-data" class="section">
+  <h2>🌧️ Taburan Hujan & Aras Air Sungai – Kuala Nerus</h2>
+  <p>
+    Dapatkan data terkini berkaitan taburan hujan dan aras air sungai di daerah Kuala Nerus daripada 
+    <a href="https://publicinfobanjir.water.gov.my/" target="_blank" rel="noopener">Public InfoBanjir JPS Malaysia</a>.
+  </p>
+  <button id="toggleView" class="map-toggle-btn">Tukar kepada Carta 📈</button>
+  <div id="rainfall-table-view">
+    <table id="rainfallTable">
+      <thead>
+        <tr>
+          <th>Stesen</th>
+          <th>Jumlah Hujan (mm)</th>
+          <th>Kemaskini</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Gong Badak</td><td>12.5</td><td>21/05/2025 15:00</td></tr>
+        <tr><td>Batu Rakit</td><td>8.0</td><td>21/05/2025 14:45</td></tr>
+        <tr><td>Seberang Takir</td><td>10.2</td><td>21/05/2025 14:30</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:1rem;">
+      <a href="https://publicinfobanjir.water.gov.my/" target="_blank" rel="noopener" style="color:#0073e6;font-weight:bold;">
+        Lihat data penuh di Public InfoBanjir JPS Malaysia
+      </a>
+    </div>
+  </div>
+  <div id="rainfall-chart-view" style="display:none;">
+    <canvas id="rainChart" height="300"></canvas>
+    <div style="margin-top:1rem;">
+      <a href="https://publicinfobanjir.water.gov.my/" target="_blank" rel="noopener" style="color:#0073e6;font-weight:bold;">
+        Lihat data penuh di Public InfoBanjir JPS Malaysia
+      </a>
+    </div>
+  </div>
+</section>
 
     <section id="repositori-dokumen" class="section">
       <h2>📂 Repositori Dokumen</h2>
@@ -545,9 +594,9 @@
       <div style="flex: 1 1 220px; min-width: 200px;">
         <strong>Hubungi Kami</strong><br>
         <span style="font-size:0.97em;">
-          📞 +60 9-XXXX XXXX<br>
+          📞 +60 9-665 3010<br>
           📱 <a href="https://wa.me/60123456789" target="_blank">+60 12-345 6789</a><br>
-          📧 <a href="mailto:jps.kualanerus@terengganu.gov.my">jps.kualanerus@terengganu.gov.my</a>
+          📧 <a href="mailto:jpskualanerus@terengganu.gov.my">jpskualanerus@terengganu.gov.my</a>
         </span>
       </div>
       <div style="flex: 1 1 220px; min-width: 200px;">
@@ -565,59 +614,149 @@
   </div>
 </footer>
 
-  <!-- Scripts -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const mapContainer = document.getElementById("mapContainer");
-      const toggleMapBtn = document.getElementById("toggleMap");
+  <!-- Place this just before </body> -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // MAP SECTION
+  const mapContainer = document.getElementById("mapContainer");
+  const toggleMapBtn = document.getElementById("toggleMap");
+  let mapInitialized = false;
+  let map;
 
-      const map = L.map("map").setView([5.39448, 103.06308], 13);
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: '&copy; OpenStreetMap contributors'
-      }).addTo(map);
+  function initMap() {
+    if (mapInitialized) return;
+    map = L.map("map").setView([5.39448, 103.06308], 13);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
 
-      L.marker([5.39448, 103.06308]).addTo(map).bindPopup("Pejabat JPS Kuala Nerus").openPopup();
-      L.marker([5.40788, 103.0886]).addTo(map).bindPopup("Projek Tebatan Banjir UMT");
+    L.marker([5.39448, 103.06308]).addTo(map).bindPopup("Pejabat JPS Kuala Nerus").openPopup();
+    L.marker([5.40788, 103.0886]).addTo(map).bindPopup("Projek Tebatan Banjir UMT");
+    mapInitialized = true;
+  }
 
-      toggleMapBtn.addEventListener("click", () => {
-        const isHidden = mapContainer.style.display === "none";
-        mapContainer.style.display = isHidden ? "block" : "none";
-        toggleMapBtn.textContent = isHidden ? "Sembunyikan Peta" : "Lihat Peta";
-        if (!isHidden) setTimeout(() => map.invalidateSize(), 200);
-      });
-
-      const toggleBtn = document.getElementById("toggleView");
-      const chartView = document.getElementById("rainfall-chart-view");
-      const tableView = document.getElementById("rainfall-table-view");
-
-      toggleBtn.addEventListener("click", () => {
-        const isTableVisible = tableView.style.display !== "none";
-        tableView.style.display = isTableVisible ? "none" : "block";
-        chartView.style.display = isTableVisible ? "block" : "none";
-        toggleBtn.textContent = isTableVisible ? "Tukar kepada Jadual 📋" : "Tukar kepada Carta 📈";
-      });
-
-            // Complaint form handler
-      document.getElementById("complaintForm").addEventListener("submit", function(e) {
-        e.preventDefault();
-        document.getElementById("complaint-success").style.display = "block";
-        this.reset();
-        setTimeout(() => {
-          document.getElementById("complaint-success").style.display = "none";
-        }, 4000);
-      });
-
-      // Feedback form handler
-      document.getElementById("feedbackForm").addEventListener("submit", function(e) {
-        e.preventDefault();
-        document.getElementById("feedback-success").style.display = "block";
-        this.reset();
-        setTimeout(() => {
-          document.getElementById("feedback-success").style.display = "none";
-        }, 4000);
-      });
+  if (toggleMapBtn && mapContainer) {
+    initMap();
+    toggleMapBtn.addEventListener("click", () => {
+      const isHidden = mapContainer.style.display === "none";
+      mapContainer.style.display = isHidden ? "block" : "none";
+      toggleMapBtn.textContent = isHidden ? "Sembunyikan Peta" : "Lihat Peta";
+      if (!isHidden && map) setTimeout(() => map.invalidateSize(), 200);
     });
-  </script>
+  }
+
+  // HYDROLOGY DATA SECTION (Chart.js)
+  const toggleBtn = document.getElementById("toggleView");
+  const chartView = document.getElementById("rainfall-chart-view");
+  const tableView = document.getElementById("rainfall-table-view");
+  let rainChart = null;
+
+  const chartLabels = [
+    "15/05", "16/05", "17/05", "18/05", "19/05", "20/05", "21/05"
+  ];
+  const chartData = {
+    "Gong Badak": [5, 8, 12, 7, 10, 9, 12.5],
+    "Batu Rakit": [2, 4, 6, 5, 7, 6, 8],
+    "Seberang Takir": [3, 5, 8, 6, 9, 7, 10.2]
+  };
+
+  function showRainChart() {
+    const ctx = document.getElementById('rainChart').getContext('2d');
+    if (rainChart) rainChart.destroy();
+    rainChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: chartLabels,
+        datasets: [
+          {
+            label: 'Gong Badak',
+            data: chartData["Gong Badak"],
+            borderColor: '#0073e6',
+            backgroundColor: 'rgba(0,115,230,0.08)',
+            tension: 0.3,
+            fill: true
+          },
+          {
+            label: 'Batu Rakit',
+            data: chartData["Batu Rakit"],
+            borderColor: '#28a745',
+            backgroundColor: 'rgba(40,167,69,0.08)',
+            tension: 0.3,
+            fill: true
+          },
+          {
+            label: 'Seberang Takir',
+            data: chartData["Seberang Takir"],
+            borderColor: '#ffc107',
+            backgroundColor: 'rgba(255,193,7,0.08)',
+            tension: 0.3,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' },
+          title: {
+            display: true,
+            text: 'Taburan Hujan Harian (mm) - Minggu Terkini'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: 'Hujan (mm)' }
+          },
+          x: {
+            title: { display: true, text: 'Tarikh' }
+          }
+        }
+      }
+    });
+  }
+
+  if (toggleBtn && chartView && tableView) {
+    toggleBtn.addEventListener("click", () => {
+      const isTableVisible = tableView.style.display !== "none";
+      tableView.style.display = isTableVisible ? "none" : "block";
+      chartView.style.display = isTableVisible ? "block" : "none";
+      toggleBtn.textContent = isTableVisible ? "Tukar kepada Jadual 📋" : "Tukar kepada Carta 📈";
+      if (isTableVisible) showRainChart();
+    });
+    // Optionally, show chart if user lands directly on chart view
+    if (chartView.style.display !== "none") showRainChart();
+  }
+
+  // COMPLAINT FORM HANDLER
+  const complaintForm = document.getElementById("complaintForm");
+  if (complaintForm) {
+    complaintForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("complaint-success").style.display = "block";
+      this.reset();
+      setTimeout(() => {
+        document.getElementById("complaint-success").style.display = "none";
+      }, 4000);
+    });
+  }
+
+  // FEEDBACK FORM HANDLER
+  const feedbackForm = document.getElementById("feedbackForm");
+  if (feedbackForm) {
+    feedbackForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("feedback-success").style.display = "block";
+      this.reset();
+      setTimeout(() => {
+        document.getElementById("feedback-success").style.display = "none";
+      }, 4000);
+    });
+  }
+});
+
+</script>
 </body>
 </html>
