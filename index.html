@@ -36,7 +36,7 @@
       min-height: 48px;
       width: auto;
       object-fit: contain;
-      background: white;
+
       border-radius: 8px;
       padding: 4px 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
@@ -314,13 +314,44 @@
       </div>
     </section>
 
-    <section id="contact" class="section">
+        <section id="contact" class="section">
       <h2>Hubungi Kami</h2>
       <p>📞 Hotline: +60 9-XXXX XXXX</p>
       <p>📱 WhatsApp: <a href="https://wa.me/60123456789" target="_blank">+60 12-345 6789</a></p>
       <p>📧 Emel: <a href="mailto:jps.kualanerus@terengganu.gov.my">jps.kualanerus@terengganu.gov.my</a></p>
+
+      <div class="grid" style="gap: 2rem; margin-top:2rem;">
+        <!-- Complaint Form -->
+        <article>
+          <h3>📝 Borang Aduan</h3>
+          <form id="complaintForm" autocomplete="off">
+            <label for="complaint-name">Nama:</label><br>
+            <input type="text" id="complaint-name" name="complaint-name" required style="width:100%;margin-bottom:8px;"><br>
+            <label for="complaint-email">Emel:</label><br>
+            <input type="email" id="complaint-email" name="complaint-email" required style="width:100%;margin-bottom:8px;"><br>
+            <label for="complaint-message">Aduan:</label><br>
+            <textarea id="complaint-message" name="complaint-message" rows="3" required style="width:100%;margin-bottom:8px;"></textarea><br>
+            <button type="submit" style="background:#0073e6;color:#fff;padding:8px 18px;border:none;border-radius:4px;cursor:pointer;">Hantar Aduan</button>
+            <div id="complaint-success" style="color:green;display:none;margin-top:8px;">Aduan anda telah dihantar. Terima kasih!</div>
+          </form>
+        </article>
+        <!-- Feedback Form -->
+        <article>
+          <h3>💬 Borang Maklum Balas</h3>
+          <form id="feedbackForm" autocomplete="off">
+            <label for="feedback-name">Nama:</label><br>
+            <input type="text" id="feedback-name" name="feedback-name" required style="width:100%;margin-bottom:8px;"><br>
+            <label for="feedback-email">Emel:</label><br>
+            <input type="email" id="feedback-email" name="feedback-email" required style="width:100%;margin-bottom:8px;"><br>
+            <label for="feedback-message">Maklum Balas:</label><br>
+            <textarea id="feedback-message" name="feedback-message" rows="3" required style="width:100%;margin-bottom:8px;"></textarea><br>
+            <button type="submit" style="background:#28a745;color:#fff;padding:8px 18px;border:none;border-radius:4px;cursor:pointer;">Hantar Maklum Balas</button>
+            <div id="feedback-success" style="color:green;display:none;margin-top:8px;">Maklum balas anda telah dihantar. Terima kasih!</div>
+          </form>
+        </article>
+      </div>
     </section>
-  </div>
+  <footer>
 
   <footer>
     &copy; 2025 Jabatan Pengairan dan Saliran Daerah Kuala Nerus. Hak cipta terpelihara.<br>
@@ -360,6 +391,26 @@
         tableView.style.display = isTableVisible ? "none" : "block";
         chartView.style.display = isTableVisible ? "block" : "none";
         toggleBtn.textContent = isTableVisible ? "Tukar kepada Jadual 📋" : "Tukar kepada Carta 📈";
+      });
+
+            // Complaint form handler
+      document.getElementById("complaintForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        document.getElementById("complaint-success").style.display = "block";
+        this.reset();
+        setTimeout(() => {
+          document.getElementById("complaint-success").style.display = "none";
+        }, 4000);
+      });
+
+      // Feedback form handler
+      document.getElementById("feedbackForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        document.getElementById("feedback-success").style.display = "block";
+        this.reset();
+        setTimeout(() => {
+          document.getElementById("feedback-success").style.display = "none";
+        }, 4000);
       });
     });
   </script>
