@@ -81,8 +81,7 @@
     }
 
     .container {
-      max-width: 1200px;
-      margin: 2rem auto;
+      margin:0 auto;
       padding: 0 1rem;
     }
 
@@ -131,6 +130,88 @@
       content: "📥 ";
       margin-right: 6px;
     }
+
+      .nav-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: #0073e6;
+  }
+  .nav-menu > li {
+    position: relative;
+  }
+  .nav-menu > li > a {
+    color: white;
+    margin: 0 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.05rem;
+    transition: color 0.2s;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    display: block;
+  }
+  .nav-menu > li > a:hover,
+  .nav-menu > li > a:focus {
+    background: #005fa3;
+    color: #ffd700;
+    outline: none;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 220px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    z-index: 1000;
+    left: 0;
+    top: 100%;
+    border-radius: 0 0 8px 8px;
+    padding: 0.5rem 0;
+  }
+  .dropdown-content li {
+    display: block;
+    width: 100%;
+  }
+  .dropdown-content li a {
+    color: #004d99;
+    padding: 0.7rem 1.2rem;
+    text-decoration: none;
+    display: block;
+    font-weight: normal;
+    font-size: 1rem;
+    border-radius: 0;
+    transition: background 0.2s, color 0.2s;
+  }
+  .dropdown-content li a:hover {
+    background: #f0f6ff;
+    color: #0073e6;
+  }
+  .dropdown:hover .dropdown-content,
+  .dropdown:focus-within .dropdown-content {
+    display: block;
+  }
+  @media (max-width: 700px) {
+    .nav-menu {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .nav-menu > li {
+      width: 100%;
+    }
+    .dropdown-content {
+      position: static;
+      box-shadow: none;
+      min-width: 100%;
+      border-radius: 0 0 8px 8px;
+    }
+    .dropdown-content li a {
+      padding-left: 2rem;
+    }
+  }
 
     #backToTop {
       position: fixed;
@@ -203,7 +284,7 @@
       background-color: #004d99;
       color: #fff;
       text-align: center;
-      padding: 1.2rem 0 0.8rem 0;
+      padding: 2rem 1rem 0.8rem 1rem;
       font-size: 1rem;
       margin-top: 3rem;
       border-top: 4px solid #0073e6;
@@ -230,32 +311,135 @@
     <h1 class="main-title">JABATAN PENGAIRAN DAN SALIRAN DAERAH KUALA NERUS</h1>
   </header>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="#about">Tentang</a>
-    <a href="#services">Perkhidmatan</a>
-    <a href="#map-section">Peta</a>
-    <a href="#contact">Hubungi</a>
-    <a href="#hydrology-data">Taburan Hujan</a>
-    <a href="#repositori-dokumen">Dokumen</a>
-  </nav>
+<!-- Navigation -->
+<nav>
+  <ul class="nav-menu">
+    <li class="dropdown">
+      <a href="#about">Profil</a>
+      <ul class="dropdown-content">
+        <li><a href="#pengenalan">Pengenalan</a></li>
+        <li><a href="#kata-aluan">Kata Aluan Jurutera Daerah</a></li>
+        <li><a href="#visi-misi">Visi Misi Objektif</a></li>
+        <li><a href="#carta-organisasi">Carta Organisasi</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#services">Perkhidmatan</a>
+      <!-- Add more dropdown items if needed -->
+    </li>
+    <li class="dropdown">
+      <a href="#map-section">Peta</a>
+    </li>
+    <li class="dropdown">
+      <a href="#contact">Hubungi</a>
+    </li>
+    <li class="dropdown">
+      <a href="#hydrology-data">Taburan Hujan</a>
+    </li>
+    <li class="dropdown">
+      <a href="#repositori-dokumen">Dokumen</a>
+    </li>
+  </ul>
+</nav>
 
-  <div class="container">
+<div class="container">
 
-    <section id="about" class="section">
-      <h2>Tentang Kami</h2>
-      <p>Kami komited dalam pengurusan sumber air, saliran, dan mitigasi banjir untuk kesejahteraan rakyat Kuala Nerus.</p>
+  <section id="about" class="section">
+    <h2>Profil Kami</h2>
+  
+    <p>Selamat datang ke laman web rasmi Jabatan Pengairan dan Saliran Daerah Kuala Nerus. </p>
+      <p>"Jayakan Perkhidmatan Sempurna".</p>
+
+    <!-- Pengenalan -->
+    <section id="pengenalan" style="margin-top:2rem;">
+        <h1>Pengenalan Jabatan Pengairan dan Saliran Daerah Kuala Nerus</h1>
+
+  <p>
+    Jabatan Pengairan dan Saliran (JPS) Daerah Kuala Nerus merupakan salah satu pejabat daerah di bawah pentadbiran 
+    Jabatan Pengairan dan Saliran Negeri Terengganu, yang memainkan peranan penting dalam pengurusan sumber air, 
+    sistem saliran bandar, tebatan banjir, serta pembangunan dan penyelenggaraan infrastruktur saliran di seluruh kawasan Kuala Nerus.
+    Sebagai cabang pentadbiran yang beroperasi di peringkat daerah, JPS Kuala Nerus terdiri daripada Jurutera Daerah (J10), Penolong Jurutera Kanan (JA7), 4 Penolong Jurutera (JA5), Pelukis Pelan (JA1), Pembantu Tadbir (N1), Pembantu Tadbir Kewangan (W1) dan juga 11 Pembantu Khidmat Am (H1).
+  </p>
+
+  <p>
+    Jabatan Pengairan dan Saliran Negeri Terengganu telah ditubuhkan pada tahun 1957, dan dahulunya dikenali sebagai 
+    Jabatan Parit dan Taliair, ditadbir oleh Jurutera Parit dan Taliair Terengganu/Kelantan. Bermula sebagai sebuah organisasi kecil 
+    dengan kurang daripada 100 orang kakitangan, kini JPS Negeri Terengganu berkembang pesat dengan lebih 500 orang pegawai dan kakitangan. 
+    Ibu pejabatnya terletak di Tingkat 6, Wisma Negeri, Kuala Terengganu, dan dibantu oleh pejabat JPS di daerah-daerah termasuk JPS Daerah Kuala Nerus, 
+    serta JPS Projek KETARA di Besut.
+  </p>
+
+  <p>
+    Di peringkat negeri, terdapat enam bahagian utama yang menyokong pengurusan tertinggi, iaitu:
+  </p>
+
+  <ul>
+    <li>Bahagian Pengairan dan Saliran</li>
+    <li>Bahagian Kejuruteraan Sungai dan Pantai</li>
+    <li>Bahagian Hidrologi</li>
+    <li>Bahagian Khidmat Teknikal</li>
+    <li>Bahagian Pentadbiran dan Kewangan</li>
+    <li>Bahagian Perkhidmatan Mekanikal (beroperasi di Jalan Bukit Kecil, Kuala Terengganu)</li>
+  </ul>
+
+  <p>
+    Sebagai sebahagian daripada rangkaian teknikal ini, JPS Kuala Nerus berperanan memastikan perkhidmatan berkaitan pengurusan air dan saliran 
+    dilaksanakan secara efisien, berdaya saing dan mampan. Kami komited untuk memberikan perkhidmatan terbaik kepada masyarakat 
+    melalui kerjasama dengan agensi teknikal, pihak berkuasa tempatan, dan komuniti setempat demi kelestarian alam dan kesejahteraan rakyat.
+  </p>
+      </p>
     </section>
 
-    <section id="services" class="section">
-      <h2>Perkhidmatan Kami</h2>
+    <!-- Kata Aluan Jurutera Daerah -->
+    <section id="kata-aluan" style="margin-top:2rem;">
+      <h3>Kata Aluan Jurutera Daerah</h3>
+      <blockquote style="border-left:4px solid #0073e6;padding-left:1rem;color:#004d99;background:#f6faff;">
+        <!-- Sila isikan kata aluan di sini. Contoh: -->
+        "Selamat datang ke laman web rasmi JPS Kuala Nerus. Kami sentiasa komited dalam memberikan perkhidmatan terbaik kepada masyarakat serta memastikan pengurusan air dan saliran yang mampan untuk masa depan yang lebih sejahtera."
+        <br><br>
+        <span style="font-weight:bold;">Jurutera Daerah<br>JPS Kuala Nerus</span>
+      </blockquote>
+    </section>
+
+    <!-- Visi Misi Objektif -->
+    <section id="visi-misi" style="margin-top:2rem;">
+      <h3>Visi, Misi & Objektif</h3>
       <ul>
-        <li>🌊 Pengurusan & Pencegahan Banjir</li>
-        <li>💧 Pemantauan Sumber Air</li>
-        <li>🛠️ Penyelenggaraan Sistem Saliran</li>
-        <li>📜 Permohonan Permit & Garis Panduan</li>
+        <li><strong>Visi:</strong> Menjadi peneraju pengurusan sumber air dan saliran yang cekap, lestari dan inovatif.</li>
+        <li><strong>Misi:</strong> Memberi perkhidmatan pengurusan air dan saliran yang berkualiti tinggi demi kesejahteraan rakyat dan kelestarian alam sekitar.</li>
+        <li><strong>Objektif:</strong>
+          <ul>
+            <li>Memastikan pengurusan banjir yang berkesan.</li>
+            <li>Melindungi dan memulihara sumber air.</li>
+            <li>Meningkatkan kesedaran masyarakat tentang kepentingan pengurusan air.</li>
+          </ul>
+        </li>
       </ul>
     </section>
+
+    <!-- Carta Organisasi -->
+    <section id="carta-organisasi" style="margin-top:2rem;">
+      <h3>Carta Organisasi</h3>
+      <!-- Anda boleh gantikan carta di bawah dengan gambar atau carta sebenar -->
+      <div style="overflow-x:auto;">
+        <table style="margin:auto;min-width:320px;max-width:600px;background:#f8fbff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+          <tr>
+            <td colspan="2" style="text-align:center;font-weight:bold;padding:10px 0;color:#0073e6;">Jurutera Daerah</td>
+          </tr>
+          <tr>
+            <td style="text-align:center;padding:8px;">Penolong Jurutera</td>
+            <td style="text-align:center;padding:8px;">Pembantu Tadbir</td>
+          </tr>
+          <tr>
+            <td style="text-align:center;padding:8px;">Pembantu Awam</td>
+            <td style="text-align:center;padding:8px;">Pembantu Operasi</td>
+          </tr>
+        </table>
+      </div>
+      <p style="text-align:center;font-size:0.95em;color:#666;margin-top:0.5rem;">(Struktur organisasi boleh dikemaskini mengikut keperluan jabatan)</p>
+    </section>
+  </section>
+<!-- ...existing code... -->
 
     <section id="map-section" class="section">
       <h2>🗘️ Peta Interaktif</h2>
@@ -316,10 +500,6 @@
 
         <section id="contact" class="section">
       <h2>Hubungi Kami</h2>
-      <p>📞 Hotline: +60 9-XXXX XXXX</p>
-      <p>📱 WhatsApp: <a href="https://wa.me/60123456789" target="_blank">+60 12-345 6789</a></p>
-      <p>📧 Emel: <a href="mailto:jps.kualanerus@terengganu.gov.my">jps.kualanerus@terengganu.gov.my</a></p>
-
       <div class="grid" style="gap: 2rem; margin-top:2rem;">
         <!-- Complaint Form -->
         <article>
@@ -353,12 +533,37 @@
     </section>
   <footer>
 
-  <footer>
-    &copy; 2025 Jabatan Pengairan dan Saliran Daerah Kuala Nerus. Hak cipta terpelihara.<br>
-    Laman web ini dibangunkan untuk kemudahan warga Kuala Nerus. 
-    <br>
-    <span style="font-size:0.95em;">Sebarang pertanyaan, sila <a href="#contact">hubungi kami</a>.</span>
-  </footer>
+<footer>
+  <div style="width:100%;padding:1.5rem 0 1rem 0;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 2rem; max-width:1200px; margin:0 auto;">
+      <div style="flex: 1 1 220px; min-width: 200px; text-align: left;">
+        <strong>Jabatan Pengairan dan Saliran<br>Kuala Nerus</strong><br>
+        <span style="font-size:0.97em;">JPS Daerah Kuala Nerus,<br>
+          Kompleks Pentadbiran Bandar Al Wathiqu Billah <br>
+        21300 Kuala Nerus, Terengganu</span>
+      </div>
+      <div style="flex: 1 1 220px; min-width: 200px;">
+        <strong>Hubungi Kami</strong><br>
+        <span style="font-size:0.97em;">
+          📞 +60 9-XXXX XXXX<br>
+          📱 <a href="https://wa.me/60123456789" target="_blank">+60 12-345 6789</a><br>
+          📧 <a href="mailto:jps.kualanerus@terengganu.gov.my">jps.kualanerus@terengganu.gov.my</a>
+        </span>
+      </div>
+      <div style="flex: 1 1 220px; min-width: 200px;">
+        <strong>Pautan Pantas</strong><br>
+        <a href="#about">Tentang</a> &nbsp;|&nbsp;
+        <a href="#services">Perkhidmatan</a> &nbsp;|&nbsp;
+        <a href="#contact">Hubungi</a>
+      </div>
+    </div>
+    <hr style="margin: 1.5rem 0 1rem 0; border: none; border-top: 1px solid #0073e6;">
+    <div style="font-size:0.97em; color:#e0e0e0; text-align:center;">
+      &copy; 2025 Jabatan Pengairan dan Saliran Daerah Kuala Nerus. Hak cipta terpelihara.<br>
+      <span style="font-size:0.95em;">Sebarang pertanyaan, sila <a href="#contact">hubungi kami</a>.</span>
+    </div>
+  </div>
+</footer>
 
   <!-- Scripts -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
