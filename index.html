@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jabatan Pengairan dan Saliran Kuala Nerus</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
-  
-<style>
+  <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -18,36 +17,50 @@
     header {
       background-color: #004d99;
       color: white;
-      padding: 1.5rem 1rem;
+      padding: 2rem 1rem 1.2rem 1rem;
       text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
-    header img {
-      float: left;
-      margin-left: 2rem;
-      height: 50px;
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .logo-container img {
+      max-height: 70px;
+      height: 10vw;
+      min-height: 48px;
+      width: auto;
+      object-fit: contain;
+      background: white;
+      border-radius: 8px;
+      padding: 4px 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
 
-.logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  margin-bottom: 10px;
-}
-.logo-container img {
-  max-height: 70px;
-  height: auto;
-}
+    .main-title {
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin: 0;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
 
     nav {
       background-color: #0073e6;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       padding: 0.8rem 1rem;
       position: sticky;
       top: 0;
       z-index: 999;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     nav a {
@@ -55,10 +68,16 @@
       margin: 0 1rem;
       text-decoration: none;
       font-weight: bold;
+      font-size: 1.05rem;
+      transition: color 0.2s;
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
     }
 
-    nav a:hover {
-      text-decoration: underline;
+    nav a:hover, nav a:focus {
+      background: #005fa3;
+      color: #ffd700;
+      outline: none;
     }
 
     .container {
@@ -77,47 +96,41 @@
 
     h2 {
       color: #004d99;
+      margin-top: 0;
     }
 
     #map {
       height: 400px;
       border-radius: 10px;
       margin-top: 1rem;
+      width: 100%;
     }
 
-    footer {
-      background-color: #004d99;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 4rem;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
     }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-#documents ul {
-  list-style: none;
-  padding-left: 0;
-}
-#documents ul li {
-  font-size: 16px;
-  margin: 0.5rem 0;
-}
-#documents ul li a {
-  color: #0073e6;
-  text-decoration: none;
-  font-weight: bold;
-}
-#documents ul li a:hover {
-  text-decoration: underline;
-}
-#documents ul li::before {
-  content: \"📥 \";
-  margin-right: 6px;
-}
+    #documents ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    #documents ul li {
+      font-size: 16px;
+      margin: 0.5rem 0;
+    }
+    #documents ul li a {
+      color: #0073e6;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    #documents ul li a:hover {
+      text-decoration: underline;
+    }
+    #documents ul li::before {
+      content: "📥 ";
+      margin-right: 6px;
+    }
 
     #backToTop {
       position: fixed;
@@ -149,53 +162,85 @@
       z-index: 1000;
     }
 
-#mapContainer {
-  display: block;
-}
-#map {
-  width: 100%;
-  height: 400px;
-}
+    #mapContainer {
+      display: block;
+    }
 
-#rainfallTable {
-  width: 100%;
-  border-collapse: collapse;
-}
-#rainfallTable th, #rainfallTable td {
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-}
-#rainfallTable th {
-  background-color: #0073e6;
-  color: white;
-}
+    #rainfallTable {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    #rainfallTable th, #rainfallTable td {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+    }
+    #rainfallTable th {
+      background-color: #0073e6;
+      color: white;
+    }
 
-</style>
+    /* Responsive adjustments */
+    @media (max-width: 700px) {
+      header {
+        padding: 1.2rem 0.5rem 0.8rem 0.5rem;
+      }
+      .main-title {
+        font-size: 1.2rem;
+      }
+      .logo-container {
+        gap: 1rem;
+      }
+      section {
+        padding: 1rem;
+      }
+      nav a {
+        margin: 0 0.4rem;
+        font-size: 0.98rem;
+      }
+    }
+
+    footer {
+      background-color: #004d99;
+      color: #fff;
+      text-align: center;
+      padding: 1.2rem 0 0.8rem 0;
+      font-size: 1rem;
+      margin-top: 3rem;
+      border-top: 4px solid #0073e6;
+      letter-spacing: 0.5px;
+    }
+    footer a {
+      color: #ffd700;
+      text-decoration: underline;
+    }
+    footer a:hover {
+      color: #fff;
+    }
+  </style>
 </head>
-
 
 <body>
 
   <!-- Header with Logos -->
   <header>
-    <div class="logo-container" style="display: flex; justify-content: center; gap: 1rem; align-items: center; padding: 1rem 0;">
-      <img src="jpslogo.png" alt="Logo JPS Kuala Nerus" style="height: 70px;">
-      <img src="trglogo.png" alt="Logo SUK Terengganu" style="height: 70px;">
+    <div class="logo-container">
+      <img src="jpslogo.png" alt="Logo JPS Kuala Nerus">
+      <img src="trglogo.png" alt="Logo SUK Terengganu">
     </div>
-    <h1 style="text-align: center; color: #004d99;">JABATAN PENGAIRAN DAN SALIRAN DAERAH KUALA NERUS</h1>
+    <h1 class="main-title">JABATAN PENGAIRAN DAN SALIRAN DAERAH KUALA NERUS</h1>
   </header>
 
   <!-- Navigation -->
-  <nav style="background-color: #0073e6; padding: 0.8rem; text-align: center;">
-    <a href="#about" style="color: white; font-weight: bold; margin: 0 1rem;">Tentang</a>
-    <a href="#services" style="color: white; font-weight: bold; margin: 0 1rem;">Perkhidmatan</a>
-    <a href="#map-section" style="color: white; font-weight: bold; margin: 0 1rem;">Peta</a>
-    <a href="#contact" style="color: white; font-weight: bold; margin: 0 1rem;">Hubungi</a>
-    <a href="#hydrology-data" style="color: white; font-weight: bold; margin: 0 1rem;">Taburan Hujan</a>
-    <a href="#repositori-dokumen" style="color: white; font-weight: bold; margin: 0 1rem;">Dokumen</a>
+  <nav>
+    <a href="#about">Tentang</a>
+    <a href="#services">Perkhidmatan</a>
+    <a href="#map-section">Peta</a>
+    <a href="#contact">Hubungi</a>
+    <a href="#hydrology-data">Taburan Hujan</a>
+    <a href="#repositori-dokumen">Dokumen</a>
   </nav>
 
-  <div class="container" style="max-width: 1200px; margin: auto; padding: 2rem;">
+  <div class="container">
 
     <section id="about" class="section">
       <h2>Tentang Kami</h2>
@@ -215,8 +260,8 @@
     <section id="map-section" class="section">
       <h2>🗘️ Peta Interaktif</h2>
       <button id="toggleMap" class="map-toggle-btn">Sembunyikan Peta</button>
-      <div id="mapContainer" style="display: block;">
-        <div id="map" style="height: 400px; border-radius: 10px; margin-top: 1rem;"></div>
+      <div id="mapContainer">
+        <div id="map"></div>
       </div>
     </section>
 
@@ -277,6 +322,13 @@
     </section>
   </div>
 
+  <footer>
+    &copy; 2025 Jabatan Pengairan dan Saliran Daerah Kuala Nerus. Hak cipta terpelihara.<br>
+    Laman web ini dibangunkan untuk kemudahan warga Kuala Nerus. 
+    <br>
+    <span style="font-size:0.95em;">Sebarang pertanyaan, sila <a href="#contact">hubungi kami</a>.</span>
+  </footer>
+
   <!-- Scripts -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
@@ -312,7 +364,4 @@
     });
   </script>
 </body>
-
-
-
 </html>
