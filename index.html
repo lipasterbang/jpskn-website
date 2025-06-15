@@ -500,6 +500,37 @@
       </ul>
     </div>
   </section>
+
+  <!-- Berita Terkini -->
+  <section id="news-section" style="margin-top:2rem;">
+  <h3>📰 Berita Terkini</h3>
+  <div class="news-list" style="display: flex; flex-direction: column; gap: 1.5rem;">
+    <!-- News Item 1 -->
+    <article class="news-item" style="background:#f8fbff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.04);padding:1rem 1.5rem;display:flex;flex-wrap:wrap;align-items:flex-start;gap:1rem;">
+      <img src="https://jpsweb.terengganu.gov.my/images/berita/2024/mei/petra.jpg" alt="Skuad PETRA Menyelami Isu Hakisan Pantai Kuala Nerus" style="width:120px;max-width:100%;border-radius:8px;object-fit:cover;">
+      <div style="flex:1;">
+        <h4 style="margin:0 0 0.5rem 0;font-size:1.1rem;color:#004d99;">Skuad PETRA Menyelami Isu Hakisan Pantai Kuala Nerus, Terengganu</h4>
+        <div style="font-size:0.95em;color:#888;margin-bottom:0.5rem;">14 Mei 2024</div>
+        <p style="margin:0 0 0.5rem 0;">
+          Skuad PETRA telah turun padang bagi meneliti isu hakisan pantai yang semakin membimbangkan di Kuala Nerus, Terengganu. Lawatan ini bertujuan untuk mendapatkan maklumat terkini serta mencari penyelesaian jangka panjang bersama pihak berkaitan.
+        </p>
+        <a href="https://jpsweb.terengganu.gov.my/index.php/ms/arkib/berita/355-skuad-petra-menyelami-isu-hakisan-pantai-kuala-nerus-terengganu" target="_blank" style="color:#0073e6;font-weight:bold;text-decoration:underline;">Baca Selanjutnya</a>
+      </div>
+    </article>
+    <!-- News Item 2 -->
+    <article class="news-item" style="background:#f8fbff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.04);padding:1rem 1.5rem;display:flex;flex-wrap:wrap;align-items:flex-start;gap:1rem;">
+      <img src="https://jpsweb.terengganu.gov.my/images/berita/2024/mei/lawatan-dytm.jpg" alt="Lawatan Kerja Duli Yang Teramat Mulia Yang di-Pertuan Muda Terengganu ke Tapak Hakisan Pantai" style="width:120px;max-width:100%;border-radius:8px;object-fit:cover;">
+      <div style="flex:1;">
+        <h4 style="margin:0 0 0.5rem 0;font-size:1.1rem;color:#004d99;">Lawatan Kerja Duli Yang Teramat Mulia Yang di-Pertuan Muda Terengganu ke Tapak Hakisan Pantai</h4>
+        <div style="font-size:0.95em;color:#888;margin-bottom:0.5rem;">7 Mei 2024</div>
+        <p style="margin:0 0 0.5rem 0;">
+          Duli Yang Teramat Mulia Yang di-Pertuan Muda Terengganu telah mengadakan lawatan kerja ke tapak hakisan pantai di Kuala Nerus bagi meninjau keadaan semasa dan mendapatkan taklimat daripada pihak JPS serta agensi berkaitan.
+        </p>
+        <a href="https://jpsweb.terengganu.gov.my/index.php/ms/arkib/berita/348-lawatan-kerja-duli-yang-teramat-mulia-yang-di-pertuan-muda-terengganu-ke-tapak-hakisan-pantai" target="_blank" style="color:#0073e6;font-weight:bold;text-decoration:underline;">Baca Selanjutnya</a>
+      </div>
+    </article>
+  </div>
+</section>
 </section>
 
     <section id="map-section" class="section">
@@ -817,6 +848,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     backToTopBtn.addEventListener("click", function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
+  // Help button functionality
+  document.addEventListener("DOMContentLoaded", function () {
+    const helpButton = document.getElementById("help-button");
+    helpButton.addEventListener("click", function () {
+      alert("Untuk bantuan, sila hubungi kami di:\n📞 +60 9-665 3010\n📱 +60 12-345 6789\n📧 jpskualanerus@terengganu.gov.my");
     });
   });
 
