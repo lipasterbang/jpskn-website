@@ -280,6 +280,48 @@
       }
     }
 
+      /* Hamburger button visible on mobile */
+  @media (max-width: 900px) {
+    .nav-toggle {
+      display: block !important;
+    }
+    .nav-menu {
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+      background: #0073e6;
+      position: absolute;
+      left: 0;
+      top: 60px;
+      z-index: 1000;
+    }
+    .nav-menu.open {
+      display: flex;
+    }
+    .nav-menu > li {
+      width: 100%;
+    }
+    .nav-menu > li > a {
+      margin: 0;
+      padding: 1rem;
+      font-size: 1.05rem;
+      border-radius: 0;
+      border-bottom: 1px solid #005fa3;
+    }
+    .dropdown-content {
+      position: static;
+      box-shadow: none;
+      min-width: 100%;
+      border-radius: 0;
+      padding: 0;
+    }
+    .dropdown-content li a {
+      padding-left: 2rem;
+      font-size: 0.98rem;
+    }
+  }
+
     footer {
       background-color: #004d99;
       color: #fff;
@@ -311,8 +353,10 @@
     <h1 class="main-title">JABATAN PENGAIRAN DAN SALIRAN DAERAH KUALA NERUS</h1>
   </header>
 
-<!-- Navigation -->
-<nav>
+<!-- Add this just before your <nav> ... </nav> -->
+<button class="nav-toggle" aria-label="Menu" style="display:none;position:absolute;right:1rem;top:1.1rem;background:none;border:none;font-size:2rem;color:#fff;z-index:1001;cursor:pointer;">&#9776;</button>
+
+<nav style="position:relative;">
   <ul class="nav-menu">
     <li class="dropdown">
       <a href="#about">Profil</a>
@@ -325,7 +369,6 @@
     </li>
     <li class="dropdown">
       <a href="#services">Perkhidmatan</a>
-      <!-- Add more dropdown items if needed -->
     </li>
     <li class="dropdown">
       <a href="#map-section">Peta</a>
