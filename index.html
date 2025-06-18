@@ -107,7 +107,7 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
     #documents ul {
@@ -369,18 +369,24 @@
     </li>
     <li class="dropdown">
       <a href="#services">Perkhidmatan</a>
+      <ul class="dropdown-content">
+        <li><a href="#ruangan-iklan">Ruangan Iklan</a></li>
+        <li><a href="#ruangan-tender">Sebut Harga/Tender</a></li>
+        <li><a href="#news-section">Berita</a></li>
+        <li><a href="#laporan-osc">Laporan OSC</a></li>
+      </ul>
     </li>
     <li class="dropdown">
       <a href="#map-section">Peta</a>
-    </li>
-    <li class="dropdown">
-      <a href="#contact">Hubungi</a>
     </li>
     <li class="dropdown">
       <a href="#hydrology-data">Taburan Hujan</a>
     </li>
     <li class="dropdown">
       <a href="#repositori-dokumen">Dokumen</a>
+    </li>
+    <li class="dropdown">
+      <a href="#contact">Hubungi</a>
     </li>
   </ul>
 </nav>
@@ -474,17 +480,17 @@
     </p>
   </section>
 
-<!-- Add this inside your #services section, after the existing content or news section -->
+  <!-- Add this inside your #services section, after the existing content or news section -->
 <section id="laporan-osc" class="section" style="margin-top:2rem;">
   <h3>📑 Laporan Ulasan OSC</h3>
   <p>
     Senarai laporan ulasan rasmi oleh JPS Kuala Nerus yang disediakan melalui sistem OSC bagi projek pembangunan dan teknikal.
     Pengguna boleh memuat turun surat ulasan teknikal untuk rujukan dan tindakan lanjut.
   </p>
-  <div class="grid" style="gap:1.5rem;">
+  <div class="grid">
     <!-- Contoh Laporan 1 -->
     <article>
-      <h4>Projek Perumahan Bukit Tok Beng</h4>
+      <h3>Projek Perumahan Bukit Tok Beng</h3>
       <ul>
         <li>📥 <a href="documents/osc/bukit-tok-beng-ulasan.pdf" download>Ulasan Teknikal JPS (PDF)</a></li>
         <li>🗓️ Tarikh Ulasan: 05 Mei 2025</li>
@@ -492,7 +498,7 @@
     </article>
     <!-- Contoh Laporan 2 -->
     <article>
-      <h4>Pembinaan Dewan Orang Ramai Batu Rakit</h4>
+      <h3>Pembinaan Dewan Orang Ramai Batu Rakit</h3>
       <ul>
         <li>📥 <a href="documents/osc/dewan-batu-rakit-ulasan.pdf" download>Ulasan Teknikal JPS (PDF)</a></li>
         <li>🗓️ Tarikh Ulasan: 22 April 2025</li>
