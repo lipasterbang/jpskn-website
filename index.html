@@ -211,6 +211,16 @@
     .dropdown-content li a {
       padding-left: 2rem;
     }
+
+    .responsive-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .responsive-table table {
+    width: 700px; /* or min-width: 600px; */
+  }
   }
 
     #backToTop {
@@ -1231,6 +1241,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  @media (max-width: 700px) {
+  section, .section {
+    padding: 1rem 0.5rem;
+  }
+  h1, h2, h3 {
+    font-size: 1.1rem;
+  }
+  .grid {
+    gap: 10px;
+  }
+}
 </script>
 </body>
 </html>
