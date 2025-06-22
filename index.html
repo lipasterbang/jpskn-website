@@ -378,6 +378,23 @@
         padding: 0.6rem 1rem;
       }
     }
+    .responsive-table {
+      width: 100%;
+      overflow-x: auto;
+    }
+    @media (max-width: 700px) {
+      .responsive-table table {
+        min-width: 500px;
+        font-size: 0.98rem;
+      }
+      #hydrology-data h2 {
+        font-size: 1.1rem;
+      }
+      #hydrology-data .map-toggle-btn {
+        font-size: 0.98rem;
+        padding: 0.5rem 1rem;
+      }
+    }
   </style>
 
   <!-- Add these inside your <head> section for SEO and accessibility -->
@@ -800,11 +817,12 @@ document.addEventListener("DOMContentLoaded", function () {
 ]
 </script>
 
-<!-- Rainfall Data Section -->
+<!-- Rainfall Data Section with Download as CSV -->
 <section id="hydrology-data" class="section">
   <h2>🌧️ Taburan Hujan Kuala Nerus</h2>
   <button id="toggleView" class="map-toggle-btn">Tukar kepada Carta 📈</button>
-  <div id="rainfall-table-view">
+  <button id="downloadRainfallCSV" class="map-toggle-btn" style="margin-left:10px;">Muat Turun CSV</button>
+  <div class="responsive-table">
     <table id="rainfallTable">
       <thead>
         <tr>
@@ -880,7 +898,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Toggle Table/Chart View
   const toggleBtn = document.getElementById("toggleView");
   const chartView = document.getElementById("rainfall-chart-view");
-  const tableView = document.getElementById("rainfall-table-view");
+  const tableView = document.querySelector(".responsive-table");
 
   function refreshRainfallSection() {
     const data = getRainfallDataFromHTML();
@@ -899,11 +917,83 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!isTableVisible) showRainChart(getRainfallDataFromHTML());
   });
 
+  // Download as CSV
+  document.getElementById("downloadRainfallCSV").addEventListener("click", function () {
+    const data = getRainfallDataFromHTML();
+    let csv = "Stesen,Jumlah Hujan (mm),Kemaskini\n";
+    data.forEach(row => {
+      csv += `"${row.station}","${row.rainfall}","${row.updated}"\n`;
+    });
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "rainfall_kuala_nerus.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
   // Optional: Auto-refresh every 5 minutes (if you update the JSON via backend)
   // setInterval(refreshRainfallSection, 300000);
 });
 </script>
 
+<!-- Improved River Level Section -->
+<section id="river-level" class="section">
+  <h2>🌊 Aras Air Sungai – Kuala Nerus</h2>
+  <div class="responsive-table">
+    <table id="riverLevelTable" style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr>
+          <th>Stesen</th>
+          <th>Paras Air (m)</th>
+          <th>Status</th>
+          <th>Kemaskini</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Filled by JS -->
+      </tbody>
+    </table>
+  </div>
+  <div id="river-legend" style="margin-top:1rem;font-size:0.97em;">
+    <strong>Legenda Status:</strong>
+    <span style="background:#d4edda;color:#155724;padding:2px 10px;border-radius:12px;margin-right:8px;">🟢 Normal</span>
+    <span style="background:#fff3cd;color:#856404;padding:2px 10px;border-radius:12px;margin-right:8px;">🟡 Amaran</span>
+    <span style="background:#f8d7da;color:#721c24;padding:2px 10px;border-radius:12px;">🔴 Bahaya</span>
+  </div>
+</section>
+
+<!-- Add or update this script before </body> -->
+<script>
+let riverData = [
+  { station: "Sungai Nerus", level: 1.8, status: "Normal", updated: "2025-06-18 15:00" },
+  { station: "Sungai Tepoh", level: 2.5, status: "Amaran", updated: "2025-06-18 14:45" },
+  { station: "Sungai Batu Rakit", level: 3.1, status: "Bahaya", updated: "2025-06-18 14:30" }
+];
+
+function refreshRiverLevel() {
+  const tbody = document.querySelector("#riverLevelTable tbody");
+  tbody.innerHTML = "";
+  riverData.forEach(d => {
+    let color = "#d4edda", fontColor = "#155724", icon = "🟢", statusText = d.status;
+    if (d.status === "Amaran") { color = "#fff3cd"; fontColor = "#856404"; icon = "🟡"; }
+    if (d.status === "Bahaya") { color = "#f8d7da"; fontColor = "#721c24"; icon = "🔴"; }
+    tbody.innerHTML += `<tr>
+      <td style="font-weight:500;">${d.station}</td>
+      <td style="text-align:center;font-weight:500;">${d.level.toFixed(2)}</td>
+      <td style="background:${color};color:${fontColor};font-weight:bold;text-align:center;border-radius:8px;">${icon} ${statusText}</td>
+      <td style="text-align:center;">${d.updated}</td>
+    </tr>`;
+  });
+}
+// Initial load
+refreshRiverLevel();
+// Auto-refresh every 5 minutes
+setInterval(refreshRiverLevel, 300000);
+</script>
     <section id="repositori-dokumen" class="section">
       <h2>📂 Repositori Dokumen</h2>
       <p>Muat turun borang rasmi, panduan teknikal, dan dokumen tender terkini daripada JPS Kuala Nerus.</p>
@@ -1141,7 +1231,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // HYDROLOGY DATA SECTION (Chart.js)
   const toggleBtn = document.getElementById("toggleView");
   const chartView = document.getElementById("rainfall-chart-view");
-  const tableView = document.getElementById("rainfall-table-view");
+  const tableView = document.querySelector(".responsive-table");
   let rainChart = null;
 
   const chartLabels = [
@@ -1329,6 +1419,60 @@ document.addEventListener("DOMContentLoaded", function () {
   updateClock();
   setInterval(updateClock, 1000);
 });
+</script>
+
+<!-- Place this script before </body> -->
+<script>
+function searchContent() {
+  const input = document.getElementById("searchInput").value.toLowerCase();
+  const sections = document.querySelectorAll("section");
+  let found = false;
+  sections.forEach(sec => {
+    // Remove previous highlight
+    sec.style.border = "none";
+    if (input && sec.innerText.toLowerCase().includes(input)) {
+      if (!found) {
+        sec.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+      sec.style.border = "2px solid #e53935";
+      found = true;
+    }
+  });
+  document.getElementById("search-results").innerText = input
+    ? (found ? "Maklumat dijumpai." : "Tiada padanan.")
+    : "";
+}
+document.getElementById("searchInput").addEventListener("keyup", searchContent);
+</script>
+
+<!-- Add this script before </body> -->
+<script>
+// River level data (can be replaced with fetch from API if available)
+let riverData = [
+  { station: "Sungai Nerus", level: 1.8, status: "Normal", updated: "2025-06-18 15:00" },
+  { station: "Sungai Tepoh", level: 2.5, status: "Amaran", updated: "2025-06-18 14:45" },
+  { station: "Sungai Batu Rakit", level: 3.1, status: "Bahaya", updated: "2025-06-18 14:30" }
+];
+
+function refreshRiverLevel() {
+  const tbody = document.querySelector("#riverLevelTable tbody");
+  tbody.innerHTML = "";
+  riverData.forEach(d => {
+    let color = "#d4edda", fontColor = "#155724", icon = "🟢", statusText = d.status;
+    if (d.status === "Amaran") { color = "#fff3cd"; fontColor = "#856404"; icon = "🟡"; }
+    if (d.status === "Bahaya") { color = "#f8d7da"; fontColor = "#721c24"; icon = "🔴"; }
+    tbody.innerHTML += `<tr>
+      <td style="font-weight:500;">${d.station}</td>
+      <td style="text-align:center;font-weight:500;">${d.level.toFixed(2)}</td>
+      <td style="background:${color};color:${fontColor};font-weight:bold;text-align:center;border-radius:8px;">${icon} ${statusText}</td>
+      <td style="text-align:center;">${d.updated}</td>
+    </tr>`;
+  });
+}
+// Initial load
+refreshRiverLevel();
+// Auto-refresh every 5 minutes
+setInterval(refreshRiverLevel, 300000);
 </script>
 </body>
 </html>
