@@ -379,9 +379,19 @@
       }
     }
   </style>
+
+  <!-- Add these inside your <head> section for SEO and accessibility -->
+  <meta name="description" content="Laman Rasmi Jabatan Pengairan dan Saliran Daerah Kuala Nerus. Info banjir, peta interaktif, data hujan dan aras sungai, serta permohonan rasmi.">
+  <meta name="keywords" content="JPS Kuala Nerus, Banjir Terengganu, Peta Interaktif, Data Hujan, OSC, Permohonan Sungai">
+  <meta name="author" content="Jabatan Pengairan dan Saliran Daerah Kuala Nerus">
 </head>
 
 <body>
+
+  <!-- Live Date/Time Display -->
+  <div id="live-date-time"
+     style="width:100%;background:#003366;color:#fff;text-align:center;font-size:1.05rem;font-weight:500;letter-spacing:0.5px;padding:0.3rem 0;position:relative;z-index:1001;">
+  </div>
 
   <!-- Header with Logos -->
   <header style="cursor:pointer;" onclick="window.location.href='index.html'">
@@ -1297,17 +1307,28 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  @media (max-width: 700px) {
-  section, .section {
-    padding: 1rem 0.5rem;
+
+</script>
+
+<!-- Live Clock/Date Display in Header -->
+<script>
+// Live Clock/Date Display in Header
+document.addEventListener("DOMContentLoaded", function () {
+  function updateClock() {
+    const now = new Date();
+    const days = ["Ahad","Isnin","Selasa","Rabu","Khamis","Jumaat","Sabtu"];
+    const months = ["Januari","Februari","Mac","April","Mei","Jun","Julai","Ogos","September","Oktober","November","Disember"];
+    const day = days[now.getDay()];
+    const date = now.getDate();
+    const month = months[now.getMonth()];
+    const year = now.getFullYear();
+    const time = now.toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    document.getElementById("live-date-time").textContent =
+      `${day}, ${date} ${month} ${year} | ${time}`;
   }
-  h1, h2, h3 {
-    font-size: 1.1rem;
-  }
-  .grid {
-    gap: 10px;
-  }
-}
+  updateClock();
+  setInterval(updateClock, 1000);
+});
 </script>
 </body>
 </html>
