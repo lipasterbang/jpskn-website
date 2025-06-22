@@ -349,6 +349,35 @@
     footer a:hover {
       color: #fff;
     }
+
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+    .search-bar input[type="search"] {
+      width: 100%;
+      max-width: 340px;
+      padding: 0.7rem 1.2rem;
+      border-radius: 24px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      transition: box-shadow 0.2s;
+    }
+    .search-bar input[type="search"]:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #0073e6;
+      border-color: #0073e6;
+    }
+    @media (max-width: 700px) {
+      .search-bar {
+        margin: 1rem 0;
+      }
+      .search-bar input[type="search"] {
+        font-size: 0.98rem;
+        padding: 0.6rem 1rem;
+      }
+    }
   </style>
 </head>
 
@@ -1207,6 +1236,28 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 4000);
     });
   }
+
+  // SEARCH FUNCTIONALITY
+  const input = document.getElementById('siteSearchInput');
+  input.addEventListener('input', function () {
+    const query = input.value.trim().toLowerCase();
+
+    // Search in news, OSC, dokumen, etc.
+    const sections = [
+      ...document.querySelectorAll(
+        '#news-section .news-item, #laporan-osc article, #repositori-dokumen article'
+      )
+    ];
+
+    sections.forEach(item => {
+      const text = item.textContent.toLowerCase();
+      if (query === "" || text.includes(query)) {
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  });
 });
 
   // Hamburger menu functionality (safe, does not affect other code)
