@@ -291,7 +291,7 @@
     }
 
       /* Hamburger button visible on mobile */
-  @media (max-width: 900px) {
+    @media (max-width: 900px) {
     .nav-toggle {
       display: block !important;
     }
@@ -402,6 +402,56 @@
   <meta name="keywords" content="JPS Kuala Nerus, Banjir Terengganu, Peta Interaktif, Data Hujan, OSC, Permohonan Sungai">
   <meta name="author" content="Jabatan Pengairan dan Saliran Daerah Kuala Nerus">
 </head>
+    
+    #riverLevelTable th, #riverLevelTable td {
+      padding: 0.8rem;
+      border: 1px solid #e0e0e0;
+      text-align: center;
+    }
+    #riverLevelTable th {
+      background-color: #0073e6;
+      color: white;
+      font-size: 1.05em;
+      letter-spacing: 0.5px;
+    }
+    #riverLevelTable td {
+      font-size: 1em;
+      background: #fff;
+    }
+    #riverLevelTable tr:nth-child(even) td {
+      background: #f6faff;
+    }
+    @media (max-width: 700px) {
+      #riverLevelTable, #riverLevelTable thead, #riverLevelTable tbody, #riverLevelTable tr, #riverLevelTable th, #riverLevelTable td {
+        display: block;
+        width: 100%;
+      }
+      #riverLevelTable thead {
+        display: none;
+      }
+      #riverLevelTable tr {
+        margin-bottom: 1.2em;
+        border-bottom: 2px solid #0073e6;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      }
+      #riverLevelTable td {
+        text-align: left;
+        padding: 0.7em 1em;
+        position: relative;
+        border: none;
+        font-size: 1em;
+      }
+      #riverLevelTable td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #004d99;
+        display: block;
+        margin-bottom: 0.2em;
+      }
+    }
+</style>
 
 <body>
 
@@ -940,9 +990,12 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-<!-- Improved River Level Section -->
+<!-- Enhanced River Level Section (UI/UX & Mobile Friendly) -->
 <section id="river-level" class="section">
-  <h2>🌊 Aras Air Sungai – Kuala Nerus</h2>
+  <h2 style="display:flex;align-items:center;gap:0.5rem;">
+    <span style="font-size:1.5em;">🌊</span> Aras Air Sungai – Kuala Nerus
+    <button id="downloadRiverCSV" class="map-toggle-btn" style="margin-left:auto;font-size:0.95em;padding:0.4em 1em;">Muat Turun CSV</button>
+  </h2>
   <div class="responsive-table">
     <table id="riverLevelTable" style="width:100%;border-collapse:collapse;">
       <thead>
@@ -960,40 +1013,12 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
   <div id="river-legend" style="margin-top:1rem;font-size:0.97em;">
     <strong>Legenda Status:</strong>
-    <span style="background:#d4edda;color:#155724;padding:2px 10px;border-radius:12px;margin-right:8px;">🟢 Normal</span>
-    <span style="background:#fff3cd;color:#856404;padding:2px 10px;border-radius:12px;margin-right:8px;">🟡 Amaran</span>
-    <span style="background:#f8d7da;color:#721c24;padding:2px 10px;border-radius:12px;">🔴 Bahaya</span>
+    <span style="background:#d4edda;color:#155724;padding:2px 10px;border-radius:12px;margin-right:8px;display:inline-block;">🟢 Normal</span>
+    <span style="background:#fff3cd;color:#856404;padding:2px 10px;border-radius:12px;margin-right:8px;display:inline-block;">🟡 Amaran</span>
+    <span style="background:#f8d7da;color:#721c24;padding:2px 10px;border-radius:12px;display:inline-block;">🔴 Bahaya</span>
   </div>
 </section>
 
-<!-- Add or update this script before </body> -->
-<script>
-let riverData = [
-  { station: "Sungai Nerus", level: 1.8, status: "Normal", updated: "2025-06-18 15:00" },
-  { station: "Sungai Tepoh", level: 2.5, status: "Amaran", updated: "2025-06-18 14:45" },
-  { station: "Sungai Batu Rakit", level: 3.1, status: "Bahaya", updated: "2025-06-18 14:30" }
-];
-
-function refreshRiverLevel() {
-  const tbody = document.querySelector("#riverLevelTable tbody");
-  tbody.innerHTML = "";
-  riverData.forEach(d => {
-    let color = "#d4edda", fontColor = "#155724", icon = "🟢", statusText = d.status;
-    if (d.status === "Amaran") { color = "#fff3cd"; fontColor = "#856404"; icon = "🟡"; }
-    if (d.status === "Bahaya") { color = "#f8d7da"; fontColor = "#721c24"; icon = "🔴"; }
-    tbody.innerHTML += `<tr>
-      <td style="font-weight:500;">${d.station}</td>
-      <td style="text-align:center;font-weight:500;">${d.level.toFixed(2)}</td>
-      <td style="background:${color};color:${fontColor};font-weight:bold;text-align:center;border-radius:8px;">${icon} ${statusText}</td>
-      <td style="text-align:center;">${d.updated}</td>
-    </tr>`;
-  });
-}
-// Initial load
-refreshRiverLevel();
-// Auto-refresh every 5 minutes
-setInterval(refreshRiverLevel, 300000);
-</script>
     <section id="repositori-dokumen" class="section">
       <h2>📂 Repositori Dokumen</h2>
       <p>Muat turun borang rasmi, panduan teknikal, dan dokumen tender terkini daripada JPS Kuala Nerus.</p>
@@ -1445,10 +1470,9 @@ function searchContent() {
 document.getElementById("searchInput").addEventListener("keyup", searchContent);
 </script>
 
-<!-- Add this script before </body> -->
+<!-- Enhanced Script: Modern, CSV Download, Mobile Data-Label -->
 <script>
-// River level data (can be replaced with fetch from API if available)
-let riverData = [
+const riverData = [
   { station: "Sungai Nerus", level: 1.8, status: "Normal", updated: "2025-06-18 15:00" },
   { station: "Sungai Tepoh", level: 2.5, status: "Amaran", updated: "2025-06-18 14:45" },
   { station: "Sungai Batu Rakit", level: 3.1, status: "Bahaya", updated: "2025-06-18 14:30" }
@@ -1461,18 +1485,34 @@ function refreshRiverLevel() {
     let color = "#d4edda", fontColor = "#155724", icon = "🟢", statusText = d.status;
     if (d.status === "Amaran") { color = "#fff3cd"; fontColor = "#856404"; icon = "🟡"; }
     if (d.status === "Bahaya") { color = "#f8d7da"; fontColor = "#721c24"; icon = "🔴"; }
-    tbody.innerHTML += `<tr>
-      <td style="font-weight:500;">${d.station}</td>
-      <td style="text-align:center;font-weight:500;">${d.level.toFixed(2)}</td>
-      <td style="background:${color};color:${fontColor};font-weight:bold;text-align:center;border-radius:8px;">${icon} ${statusText}</td>
-      <td style="text-align:center;">${d.updated}</td>
-    </tr>`;
+    tbody.innerHTML += `
+      <tr>
+        <td data-label="Stesen" style="font-weight:500;">${d.station}</td>
+        <td data-label="Paras Air (m)" style="font-weight:500;">${d.level.toFixed(2)}</td>
+        <td data-label="Status" style="background:${color};color:${fontColor};font-weight:bold;text-align:center;border-radius:8px;">${icon} ${statusText}</td>
+        <td data-label="Kemaskini">${d.updated}</td>
+      </tr>`;
   });
 }
-// Initial load
 refreshRiverLevel();
-// Auto-refresh every 5 minutes
 setInterval(refreshRiverLevel, 300000);
+
+// Download as CSV functionality
+document.getElementById("downloadRiverCSV").addEventListener("click", function () {
+  let csv = "Stesen,Paras Air (m),Status,Kemaskini\n";
+  riverData.forEach(row => {
+    csv += `"${row.station}","${row.level}","${row.status}","${row.updated}"\n`;
+  });
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "aras_air_sungai_kuala_nerus.csv";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
 </script>
 </body>
 </html>
