@@ -450,6 +450,27 @@
         margin-bottom: 0.2em;
       }
     }
+    .responsive-form-iframe {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      position: relative;
+      padding-bottom: 140%; /* Aspect ratio for mobile (adjust as needed) */
+      height: 0;
+      overflow: hidden;
+    }
+    .responsive-form-iframe iframe {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      border: none;
+      background: #fff;
+    }
+    @media (min-width: 700px) {
+      .responsive-form-iframe {
+        padding-bottom: 900px; /* Desktop height */
+        height: 900px;
+      }
+    }
 </style>
 
 <body>
@@ -1052,13 +1073,19 @@ document.addEventListener("DOMContentLoaded", function () {
         <!-- Borang Aduan -->
       <section id="borang-aduan" style="margin-bottom:2rem;">
         <h3>📝 Borang Aduan</h3>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScHNlMObZewD-NCIHjfqWOCIQdHMnFT2PPR3yr07rG9bLxP9Q/viewform?embedded=true" width="640" height="1121" frameborder="0" marginheight="0" marginwidth="0">Memuatkan…</iframe>
+          <!-- Replace your current Google Form iframe with this responsive wrapper -->
+        <div class="responsive-form-iframe">
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScHNlMObZewD-NCIHjfqWOCIQdHMnFT2PPR3yr07rG9bLxP9Q/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0" allowfullscreen>Memuatkan…</iframe>
+        </div>
       </section>
 
       <!-- Borang Maklum Balas -->
       <section id="borang-maklum-balas" style="margin-bottom:2rem;">
         <h3>💬 Borang Maklum Balas</h3>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScOg2tc-4SLojMGjwKtnZxazyVi4At98-2A1B13EdXc0oIebw/viewform?embedded=true" width="640" height="823" frameborder="0" marginheight="0" marginwidth="0">Memuatkan…</iframe>
+          <!-- For Borang Maklum Balas -->
+        <div class="responsive-form-iframe">
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScOg2tc-4SLojMGjwKtnZxazyVi4At98-2A1B13EdXc0oIebw/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0" allowfullscreen>Memuatkan…</iframe>
+        </div>
       </section>
       </div>
     </section>
