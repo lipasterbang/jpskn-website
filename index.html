@@ -454,21 +454,20 @@
       width: 100%;
       max-width: 700px;
       margin: 0 auto 2rem auto;
-      position: relative;
-      padding-bottom: 140%; /* Aspect ratio for mobile (adjust as needed) */
-      height: 0;
-      overflow: hidden;
     }
     .responsive-form-iframe iframe {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      width: 100%;
+      min-height: 600px;
+      max-height: 1200px;
       border: none;
       background: #fff;
+      display: block;
     }
-    @media (min-width: 700px) {
-      .responsive-form-iframe {
-        padding-bottom: 900px; /* Desktop height */
-        height: 900px;
+    @media (max-width: 700px) {
+      .responsive-form-iframe iframe {
+        min-height: 520px;
+        height: 80vh;
+        max-height: 1000px;
       }
     }
 </style>
@@ -1075,7 +1074,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <h3>📝 Borang Aduan</h3>
           <!-- Replace your current Google Form iframe with this responsive wrapper -->
         <div class="responsive-form-iframe">
-          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScHNlMObZewD-NCIHjfqWOCIQdHMnFT2PPR3yr07rG9bLxP9Q/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0" allowfullscreen>Memuatkan…</iframe>
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScHNlMObZewD-NCIHjfqWOCIQdHMnFT2PPR3yr07rG9bLxP9Q/viewform?embedded=true" allowfullscreen>Memuatkan…</iframe>
         </div>
       </section>
 
@@ -1084,7 +1083,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <h3>💬 Borang Maklum Balas</h3>
           <!-- For Borang Maklum Balas -->
         <div class="responsive-form-iframe">
-          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScOg2tc-4SLojMGjwKtnZxazyVi4At98-2A1B13EdXc0oIebw/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0" allowfullscreen>Memuatkan…</iframe>
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScOg2tc-4SLojMGjwKtnZxazyVi4At98-2A1B13EdXc0oIebw/viewform?embedded=true" allowfullscreen>Memuatkan…</iframe>
         </div>
       </section>
       </div>
