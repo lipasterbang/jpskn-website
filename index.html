@@ -588,27 +588,7 @@
   
     <p>Selamat datang ke laman web rasmi Jabatan Pengairan dan Saliran Daerah Kuala Nerus. </p>
       <p>"Jayakan Perkhidmatan Sempurna".</p>
-
-      <!-- Small Dashboard -->
-      <section id="dashboard" class="section" style="padding:1.2rem 1rem 0.7rem 1rem;">
-        <div class="dashboard-grid">
-          <div class="dashboard-card" id="dashboard-hujan">
-            <div class="dashboard-title">🌧️ Jumlah Hujan Hari Ini</div>
-            <div class="dashboard-value" id="total-hujan">-</div>
-            <div class="dashboard-label">mm (keseluruhan stesen)</div>
-          </div>
-          <div class="dashboard-card">
-            <div class="dashboard-title">📍 Stesen Aktif</div>
-            <div class="dashboard-value" id="total-stesen">-</div>
-            <div class="dashboard-label">Stesen</div>
-          </div>
-          <div class="dashboard-card">
-            <div class="dashboard-title">🌊 Status Sungai</div>
-            <div class="dashboard-value" id="status-sungai">-</div>
-            <div class="dashboard-label">Terkini</div>
-          </div>
-        </div>
-      </section>
+    
 
     <!-- Pengenalan -->
     <section id="pengenalan" style="margin-top:2rem;">
@@ -1304,6 +1284,12 @@ document.addEventListener("DOMContentLoaded", function () {
         <a href="#services">Perkhidmatan</a> &nbsp;|&nbsp;
         <a href="#contact">Hubungi</a>
       </div>
+          <div style="margin-top:1.2rem;">
+      <strong>Pautan Luar:</strong>
+      <a href="https://jpsweb.terengganu.gov.my/index.php/ms/" target="_blank" rel="noopener" style="color:#ffd700;text-decoration:underline;">
+        Portal Rasmi JPS Negeri Terengganu
+      </a>
+    </div>
 
         <div style="text-align:center;margin-top:2rem;">
         <button id="backToTop" title="Kembali ke atas">↑</button>
@@ -1591,7 +1577,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <td>${row.station}</td>
         <td>${row.rainfall}</td>
         <td>${row.updated}</td>
-           </tr>`;
+      </tr>`;
     });
   }
 
