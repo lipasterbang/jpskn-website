@@ -1262,40 +1262,48 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 
 <footer>
-  <div style="width:100%;padding:1.5rem 0 1rem 0;">
-    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 2rem; max-width:1200px; margin:0 auto;">
-      <div style="flex: 1 1 220px; min-width: 200px; text-align: left;">
+  <div style="max-width:1200px;margin:0 auto;padding:2rem 1rem 1rem 1rem;">
+    <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:space-between;align-items:flex-start;">
+      <!-- JPS Info -->
+      <div style="flex:1 1 220px;min-width:200px;text-align:left;">
         <strong>Jabatan Pengairan dan Saliran<br>Kuala Nerus</strong><br>
-        <span style="font-size:0.97em;">JPS Daerah Kuala Nerus,<br>
-          Kompleks Pentadbiran Bandar Al Wathiqu Billah <br>
-        21300 Kuala Nerus, Terengganu</span>
+        <span style="font-size:0.97em;">
+          Kompleks Pentadbiran Bandar Al Wathiqu Billah<br>
+          21300 Kuala Nerus, Terengganu
+        </span>
       </div>
-      <div style="flex: 1 1 220px; min-width: 200px;">
+      <!-- Contact -->
+      <div style="flex:1 1 220px;min-width:200px;">
         <strong>Hubungi Kami</strong><br>
         <span style="font-size:0.97em;">
           📞 +60 9-665 3010<br>
           📱 <a href="https://wa.me/60123456789" target="_blank">+60 12-345 6789</a><br>
           📧 <a href="mailto:jpskualanerus@terengganu.gov.my">jpskualanerus@terengganu.gov.my</a>
-          <strong>Pautan Luar:</strong>
-            <a href="https://jpsweb.terengganu.gov.my/index.php/ms/" target="_blank" rel="noopener" style="color:#ffd700;text-decoration:underline;">
-            Portal Rasmi JPS Negeri Terengganu
         </span>
+        <div style="font-size:0.97em;margin-top:0.7rem;">
+          <strong>Waktu Operasi:</strong><br>
+          Isnin - Jumaat: 8:00 AM - 5:00 PM<br>
+          Sabtu & Ahad: Tutup
+        </div>
       </div>
-      <div style="flex: 1 1 220px; min-width: 200px;">
+      <!-- Quick Links & External -->
+      <div style="flex:1 1 220px;min-width:200px;">
         <strong>Pautan Pantas</strong><br>
         <a href="#about">Tentang</a> &nbsp;|&nbsp;
         <a href="#services">Perkhidmatan</a> &nbsp;|&nbsp;
         <a href="#contact">Hubungi</a>
+        <br>
+        <a href="https://jpsweb.terengganu.gov.my/index.php/ms/" target="_blank" rel="noopener" style="color:#ffd700;text-decoration:underline;display:inline-block;margin-top:0.7em;">
+          Portal Rasmi JPS Negeri Terengganu
+        </a>
       </div>
-
-        <div style="text-align:center;margin-top:2rem;">
-        <button id="backToTop" title="Kembali ke atas">↑</button>
-        <button id="help-button" title="Bantuan">Bantuan</button>
-        </div>
-
     </div>
-    <hr style="margin: 1.5rem 0 1rem 0; border: none; border-top: 1px solid #0073e6;">
-    <div style="font-size:0.97em; color:#e0e0e0; text-align:center;">
+    <div style="text-align:center;margin-top:2rem;">
+      <button id="backToTop" title="Kembali ke atas">↑</button>
+      <button id="help-button" title="Bantuan">Bantuan</button>
+    </div>
+    <hr style="margin:1.5rem 0 1rem 0;border:none;border-top:1px solid #0073e6;">
+    <div style="font-size:0.97em;color:#e0e0e0;text-align:center;">
       &copy; 2025 Jabatan Pengairan dan Saliran Daerah Kuala Nerus. Hak cipta terpelihara.<br>
       <span style="font-size:0.95em;">Sebarang pertanyaan, sila <a href="#contact">hubungi kami</a>.</span>
     </div>
@@ -1538,6 +1546,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "station": "Batu Rakit",
     "rainfall": 9.7,
     "updated": "2025-06-18 14:45"
+ 
   },
   {
     "station": "Seberang Takir",
