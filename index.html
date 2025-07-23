@@ -5,14 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Jabatan Pengairan dan Saliran Kuala Nerus</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
   <meta name="description" content="Laman Rasmi Jabatan Pengairan dan Saliran Daerah Kuala Nerus. Info banjir, peta interaktif, data hujan dan aras sungai, serta permohonan rasmi.">
   <meta name="keywords" content="JPS Kuala Nerus, Banjir Terengganu, Peta Interaktif, Data Hujan, OSC, Permohonan Sungai">
   <meta name="author" content="Jabatan Pengairan dan Saliran Daerah Kuala Nerus">
-</head>
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
   <style>
     body {
       margin: 0;
@@ -525,14 +523,100 @@
         align-items: flex-start;
       }
     }
-</style>
+
+    #live-date-time {
+      width: 100%;
+      background: #003366;
+      color: #fff;
+      text-align: center;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      padding: 0.3rem 0;
+      position: relative;
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    #live-date-time span {
+      flex: 1 1 auto;
+      text-align: center;
+    }
+    #live-date-time button {
+      background: none;
+      border: none;
+      color: #ffd700;
+      font-size: 1.3em;
+      cursor: pointer;
+      margin: 0 0.2em;
+    }
+    #live-date-time form {
+      display: inline-block;
+      margin: 0 0.2em;
+    }
+    #live-date-time input[type="search"] {
+      padding: 0.3em 0.9em;
+      border-radius: 16px;
+      border: none;
+      font-size: 1em;
+      width: 120px;
+      max-width: 40vw;
+    }
+    #live-date-time button[type="submit"] {
+      background: #ffd700;
+      border: none;
+      color: #003366;
+      font-weight: bold;
+      border-radius: 16px;
+      padding: 0.3em 0.9em;
+      margin-left: 0.2em;
+      cursor: pointer;
+    }
+    #chatbox {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      height: 300px;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+    }
+    #user-input {
+      width: 80%;
+      padding: 0.5rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      background: #0073e6;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
 
 <body>
 
-  <!-- Live Date/Time Display -->
+  <!-- Live Date/Time Display with logo buttons and search -->
   <div id="live-date-time"
-     style="width:100%;background:#003366;color:#fff;text-align:center;font-size:1.05rem;font-weight:500;letter-spacing:0.5px;padding:0.3rem 0;position:relative;z-index:1001;">
-  </div>
+  style="width:100%;background:#003366;color:#fff;text-align:center;font-size:1.05rem;font-weight:500;letter-spacing:0.5px;padding:0.3rem 0;position:relative;z-index:1001;display:flex;align-items:center;justify-content:center;gap:1.2rem;flex-wrap:wrap;">
+  <span id="date-time-text" style="flex:1 1 auto;text-align:center;"></span>
+  <button id="faq-btn" title="Soalan Lazim" style="background:none;border:none;color:#ffd700;font-size:1.3em;cursor:pointer;margin:0 0.2em;">
+    <span aria-label="FAQ" role="img">❓</span>
+  </button>
+  <button id="contact-btn" title="Hubungi Kami" style="background:none;border:none;color:#ffd700;font-size:1.3em;cursor:pointer;margin:0 0.2em;">
+    <span aria-label="Contact" role="img">📞</span>
+  </button>
+  <button id="feedback-btn" title="Maklum Balas" style="background:none;border:none;color:#ffd700;font-size:1.3em;cursor:pointer;margin:0 0.2em;">
+    <span aria-label="Maklum Balas" role="img">💬</span>
+  </button>
+  <form id="header-search-form" style="display:inline-block;margin:0 0.2em;">
+    <input id="header-search-input" type="search" placeholder="Cari..." style="padding:0.3em 0.9em;border-radius:16px;border:none;font-size:1em;width:120px;max-width:40vw;">
+    <button type="submit" style="background:#ffd700;border:none;color:#003366;font-weight:bold;border-radius:16px;padding:0.3em 0.9em;margin-left:0.2em;cursor:pointer;">Cari</button>
+  </form>
+</div>
 
   <!-- Header with Logos -->
   <header style="cursor:pointer;" onclick="window.location.href='index.html'">
@@ -543,48 +627,78 @@
     <h1 class="main-title" style="cursor:pointer;">JABATAN PENGAIRAN DAN SALIRAN DAERAH KUALA NERUS</h1>
   </header>
 
-<!-- Add this just before your <nav> ... </nav> -->
-<button class="nav-toggle" aria-label="Menu" style="display:none;position:absolute;right:1rem;top:1.1rem;background:none;border:none;font-size:2rem;color:#fff;z-index:1001;cursor:pointer;">&#9776;</button>
+  <!-- Add this just before your <nav> ... </nav> -->
+  <button class="nav-toggle" aria-label="Menu" style="display:none;position:absolute;right:1rem;top:1.1rem;background:none;border:none;font-size:2rem;color:#fff;z-index:1001;cursor:pointer;">&#9776;</button>
 
-<nav style="position:relative;">
-  <ul class="nav-menu">
-    <li class="dropdown">
-      <a href="#about">Profil</a>
-      <ul class="dropdown-content">
-        <li><a href="#pengenalan">Pengenalan</a></li>
-        <li><a href="#kata-aluan">Kata Aluan Jurutera Daerah</a></li>
-        <li><a href="#visi-misi">Visi Misi Objektif</a></li>
-        <li><a href="#carta-organisasi">Carta Organisasi</a></li>
-      </ul>
-    </li>
-    <li class="dropdown">
-      <a href="#services">Perkhidmatan</a>
-      <ul class="dropdown-content">
-        <li><a href="#ruangan-iklan">Ruangan Iklan</a></li>
-        <li><a href="#ruangan-tender">Sebut Harga/Tender</a></li>
-        <li><a href="#news-section">Berita</a></li>
-        <li><a href="#laporan-osc">Laporan OSC</a></li>
-      </ul>
-    </li>
-    <li class="dropdown">
-      <a href="#map-section">Peta</a>
-    </li>
-    <li class="dropdown">
-      <a href="#hydrology-data">Taburan Hujan</a>
-    </li>
-    <li class="dropdown">
-      <a href="#repositori-dokumen">Dokumen</a>
-    </li>
-    <li class="dropdown">
-      <a href="#contact">Hubungi</a>
-    </li>
-  </ul>
-</nav>
+  <nav style="position:relative;">
+    <ul class="nav-menu">
+      <li class="dropdown">
+        <a href="#about">Profil</a>
+        <ul class="dropdown-content">
+          <li><a href="#pengenalan">Pengenalan</a></li>
+          <li><a href="#kata-aluan">Kata Aluan Jurutera Daerah</a></li>
+          <li><a href="#visi-misi">Visi Misi Objektif</a></li>
+          <li><a href="#carta-organisasi">Carta Organisasi</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#services">Perkhidmatan</a>
+        <ul class="dropdown-content">
+          <li><a href="#ruangan-iklan">Ruangan Iklan</a></li>
+          <li><a href="#ruangan-tender">Sebut Harga/Tender</a></li>
+          <li><a href="#news-section">Berita</a></li>
+          <li><a href="#laporan-osc">Laporan OSC</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#map-section">Peta</a>
+      </li>
+      <li class="dropdown">
+        <a href="#hydrology-data">Taburan Hujan</a>
+      </li>
+      <li class="dropdown">
+        <a href="#repositori-dokumen">Dokumen</a>
+      </li>
+      <li class="dropdown">
+        <a href="#contact">Hubungi</a>
+      </li>
+      <li class="dropdown">
+        <a href="#">Info Banjir</a>
+        <ul class="dropdown-content">
+          <li>
+            <a href="https://publicinfobanjir.water.gov.my/aras-air/data-paras-air/?state=TRG&lang=en" target="_blank" rel="noopener">
+              Info Aras Air
+            </a>
+          </li>
+          <li>
+            <a href="https://publicinfobanjir.water.gov.my/hujan/data-hujan/?state=TRG&lang=en" target="_blank" rel="noopener">
+              Info Hujan Lebat
+            </a>
+          </li>
+          <li>
+            <a href="https://jpsweb.terengganu.gov.my/index.php/ms/info-banjir/siren-amaran-banjir" target="_blank" rel="noopener">
+              Siren Amaran Banjir
+            </a>
+          </li>
+          <li>
+            <a href="https://jpsweb.terengganu.gov.my/index.php/ms/info-banjir/stesen-lebat-hujan" target="_blank" rel="noopener">
+              Stesen Lebat Hujan
+            </a>
+          </li>
+          <li>
+            <a href="https://jpsweb.terengganu.gov.my/index.php/ms/info-banjir/stesen-paras-air-sungai" target="_blank" rel="noopener">
+              Stesen Paras Air Sungai
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 
-<div class="container">
+  <div class="container">
 
-  <section id="about" class="section">
-    <h2>Profil Kami</h2>
+    <section id="about" class="section">
+      <h2>Profil Kami</h2>
   
     <p>Selamat datang ke laman web rasmi Jabatan Pengairan dan Saliran Daerah Kuala Nerus. </p>
       <p>"Jayakan Perkhidmatan Sempurna".</p>
@@ -761,27 +875,30 @@
   <div id="mapContainer" style="position:relative;">
     <div id="map" style="height:400px;border-radius:10px;margin-top:1rem;width:100%;"></div>
     <!-- Map Legend -->
-    <div id="map-legend" style="background:rgba(255,255,255,0.95);border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);padding:10px 18px;position:absolute;bottom:20px;right:20px;z-index:1001;min-width:160px;">
-      <strong>Legend:</strong>
-      <div style="display:flex;align-items:center;margin-top:6px;">
+    <div id="map-legend" style="background:rgba(255,255,255,0.98);border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.10);padding:14px 20px;position:absolute;bottom:20px;right:20px;z-index:1001;min-width:180px;font-size:1em;">
+      <div style="font-weight:bold;color:#004d99;margin-bottom:0.5em;">Legenda Peta JPS</div>
+      <div style="display:flex;align-items:center;margin-bottom:6px;">
         <img src="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-blue.png" style="width:20px;height:32px;margin-right:8px;" alt="Pejabat JPS">
         <span>Pejabat JPS</span>
       </div>
-      <div style="display:flex;align-items:center;margin-top:4px;">
+      <div style="display:flex;align-items:center;margin-bottom:6px;">
         <img src="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-red.png" style="width:20px;height:32px;margin-right:8px;" alt="Siren Banjir">
         <span>Siren Banjir</span>
       </div>
-      <div style="display:flex;align-items:center;margin-top:4px;">
+      <div style="display:flex;align-items:center;margin-bottom:6px;">
         <img src="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-green.png" style="width:20px;height:32px;margin-right:8px;" alt="Stesen Hujan">
         <span>Stesen Hujan</span>
       </div>
-      <div style="display:flex;align-items:center;margin-top:4px;">
+      <div style="display:flex;align-items:center;margin-bottom:6px;">
         <img src="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-yellow.png" style="width:20px;height:32px;margin-right:8px;" alt="Stesen Aras Air">
         <span>Stesen Aras Air</span>
       </div>
-      <div style="display:flex;align-items:center;margin-top:4px;">
+      <div style="display:flex;align-items:center;">
         <img src="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-violet.png" style="width:20px;height:32px;margin-right:8px;" alt="Projek Tebatan Banjir">
         <span>Projek Tebatan Banjir</span>
+      </div>
+      <div style="border-top:1px solid #e0e0e0;margin:10px 0 0 0;padding-top:7px;font-size:0.93em;color:#666;">
+        <span style="font-style:italic;">Klik ikon untuk maklumat lanjut.</span>
       </div>
     </div>
   </div>
@@ -987,13 +1104,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     hydroStations.forEach(station => {
       const icon = hydroIcons[station.river_status] || hydroIcons["Normal"];
-      const marker = L.marker(station.coords, { icon });
+      let statusColor = "#155724", statusBg = "#d4edda", statusIcon = "🟢";
+      if (station.river_status === "Amaran") { statusColor = "#856404"; statusBg = "#fff3cd"; statusIcon = "🟡"; }
+      if (station.river_status === "Bahaya") { statusColor = "#721c24"; statusBg = "#f8d7da"; statusIcon = "🔴"; }
       const popupHtml = `
-        <strong>${station.name}</strong><br>
-        <span>Paras Air: <b>${station.river_level} m</b> (${station.river_status})</span><br>
-        <span>Hujan: <b>${station.rainfall} mm</b></span><br>
-        <span>Kemaskini: <b>${station.last_update}</b></span>
+        <div style="font-size:1.05em;font-weight:bold;color:#004d99;margin-bottom:0.3em;">${station.name}</div>
+        <div style="margin-bottom:0.2em;">
+          <span style="font-weight:500;">Paras Air:</span>
+          <span style="background:${statusBg};color:${statusColor};padding:2px 10px;border-radius:12px;font-weight:bold;margin-left:4px;">
+            ${statusIcon} ${station.river_level} m (${station.river_status})
+          </span>
+        </div>
+        <div style="margin-bottom:0.2em;">
+          <span style="font-weight:500;">Hujan:</span>
+          <span style="color:#0073e6;font-weight:bold;">${station.rainfall} mm</span>
+        </div>
+        <div style="font-size:0.97em;color:#888;">
+          <span>Kemaskini: <b>${station.last_update}</b></span>
+        </div>
       `;
+      marker = L.marker(station.coords, { icon });
       marker.bindPopup(popupHtml);
       hydroClusterGroup.addLayer(marker);
     });
@@ -1240,10 +1370,8 @@ document.addEventListener("DOMContentLoaded", function () {
       </section>
       </div>
     </section>
-  </section>
-</div>
-  <!-- Place this before your closing </body> tag, ideally above <footer> -->
-  <div style="width:100%;display:flex;justify-content:center;margin:2rem 0;">
+<!-- Place this before your closing </body> tag, ideally above <footer> -->
+<div style="width:100%;display:flex;justify-content:center;margin:2rem 0;">
     <div class="fb-page"
       data-href="https://www.facebook.com/jabatanpengairandansaliranterengganu" 
       data-tabs="timeline"
@@ -1258,6 +1386,11 @@ document.addEventListener("DOMContentLoaded", function () {
       </blockquote>
     </div>
   </div>
+    <div id="chatbot">
+      <div id="chat-log"></div>
+      <textarea id="user-input" placeholder="Tulis soalan anda di sini..."></textarea>
+      <button id="send-btn">Hantar</button>
+    </div>
   </main>
   </div>
 
@@ -1310,271 +1443,77 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 </footer>
 
-
 <!-- Facebook SDK (only include once per page, before </body>) -->
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" 
   src="https://connect.facebook.net/ms_MY/sdk.js#xfbml=1&version=v19.0" nonce="fb"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 
-  <!-- Place this just before </body> -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-  // MAP SECTION
-  const mapContainer = document.getElementById("mapContainer");
-  const toggleMapBtn = document.getElementById("toggleMap");
-  let mapInitialized = false;
-  let map;
-
-  function initMap() {
-    if (mapInitialized) return;
-    map = L.map("map").setView([5.39448, 103.06308], 12);
-    window.map = map; // <-- Make map global for cluster logic
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-
-    // Custom icons
-    const pejabatIcon = new L.Icon({
-      iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-blue.png',
-      shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
-    const floodSirenIcon = new L.Icon({
-      iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-red.png',
-      shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
-    const rainStationIcon = new L.Icon({
-      iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-green.png',
-      shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
-    const riverLevelIcon = new L.Icon({
-      iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-yellow.png',
-      shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
-    const floodProjectIcon = new L.Icon({
-      iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-violet.png',
-      shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
-
-    // Pejabat JPS marker (blue)
-    L.marker([5.39448, 103.06308], {icon: pejabatIcon})
-      .addTo(map)
-      .bindPopup("Pejabat JPS Kuala Nerus");
-
-    // Flood Siren markers (red)
-    [
-      { name: "Siren Banjir Tok Jembal", coords: [5.4145, 103.0855] },
-      { name: "Siren Banjir Batu Rakit", coords: [5.4630, 103.1020] },
-      { name: "Siren Banjir Seberang Takir", coords: [5.3660, 103.0990] }
-    ].forEach(point => {
-      L.marker(point.coords, {icon: floodSirenIcon})
-        .addTo(map)
-        .bindPopup(point.name);
-    });
-
-    // Rainfall Stations (green)
-    [
-      { name: "Stesen Hujan Gong Badak", coords: [5.3950, 103.0850] },
-      { name: "Stesen Hujan Batu Rakit", coords: [5.4600, 103.1000] }
-    ].forEach(point => {
-      L.marker(point.coords, {icon: rainStationIcon})
-        .addTo(map)
-        .bindPopup(point.name);
-    });
-
-    // River Level Stations (yellow)
-    [
-      { name: "Stesen Aras Air Sungai Nerus", coords: [5.4000, 103.0700] }
-    ].forEach(point => {
-      L.marker(point.coords, {icon: riverLevelIcon})
-        .addTo(map)
-        .bindPopup(point.name);
-    });
-
-    // Flood Mitigation Project (violet)
-    [
-      { name: "Projek Tebatan Banjir UMT", coords: [5.40788, 103.0886] }
-    ].forEach(point => {
-      L.marker(point.coords, {icon: floodProjectIcon})
-        .addTo(map)
-        .bindPopup(point.name);
-    });
-
-    // Ensure legend stays on map
-    const legend = document.getElementById('map-legend');
-    if (legend) {
-      map.getContainer().appendChild(legend);
+  <script>
+  // Live Date/Time Display and Header Buttons/Search
+  document.addEventListener("DOMContentLoaded", function () {
+    function updateClock() {
+      const now = new Date();
+      const days = ["Ahad","Isnin","Selasa","Rabu","Khamis","Jumaat","Sabtu"];
+      const months = ["Januari","Februari","Mac","April","Mei","Jun","Julai","Ogos","September","Oktober","November","Disember"];
+      const day = days[now.getDay()];
+      const date = now.getDate();
+      const month = months[now.getMonth()];
+      const year = now.getFullYear();
+      const time = now.toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      document.getElementById("date-time-text").textContent =
+        `${day}, ${date} ${month} ${year} | ${time}`;
     }
+    updateClock();
+    setInterval(updateClock, 1000);
 
-    mapInitialized = true;
-  }
-
-  if (toggleMapBtn && mapContainer) {
-    initMap();
-    toggleMapBtn.addEventListener("click", () => {
-      const isHidden = mapContainer.style.display === "none";
-      mapContainer.style.display = isHidden ? "block" : "none";
-      toggleMapBtn.textContent = isHidden ? "Sembunyikan Peta" : "Lihat Peta";
-      if (!isHidden && map) setTimeout(() => map.invalidateSize(), 200);
-    });
-  }
-
-  // --- Hydrology Cluster Markers ---
-  // Only run after map is initialized
-  function addHydroClusters() {
-    if (!window.map || typeof L === "undefined") return;
-
-    // Example dynamic river/rainfall data for markers
-    const hydroStations = [
-      {
-        name: "Stesen Aras Air Sungai Nerus",
-        coords: [5.4000, 103.0700],
-        river_level: 1.8,
-        river_status: "Normal",
-        rainfall: 14.2,
-        last_update: "2025-06-18 15:00"
-      },
-      {
-        name: "Stesen Aras Air Sungai Tepoh",
-        coords: [5.4200, 103.0800],
-        river_level: 2.5,
-        river_status: "Amaran",
-        rainfall: 9.7,
-        last_update: "2025-06-18 14:45"
-      },
-      {
-        name: "Stesen Aras Air Sungai Batu Rakit",
-        coords: [5.4600, 103.1000],
-        river_level: 3.1,
-        river_status: "Bahaya",
-        rainfall: 11.5,
-        last_update: "2025-06-18 14:30"
-      }
-    ];
-
-    // Color-coded icon URLs
-    const hydroIcons = {
-      "Normal": new L.Icon({
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-green.png',
-        shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-      }),
-      "Amaran": new L.Icon({
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-yellow.png',
-        shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-      }),
-      "Bahaya": new L.Icon({
-        iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-red.png',
-        shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-      })
+    // FAQ button
+    document.getElementById("faq-btn").onclick = function() {
+      window.location.href = "#faq";
+    };
+    // Contact button
+    document.getElementById("contact-btn").onclick = function() {
+      window.location.href = "#contact";
+    };
+    // Feedback button
+    document.getElementById("feedback-btn").onclick = function() {
+      window.location.href = "#borang-maklum-balas";
     };
 
-    // Remove previous hydrology markers if any
-    if (window.hydroClusterGroup) {
-      window.map.removeLayer(window.hydroClusterGroup);
-    }
+    // Simple HTML search (finds and scrolls to first match)
+    document.getElementById("header-search-form").onsubmit = function(e) {
+      e.preventDefault();
+      const q = document.getElementById("header-search-input").value.trim().toLowerCase();
+      if (!q) return;
+      // Search all text nodes in body
+      let found = false;
+      function walk(node) {
+        if (found) return;
+        if (node.nodeType === 3 && node.textContent.toLowerCase().includes(q)) {
+          node.parentElement.scrollIntoView({ behavior: "smooth", block: "center" });
+          node.parentElement.style.background = "#fff3cd";
+          setTimeout(() => node.parentElement.style.background = "", 2000);
+          found = true;
+        } else if (node.nodeType === 1 && node.childNodes) {
+          node.childNodes.forEach(walk);
+        }
+      }
+      walk(document.body);
+      if (!found) alert("Tiada padanan dijumpai.");
+    };
+  });
 
-    // Create cluster group
-    const hydroClusterGroup = L.markerClusterGroup();
-
-    hydroStations.forEach(station => {
-      const icon = hydroIcons[station.river_status] || hydroIcons["Normal"];
-      const marker = L.marker(station.coords, { icon });
-      const popupHtml = `
-        <strong>${station.name}</strong><br>
-        <span>Paras Air: <b>${station.river_level} m</b> (${station.river_status})</span><br>
-        <span>Hujan: <b>${station.rainfall} mm</b></span><br>
-        <span>Kemaskini: <b>${station.last_update}</b></span>
-      `;
-      marker.bindPopup(popupHtml);
-      hydroClusterGroup.addLayer(marker);
-    });
-
-    window.map.addLayer(hydroClusterGroup);
-    window.hydroClusterGroup = hydroClusterGroup;
-  }
-
-  // Wait a moment after map is initialized, then add clusters
-  setTimeout(addHydroClusters, 500);
-});
-</script>
-
-<!-- Rainfall JSON Data (place in your HTML, e.g. before your rainfall section) -->
-<script id="rainfall-json" type="application/json">
-[
-  {
-    "station": "Gong Badak",
-    "rainfall": 14.2,
-    "updated": "2025-06-18 15:00"
-  },
-  {
-    "station": "Batu Rakit",
-    "rainfall": 9.7,
-    "updated": "2025-06-18 14:45"
- 
-  },
-  {
-    "station": "Seberang Takir",
-    "rainfall": 11.5,
-    "updated": "2025-06-18 14:30"
-  },
-  {
-    "station": "Tok Jembal",
-    "rainfall": 7.8,
-    "updated": "2025-06-18 14:20"
-  },
-  {
-    "station": "Kampung Pak Tuyu",
-    "rainfall": 6.3,
-    "updated": "2025-06-18 14:10"
-  }
-]
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </script>
+  <!-- ...other scripts for map, rainfall, river-level, etc. ... -->
+   <!-- Rainfall Table & Dashboard -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Get rainfall data from JSON in HTML
   function getRainfallDataFromHTML() {
     const json = document.getElementById('rainfall-json').textContent;
     return JSON.parse(json);
   }
-
   function updateRainfallTable(data) {
     const tbody = document.getElementById("rainfallTableBody");
     tbody.innerHTML = "";
@@ -1586,73 +1525,9 @@ document.addEventListener("DOMContentLoaded", function () {
       </tr>`;
     });
   }
-
-  let rainChart = null;
-  function showRainChart(data) {
-    const ctx = document.getElementById('rainChart').getContext('2d');
-    if (rainChart) rainChart.destroy();
-    rainChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: data.map(d => d.station),
-        datasets: [{
-          label: 'Jumlah Hujan (mm)',
-          data: data.map(d => d.rainfall),
-          backgroundColor: ['#0073e6', '#28a745', '#ffc107', '#ff6384', '#36a2eb']
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          title: {
-            display: true,
-            text: 'Taburan Hujan Terkini Kuala Nerus'
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: { display: true, text: 'Hujan (mm)' }
-          }
-        }
-      }
-    });
-  }
-      if (toggleBtn && chartView && tableView) {
-      toggleBtn.addEventListener("click", () => {
-        const isTableVisible = tableView.style.display !== "none";
-        tableView.style.display = isTableVisible ? "none" : "block";
-        chartView.style.display = isTableVisible ? "block" : "none";
-        toggleBtn.textContent = isTableVisible ? "Tukar kepada Jadual 📋" : "Tukar kepada Carta 📈";
-        if (isTableVisible) showRainChart();
-      });
-      // Optionally, show chart if user lands directly on chart view
-      if (chartView.style.display !== "none") showRainChart();
-    }
-
-  // Toggle Table/Chart View
-  const toggleBtn = document.getElementById("toggleView");
-  const chartView = document.getElementById("rainfall-chart-view");
-  const tableView = document.querySelector(".responsive-table");
-
-  function refreshRainfallSection() {
-    const data = getRainfallDataFromHTML();
-    updateRainfallTable(data);
-    if (chartView.style.display !== "none") showRainChart(data);
-  }
-
   // Initial load
-  refreshRainfallSection();
-
-  // Toggle event
-  toggleBtn.addEventListener("click", () => {
-    const isTableVisible = tableView.style.display !== "none";
-    tableView.style.display = isTableVisible ? "none" : "block";
-    chartView.style.display = isTableVisible ? "block" : "none";
-    if (!isTableVisible) showRainChart(getRainfallDataFromHTML());
-  });
-
+  const rainfallData = getRainfallDataFromHTML();
+  updateRainfallTable(rainfallData);
   // Download as CSV
   document.getElementById("downloadRainfallCSV").addEventListener("click", function () {
     const data = getRainfallDataFromHTML();
@@ -1670,178 +1545,62 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   });
-
-  // Optional: Auto-refresh every 5 minutes (if you update the JSON via backend)
-  // setInterval(refreshRainfallSection, 300000);
 });
 </script>
 
+<!-- River Level Table & Dashboard -->
 <script>
-  // Live Clock/Date Display in Header
-  document.addEventListener("DOMContentLoaded", function () {
-    function updateClock() {
-      const now = new Date();
-      const days = ["Ahad","Isnin","Selasa","Rabu","Khamis","Jumaat","Sabtu"];
-      const months = ["Januari","Februari","Mac","April","Mei","Jun","Julai","Ogos","September","Oktober","November","Disember"];
-      const day = days[now.getDay()];
-      const date = now.getDate();
-      const month = months[now.getMonth()];
-      const year = now.getFullYear();
-      const time = now.toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      document.getElementById("live-date-time").textContent =
-        `${day}, ${date} ${month} ${year} | ${time}`;
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
-  });
-
-  // Hamburger menu functionality
-  document.addEventListener("DOMContentLoaded", function () {
-    const navToggle = document.querySelector('.nav-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-    navToggle.addEventListener('click', function () {
-      navMenu.classList.toggle('open');
-    });
-    navMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth < 900) navMenu.classList.remove('open');
-      });
-    });
-  });
-
-  // Back to top button functionality
-  document.addEventListener("DOMContentLoaded", function () {
-    const backToTopBtn = document.getElementById("backToTop");
-    window.addEventListener("scroll", function () {
-      if (window.scrollY > 300) {
-        backToTopBtn.style.display = "block";
-      } else {
-        backToTopBtn.style.display = "none";
-      }
-    });
-    backToTopBtn.addEventListener("click", function () {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  });
-
-  // Help button functionality
-  document.addEventListener("DOMContentLoaded", function () {
-    const helpButton = document.getElementById("help-button");
-    helpButton.addEventListener("click", function () {
-      alert("Untuk bantuan, sila hubungi kami di:\n📞 +60 9-665 3010\n📱 +60 12-345 6789\n📧 jpskualanerus@terengganu.gov.my");
-    });
-  });
-
-  // Rainfall Table & Dashboard
-  document.addEventListener("DOMContentLoaded", function () {
-    function getRainfallDataFromHTML() {
-      const json = document.getElementById('rainfall-json').textContent;
-      return JSON.parse(json);
-    }
-    function updateRainfallTable(data) {
-      const tbody = document.getElementById("rainfallTableBody");
-      tbody.innerHTML = "";
-      data.forEach(row => {
-        tbody.innerHTML += `<tr>
-          <td>${row.station}</td>
-          <td>${row.rainfall}</td>
-          <td>${row.updated}</td>
+document.addEventListener("DOMContentLoaded", function () {
+  const riverData = [
+    { station: "Sungai Nerus", level: 1.8, status: "Normal", updated: "2025-06-18 15:00" },
+    { station: "Sungai Tepoh", level: 2.5, status: "Amaran", updated: "2025-06-18 14:45" },
+    { station: "Sungai Batu Rakit", level: 3.1, status: "Bahaya", updated: "2025-06-18 14:30" }
+  ];
+  function refreshRiverLevel() {
+    const tbody = document.querySelector("#riverLevelTable tbody");
+    tbody.innerHTML = "";
+    riverData.forEach(d => {
+      let color = "#d4edda", fontColor = "#155724", icon = "🟢";
+      if (d.status === "Amaran") { color = "#fff3cd"; fontColor = "#856404"; icon = "🟡"; }
+      if (d.status === "Bahaya") { color = "#f8d7da"; fontColor = "#721c24"; icon = "🔴"; }
+      tbody.innerHTML += `
+        <tr>
+          <td data-label="Stesen" style="font-weight:500;">${d.station}</td>
+          <td data-label="Paras Air (m)" style="font-weight:500;">${d.level.toFixed(2)}</td>
+          <td data-label="Status" style="background:${color};color:${fontColor};font-weight:bold;text-align:center;border-radius:8px;">${icon} ${d.status}</td>
+          <td data-label="Kemaskini">${d.updated}</td>
         </tr>`;
-      });
-    }
-    function updateDashboardRainfall() {
-      let data = [];
-      try {
-        data = getRainfallDataFromHTML();
-      } catch {}
-      const total = data.reduce((sum, s) => sum + (parseFloat(s.rainfall) || 0), 0);
-      document.getElementById('total-hujan').textContent = total.toFixed(1);
-      document.getElementById('total-stesen').textContent = data.length;
-    }
-    // Initial load
-    const rainfallData = getRainfallDataFromHTML();
-    updateRainfallTable(rainfallData);
-    updateDashboardRainfall();
-    // Download as CSV
-    document.getElementById("downloadRainfallCSV").addEventListener("click", function () {
-      const data = getRainfallDataFromHTML();
-      let csv = "Stesen,Jumlah Hujan (mm),Kemaskini\n";
-      data.forEach(row => {
-        csv += `"${row.station}","${row.rainfall}","${row.updated}"\n`;
-      });
-      const blob = new Blob([csv], { type: "text/csv" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "rainfall_kuala_nerus.csv";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
     });
-    // Optional: Auto-refresh every 5 minutes
-    setInterval(() => {
-      const data = getRainfallDataFromHTML();
-      updateRainfallTable(data);
-      updateDashboardRainfall();
-    }, 300000);
-  });
-
-  // River Level Table & Dashboard
-  document.addEventListener("DOMContentLoaded", function () {
-    const riverData = [
-      { station: "Sungai Nerus", level: 1.8, status: "Normal", updated: "2025-06-18 15:00" },
-      { station: "Sungai Tepoh", level: 2.5, status: "Amaran", updated: "2025-06-18 14:45" },
-      { station: "Sungai Batu Rakit", level: 3.1, status: "Bahaya", updated: "2025-06-18 14:30" }
-    ];
-    function refreshRiverLevel() {
-      const tbody = document.querySelector("#riverLevelTable tbody");
-      tbody.innerHTML = "";
-      riverData.forEach(d => {
-        let color = "#d4edda", fontColor = "#155724", icon = "🟢";
-        if (d.status === "Amaran") { color = "#fff3cd"; fontColor = "#856404"; icon = "🟡"; }
-        if (d.status === "Bahaya") { color = "#f8d7da"; fontColor = "#721c24"; icon = "🔴"; }
-        tbody.innerHTML += `
-          <tr>
-            <td data-label="Stesen" style="font-weight:500;">${d.station}</td>
-            <td data-label="Paras Air (m)" style="font-weight:500;">${d.level.toFixed(2)}</td>
-            <td data-label="Status" style="background:${color};color:${fontColor};font-weight:bold;text-align:center;border-radius:8px;">${icon} ${d.status}</td>
-            <td data-label="Kemaskini">${d.updated}</td>
-          </tr>`;
-      });
-    }
-    function updateDashboardRiver() {
-      let status = "Normal", icon = "🟢";
-      if (riverData.some(d => d.status === "Bahaya")) { status = "Bahaya"; icon = "🔴"; }
-      else if (riverData.some(d => d.status === "Amaran")) { status = "Amaran"; icon = "🟡"; }
-      document.getElementById('status-sungai').textContent = icon + " " + status;
-    }
-    refreshRiverLevel();
-    updateDashboardRiver();
-    // Download as CSV
-    document.getElementById("downloadRiverCSV").addEventListener("click", function () {
-      let csv = "Stesen,Paras Air (m),Status,Kemaskini\n";
-      riverData.forEach(row => {
-        csv += `"${row.station}","${row.level}","${row.status}","${row.updated}"\n`;
-      });
-      const blob = new Blob([csv], { type: "text/csv" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "aras_air_sungai_kuala_nerus.csv";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+  }
+  refreshRiverLevel();
+  // Download as CSV
+  document.getElementById("downloadRiverCSV").addEventListener("click", function () {
+    let csv = "Stesen,Paras Air (m),Status,Kemaskini\n";
+    riverData.forEach(row => {
+      csv += `"${row.station}","${row.level}","${row.status}","${row.updated}"\n`;
     });
-    // Optional: Auto-refresh every 5 minutes
-    setInterval(() => {
-      refreshRiverLevel();
-      updateDashboardRiver();
-    }, 300000);
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "aras_air_sungai_kuala_nerus.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   });
-
-  // Map Section (no changes needed, your map and cluster code is already correct)
-  </script>
+  // Back to top button
+  const backToTopBtn = document.getElementById("backToTop"); 
+  backToTopBtn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  // Help button
+  const helpButton = document.getElementById("help-button");
+  helpButton.addEventListener("click", function () {
+    alert("Untuk bantuan, sila hubungi kami melalui pautan Hubungi Kami di footer.");
+  });
+  
+});
+</script>
 </body>
 </html>

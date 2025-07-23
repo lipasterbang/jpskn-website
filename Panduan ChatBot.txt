@@ -1,0 +1,7 @@
+
+PANDUAN CHATBOT AI JPS KUALA NERUS
+
+1. Objektif: Membantu pengguna dapatkan maklumat.
+2. Cara Guna: Taip & dapatkan jawapan.
+3. Keperluan: Sambungan Internet & OpenAI API Key.
+4. Nota: Jangan dedah API Key.
