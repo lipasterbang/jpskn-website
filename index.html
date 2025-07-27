@@ -1407,50 +1407,54 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
 
 <footer>
-  <div style="max-width:1200px;margin:0 auto;padding:2rem 1rem 1rem 1rem;">
-    <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:space-between;align-items:flex-start;">
+  <div class="footer-main" style="max-width:1200px;margin:0 auto;padding:2.5rem 1rem 1.2rem 1rem;">
+    <div class="footer-grid" style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:space-between;align-items:flex-start;">
       <!-- JPS Info -->
-      <div style="flex:1 1 220px;min-width:200px;text-align:left;">
-        <strong>Jabatan Pengairan dan Saliran<br>Kuala Nerus</strong><br>
-        <span style="font-size:0.97em;">
+      <div class="footer-col" style="flex:1 1 220px;min-width:200px;text-align:left;">
+        <div style="display:flex;align-items:center;gap:0.7rem;">
+          <img src="jpslogo.png" alt="Logo JPS" style="height:38px;width:auto;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.08);background:#fff;">
+          <span style="font-size:1.15em;font-weight:700;letter-spacing:0.5px;">JPS Kuala Nerus</span>
+        </div>
+        <div style="margin-top:0.7em;font-size:0.97em;">
           Kompleks Pentadbiran Bandar Al Wathiqu Billah<br>
           21300 Kuala Nerus, Terengganu
-        </span>
+        </div>
       </div>
       <!-- Contact -->
-      <div style="flex:1 1 220px;min-width:200px;">
-        <strong>Hubungi Kami</strong><br>
-        <span style="font-size:0.97em;">
-          📞 +60 9-665 3010<br>
-          📱 <a href="https://wa.me/60123456789" target="_blank">+60 12-345 6789</a><br>
-          📧 <a href="mailto:jpskualanerus@terengganu.gov.my">jpskualanerus@terengganu.gov.my</a>
-        </span>
+      <div class="footer-col" style="flex:1 1 220px;min-width:200px;">
+        <div style="font-weight:700;font-size:1.08em;margin-bottom:0.5em;">Hubungi Kami</div>
+        <div style="font-size:0.97em;">
+          📞 <a href="tel:+6096653010" style="color:#ffd700;">+60 9-665 3010</a><br>
+          📱 <a href="https://wa.me/60123456789" target="_blank" style="color:#ffd700;">+60 12-345 6789</a><br>
+          📧 <a href="mailto:jpskualanerus@terengganu.gov.my" style="color:#ffd700;">jpskualanerus@terengganu.gov.my</a>
+        </div>
         <div style="font-size:0.97em;margin-top:0.7rem;">
-          <strong>Waktu Operasi:</strong><br>
+          <span style="font-weight:600;">Waktu Operasi:</span><br>
           Isnin - Jumaat: 8:00 AM - 5:00 PM<br>
           Sabtu & Ahad: Tutup
         </div>
       </div>
       <!-- Quick Links & External -->
-      <div style="flex:1 1 220px;min-width:200px;">
-        <strong>Pautan Pantas</strong><br>
-        <a href="#about">Tentang</a> &nbsp;|&nbsp;
-        <a href="#services">Perkhidmatan</a> &nbsp;|&nbsp;
-        <a href="#contact">Hubungi</a>
-        <br>
-        <a href="https://jpsweb.terengganu.gov.my/index.php/ms/" target="_blank" rel="noopener" style="color:#ffd700;text-decoration:underline;display:inline-block;margin-top:0.7em;">
+      <div class="footer-col" style="flex:1 1 220px;min-width:200px;">
+        <div style="font-weight:700;font-size:1.08em;margin-bottom:0.5em;">Pautan Pantas</div>
+        <div style="margin-bottom:0.7em;">
+          <a href="#about" style="color:#ffd700;">Tentang</a> &nbsp;|&nbsp;
+          <a href="#services" style="color:#ffd700;">Perkhidmatan</a> &nbsp;|&nbsp;
+          <a href="#contact" style="color:#ffd700;">Hubungi</a>
+        </div>
+        <a href="https://jpsweb.terengganu.gov.my/index.php/ms/" target="_blank" rel="noopener" style="color:#fff;background:#0073e6;padding:6px 14px;border-radius:18px;text-decoration:none;display:inline-block;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
           Portal Rasmi JPS Negeri Terengganu
         </a>
       </div>
     </div>
-    <div style="text-align:center;margin-top:2rem;">
-      <button id="backToTop" title="Kembali ke atas">↑</button>
-      <button id="help-button" title="Bantuan">Bantuan</button>
+    <div style="text-align:center;margin-top:2.2rem;">
+      <button id="backToTop" title="Kembali ke atas" style="background:#0073e6;color:#fff;border:none;padding:0.7rem 1rem;border-radius:50%;font-size:1.3rem;box-shadow:0 4px 12px rgba(0,0,0,0.10);cursor:pointer;margin:0 0.5rem;">↑</button>
+      <button id="help-button" title="Bantuan" style="background:#28a745;color:#fff;padding:0.7rem 1.2rem;border-radius:22px;box-shadow:0 4px 12px rgba(0,0,0,0.10);cursor:pointer;font-weight:600;margin:0 0.5rem;">Bantuan</button>
     </div>
-    <hr style="margin:1.5rem 0 1rem 0;border:none;border-top:1px solid #0073e6;">
-    <div style="font-size:0.97em;color:#e0e0e0;text-align:center;">
+    <hr style="margin:2rem 0 1rem 0;border:none;border-top:1px solid #0073e6;">
+    <div style="font-size:0.98em;color:#e0e0e0;text-align:center;">
       &copy; 2025 Jabatan Pengairan dan Saliran Daerah Kuala Nerus. Hak cipta terpelihara.<br>
-      <span style="font-size:0.95em;">Sebarang pertanyaan, sila <a href="#contact">hubungi kami</a>.</span>
+      <span style="font-size:0.95em;">Sebarang pertanyaan, sila <a href="#contact" style="color:#ffd700;">hubungi kami</a>.</span>
     </div>
   </div>
 </footer>
