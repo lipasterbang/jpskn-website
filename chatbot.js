@@ -9,7 +9,7 @@ async function sendMessage() {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "sk-ijklmnopuvwx1234ijklmnopuvwx1234ijklmnop"
+      "Authorization": "sk-ijklmnopqrstuvwxijklmnopqrstuvwxijklmnopqrstuvwx" // Replace with your actual API key
     },
     body: JSON.stringify({
       model: "gpt-3.5-turbo",
