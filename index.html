@@ -11,7 +11,10 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
-  <style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+<style>
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -137,202 +140,83 @@
     }
 
     .main-nav {
-  background: #0073e6;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
-.nav-menu {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 0.2rem;
-  padding: 0;
-  margin: 0;
-  background: #0073e6;
-}
-.nav-menu > li {
-  position: relative;
-}
-.nav-menu > li > a {
-  color: white;
-  margin: 0 0.5rem;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.08rem;
-  padding: 0.5rem 1.2rem;
-  border-radius: 6px;
-  display: block;
-  transition: background 0.2s, color 0.2s;
-}
-.nav-menu > li > a:hover,
-.nav-menu > li > a:focus {
-  background: #005fa3;
-  color: #ffd700;
-  outline: none;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background: #fff;
-  min-width: 220px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
-  z-index: 1000;
-  left: 0;
-  top: 100%;
-  border-radius: 0 0 8px 8px;
-  padding: 0.5rem 0;
-}
-.dropdown-content li {
-  width: 100%;
-}
-.dropdown-content li a {
-  color: #004d99;
-  padding: 0.7rem 1.2rem;
-  text-decoration: none;
-  display: block;
-  font-weight: normal;
-  font-size: 1rem;
-  border-radius: 0;
-  transition: background 0.2s, color 0.2s;
-}
-.dropdown-content li a:hover {
-  background: #f0f6ff;
-  color: #0073e6;
-}
-.dropdown:hover .dropdown-content,
-.dropdown:focus-within .dropdown-content {
-  display: block;
-}
-.nav-toggle {
-  display: none;
-}
-@media (max-width: 900px) {
-  .nav-toggle {
-    display: block !important;
+    background: #0073e6;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    position: sticky;
+    top: 0;
+    z-index: 999;
   }
   .nav-menu {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-    background: #0073e6;
-    position: absolute;
-    left: 0;
-    top: 60px;
-    z-index: 1000;
-    display: none;
-  }
-  .nav-menu.open {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 0;
+    margin: 0;
+    background: #0073e6;
   }
   .nav-menu > li {
-    width: 100%;
+    position: relative;
   }
   .nav-menu > li > a {
-    margin: 0;
-    padding: 1rem;
-    font-size: 1.05rem;
-    border-radius: 0;
-    border-bottom: 1px solid #005fa3;
+    color: white;
+    margin: 0 0.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.08rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    display: block;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-menu > li > a:hover,
+  .nav-menu > li > a:focus {
+    background: #005fa3;
+    color: #ffd700;
+    outline: none;
   }
   .dropdown-content {
-    position: static;
-    box-shadow: none;
-    min-width: 100%;
-    border-radius: 0;
-    padding: 0;
+    display: none;
+    position: absolute;
+    background: #fff;
+    min-width: 220px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    z-index: 1000;
+    left: 0;
+    top: 100%;
+    border-radius: 0 0 8px 8px;
+    padding: 0.5rem 0;
+  }
+  .dropdown-content li {
+    width: 100%;
   }
   .dropdown-content li a {
-    padding-left: 2rem;
-    font-size: 0.98rem;
-  }
-}
-    .responsive-table {
+    color: #004d99;
+    padding: 0.7rem 1.2rem;
+    text-decoration: none;
     display: block;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    font-weight: normal;
+    font-size: 1rem;
+    border-radius: 0;
+    transition: background 0.2s, color 0.2s;
   }
-  .responsive-table table {
-    width: 700px; /* or min-width: 600px; */
+  .dropdown-content li a:hover {
+    background: #f0f6ff;
+    color: #0073e6;
   }
-
-    #backToTop {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 999;
-      background-color: #0073e6;
-      color: white;
-      border: none;
-      padding: 0.8rem 1rem;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      display: none;
-    }
-
-    #help-button {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      background-color: #28a745;
-      color: white;
-      padding: 12px 16px;
-      border-radius: 30px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      font-weight: bold;
-      z-index: 1000;
-    }
-
-    #mapContainer {
-      display: block;
-    }
-
-    #rainfallTable {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    #rainfallTable th, #rainfallTable td {
-      padding: 0.8rem;
-      border: 1px solid #ccc;
-    }
-    #rainfallTable th {
-      background-color: #0073e6;
-      color: white;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 700px) {
-      header {
-        padding: 1.2rem 0.5rem 0.8rem 0.5rem;
-      }
-      .main-title {
-        font-size: 1.2rem;
-      }
-      .logo-container {
-        gap: 1rem;
-      }
-      section {
-        padding: 1rem;
-      }
-      nav a {
-        margin: 0 0.4rem;
-        font-size: 0.98rem;
-      }
-    }
-
-      /* Hamburger button visible on mobile */
-    @media (max-width: 900px) {
+  .dropdown:hover .dropdown-content,
+  .dropdown:focus-within .dropdown-content {
+    display: block;
+  }
+  .nav-toggle {
+    display: none;
+  }
+  @media (max-width: 900px) {
     .nav-toggle {
       display: block !important;
     }
     .nav-menu {
-      display: none;
       flex-direction: column;
       align-items: stretch;
       width: 100%;
@@ -341,6 +225,7 @@
       left: 0;
       top: 60px;
       z-index: 1000;
+      display: none;
     }
     .nav-menu.open {
       display: flex;
@@ -367,251 +252,370 @@
       font-size: 0.98rem;
     }
   }
-
-    footer {
-      background-color: #004d99;
-      color: #fff;
-      text-align: center;
-      padding: 2rem 1rem 0.8rem 1rem;
-      font-size: 1rem;
-      margin-top: 3rem;
-      border-top: 4px solid #0073e6;
-      letter-spacing: 0.5px;
-    }
-    footer a {
-      color: #ffd700;
-      text-decoration: underline;
-    }
-    footer a:hover {
-      color: #fff;
-    }
-
-    .search-bar {
-      display: flex;
-      justify-content: center;
-      margin: 1.5rem 0;
-    }
-    .search-bar input[type="search"] {
-      width: 100%;
-      max-width: 340px;
-      padding: 0.7rem 1.2rem;
-      border-radius: 24px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-      transition: box-shadow 0.2s;
-    }
-    .search-bar input[type="search"]:focus {
-      outline: none;
-      box-shadow: 0 0 0 2px #0073e6;
-      border-color: #0073e6;
-    }
-    @media (max-width: 700px) {
-      .search-bar {
-        margin: 1rem 0;
-      }
-      .search-bar input[type="search"] {
-        font-size: 0.98rem;
-        padding: 0.6rem 1rem;
-      }
-    }
-    .responsive-table {
+      .responsive-table {
+      display: block;
       width: 100%;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
-    @media (max-width: 700px) {
-      .responsive-table table {
-        min-width: 500px;
-        font-size: 0.98rem;
-      }
-      #hydrology-data h2 {
-        font-size: 1.1rem;
-      }
-      #hydrology-data .map-toggle-btn {
-        font-size: 0.98rem;
-        padding: 0.5rem 1rem;
-      }
+    .responsive-table table {
+      width: 700px; /* or min-width: 600px; */
     }
-    
-    #riverLevelTable th, #riverLevelTable td {
-      padding: 0.8rem;
-      border: 1px solid #e0e0e0;
-      text-align: center;
-    }
-    #riverLevelTable th {
-      background-color: #0073e6;
-      color: white;
-      font-size: 1.05em;
-      letter-spacing: 0.5px;
-    }
-    #riverLevelTable td {
-      font-size: 1em;
-      background: #fff;
-    }
-    #riverLevelTable tr:nth-child(even) td {
-      background: #f6faff;
-    }
-    @media (max-width: 700px) {
-      #riverLevelTable, #riverLevelTable thead, #riverLevelTable tbody, #riverLevelTable tr, #riverLevelTable th, #riverLevelTable td {
-        display: block;
-        width: 100%;
-      }
-      #riverLevelTable thead {
+
+      #backToTop {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 999;
+        background-color: #0073e6;
+        color: white;
+        border: none;
+        padding: 0.8rem 1rem;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
         display: none;
       }
-      #riverLevelTable tr {
-        margin-bottom: 1.2em;
-        border-bottom: 2px solid #0073e6;
-        border-radius: 8px;
-        background: #fff;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      }
-      #riverLevelTable td {
-        text-align: left;
-        padding: 0.7em 1em;
-        position: relative;
-        border: none;
-        font-size: 1em;
-      }
-      #riverLevelTable td:before {
-        content: attr(data-label);
+
+      #help-button {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        background-color: #28a745;
+        color: white;
+        padding: 12px 16px;
+        border-radius: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
         font-weight: bold;
-        color: #004d99;
+        z-index: 1000;
+      }
+
+      #mapContainer {
         display: block;
-        margin-bottom: 0.2em;
       }
-    }
-    .responsive-form-iframe {
-      width: 100%;
-      max-width: 700px;
-      margin: 0 auto 2rem auto;
-    }
-    .responsive-form-iframe iframe {
-      width: 100%;
-      min-height: 600px;
-      max-height: 1200px;
-      border: none;
-      background: #fff;
-      display: block;
-    }
-    @media (max-width: 700px) {
-      .responsive-form-iframe iframe {
-        min-height: 520px;
-        height: 80vh;
-        max-height: 1000px;
-      }
-    }
-    .dashboard-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      justify-content: space-between;
-    }
-    .dashboard-card {
-      flex: 1 1 180px;
-      min-width: 160px;
-      background: #f8fbff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      padding: 1.2rem 1rem 1rem 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      min-height: 110px;
-    }
-    .dashboard-title {
-      font-size: 1.05em;
-      color: #004d99;
-      font-weight: 600;
-      margin-bottom: 0.5em;
-    }
-    .dashboard-value {
-      font-size: 1.7em;
-      font-weight: bold;
-      color: #0073e6;
-      margin-bottom: 0.2em;
-      line-height: 1.1;
-    }
-    .dashboard-label {
-      font-size: 0.98em;
-      color: #666;
-    }
-    @media (max-width: 900px) {
-      .dashboard-grid {
-        gap: 0.8rem;
-      }
-      .dashboard-card {
-        min-width: 140px;
-        padding: 1rem 0.7rem 0.8rem 0.7rem;
-      }
-    }
-    @media (max-width: 700px) {
-      .dashboard-grid {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .dashboard-card {
+
+      #rainfallTable {
         width: 100%;
-        min-width: 0;
-        align-items: flex-start;
+        border-collapse: collapse;
+      }
+      #rainfallTable th, #rainfallTable td {
+        padding: 0.8rem;
+        border: 1px solid #ccc;
+      }
+      #rainfallTable th {
+        background-color: #0073e6;
+        color: white;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 700px) {
+        header {
+          padding: 1.2rem 0.5rem 0.8rem 0.5rem;
+        }
+        .main-title {
+          font-size: 1.2rem;
+        }
+        .logo-container {
+          gap: 1rem;
+        }
+        section {
+          padding: 1rem;
+        }
+        nav a {
+          margin: 0 0.4rem;
+          font-size: 0.98rem;
+        }
+      }
+
+        /* Hamburger button visible on mobile */
+      @media (max-width: 900px) {
+      .nav-toggle {
+        display: block !important;
+      }
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        background: #0073e6;
+        position: absolute;
+        left: 0;
+        top: 60px;
+        z-index: 1000;
+      }
+      .nav-menu.open {
+        display: flex;
+      }
+      .nav-menu > li {
+        width: 100%;
+      }
+      .nav-menu > li > a {
+        margin: 0;
+        padding: 1rem;
+        font-size: 1.05rem;
+        border-radius: 0;
+        border-bottom: 1px solid #005fa3;
+      }
+      .dropdown-content {
+        position: static;
+        box-shadow: none;
+        min-width: 100%;
+        border-radius: 0;
+        padding: 0;
+      }
+      .dropdown-content li a {
+        padding-left: 2rem;
+        font-size: 0.98rem;
       }
     }
 
-    #live-date-time {
-      width: 100%;
-      background: #003366;
-      color: #fff;
-      text-align: center;
-      font-size: 1.05rem;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      padding: 0.3rem 0;
-      position: relative;
-      z-index: 1001;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.2rem;
-      flex-wrap: wrap;
-    }
-    #live-date-time span {
-      flex: 1 1 auto;
-      text-align: center;
-    }
-    #live-date-time button {
-      background: none;
-      border: none;
-      color: #ffd700;
-      font-size: 1.3em;
-      cursor: pointer;
-      margin: 0 0.2em;
-    }
-    #live-date-time form {
-      display: inline-block;
-      margin: 0 0.2em;
-    }
-    #live-date-time input[type="search"] {
-      padding: 0.3em 0.9em;
-      border-radius: 16px;
-      border: none;
-      font-size: 1em;
-      width: 120px;
-      max-width: 40vw;
-    }
-    #live-date-time button[type="submit"] {
-      background: #ffd700;
-      border: none;
-      color: #003366;
-      font-weight: bold;
-      border-radius: 16px;
-      padding: 0.3em 0.9em;
-      margin-left: 0.2em;
-      cursor: pointer;
-    }
-    #faq-btn, #contact-btn, #feedback-btn {
-      font-size: 1.3em;
-      cursor: pointer;
-      color: #ffd700;
-      margin: 0 0.2em;
+      footer {
+        background-color: #004d99;
+        color: #fff;
+        text-align: center;
+        width: 110%;
+        padding: 2rem 1rem;
+        font-size: 1rem;
+        margin-top: 2rem;
+        border-top: 3px solid #0073e6;
+        letter-spacing: 0.5px;
+      }
+      footer a {
+        color: #a61fff;
+        text-decoration: underline;
+      }
+      footer a:hover {
+        color: #fff;
+      }
+
+      .search-bar {
+        display: flex;
+        justify-content: center;
+        margin: 1.5rem 0;
+      }
+      .search-bar input[type="search"] {
+        width: 100%;
+        max-width: 340px;
+        padding: 0.7rem 1.2rem;
+        border-radius: 24px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        transition: box-shadow 0.2s;
+      }
+      .search-bar input[type="search"]:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #0073e6;
+        border-color: #0073e6;
+      }
+      @media (max-width: 700px) {
+        .search-bar {
+          margin: 1rem 0;
+        }
+        .search-bar input[type="search"] {
+          font-size: 0.98rem;
+          padding: 0.6rem 1rem;
+        }
+      }
+      .responsive-table {
+        width: 100%;
+        overflow-x: auto;
+      }
+      @media (max-width: 700px) {
+        .responsive-table table {
+          min-width: 500px;
+          font-size: 0.98rem;
+        }
+        #hydrology-data h2 {
+          font-size: 1.1rem;
+        }
+        #hydrology-data .map-toggle-btn {
+          font-size: 0.98rem;
+          padding: 0.5rem 1rem;
+        }
+      }
+      
+      #riverLevelTable th, #riverLevelTable td {
+        padding: 0.8rem;
+        border: 1px solid #e0e0e0;
+        text-align: center;
+      }
+      #riverLevelTable th {
+        background-color: #0073e6;
+        color: white;
+        font-size: 1.05em;
+        letter-spacing: 0.5px;
+      }
+      #riverLevelTable td {
+        font-size: 1em;
+        background: #fff;
+      }
+      #riverLevelTable tr:nth-child(even) td {
+        background: #f6faff;
+      }
+      @media (max-width: 700px) {
+        #riverLevelTable, #riverLevelTable thead, #riverLevelTable tbody, #riverLevelTable tr, #riverLevelTable th, #riverLevelTable td {
+          display: block;
+          width: 100%;
+        }
+        #riverLevelTable thead {
+          display: none;
+        }
+        #riverLevelTable tr {
+          margin-bottom: 1.2em;
+          border-bottom: 2px solid #0073e6;
+          border-radius: 8px;
+          background: #fff;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        #riverLevelTable td {
+          text-align: left;
+          padding: 0.7em 1em;
+          position: relative;
+          border: none;
+          font-size: 1em;
+        }
+        #riverLevelTable td:before {
+          content: attr(data-label);
+          font-weight: bold;
+          color: #004d99;
+          display: block;
+          margin-bottom: 0.2em;
+        }
+      }
+      .responsive-form-iframe {
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto 2rem auto;
+      }
+      .responsive-form-iframe iframe {
+        width: 100%;
+        min-height: 600px;
+        max-height: 1200px;
+        border: none;
+        background: #fff;
+        display: block;
+      }
+      @media (max-width: 700px) {
+        .responsive-form-iframe iframe {
+          min-height: 520px;
+          height: 80vh;
+          max-height: 1000px;
+        }
+      }
+      .dashboard-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+        justify-content: space-between;
+      }
+      .dashboard-card {
+        flex: 1 1 180px;
+        min-width: 160px;
+        background: #f8fbff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        padding: 1.2rem 1rem 1rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: 110px;
+      }
+      .dashboard-title {
+        font-size: 1.05em;
+        color: #004d99;
+        font-weight: 600;
+        margin-bottom: 0.5em;
+      }
+      .dashboard-value {
+        font-size: 1.7em;
+        font-weight: bold;
+        color: #0073e6;
+        margin-bottom: 0.2em;
+        line-height: 1.1;
+      }
+      .dashboard-label {
+        font-size: 0.98em;
+        color: #666;
+      }
+      @media (max-width: 900px) {
+        .dashboard-grid {
+          gap: 0.8rem;
+        }
+        .dashboard-card {
+          min-width: 140px;
+          padding: 1rem 0.7rem 0.8rem 0.7rem;
+        }
+      }
+      @media (max-width: 700px) {
+        .dashboard-grid {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .dashboard-card {
+          width: 100%;
+          min-width: 0;
+          align-items: flex-start;
+        }
+      }
+
+      #live-date-time {
+        width: 100%;
+        background: #003366;
+        color: #fff;
+        text-align: center;
+        font-size: 1.05rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        padding: 0.3rem 0;
+        position: relative;
+        z-index: 1001;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.2rem;
+        flex-wrap: wrap;
+      }
+      #live-date-time span {
+        flex: 1 1 auto;
+        text-align: center;
+      }
+      #live-date-time button {
+        background: none;
+        border: none;
+        color: #ffd700;
+        font-size: 1.3em;
+        cursor: pointer;
+        margin: 0 0.2em;
+      }
+      #live-date-time form {
+        display: inline-block;
+        margin: 0 0.2em;
+      }
+      #live-date-time input[type="search"] {
+        padding: 0.3em 0.9em;
+        border-radius: 16px;
+        border: none;
+        font-size: 1em;
+        width: 120px;
+        max-width: 40vw;
+      }
+      #live-date-time button[type="submit"] {
+        background: #ffd700;
+        border: none;
+        color: #003366;
+        font-weight: bold;
+        border-radius: 16px;
+        padding: 0.3em 0.9em;
+        margin-left: 0.2em;
+        cursor: pointer;
+      }
+      #faq-btn, #contact-btn, #feedback-btn {
+        font-size: 1.3em;
+        cursor: pointer;
+        color: #ffd700;
+        margin: 0 0.2em;
     }
   </style>
 </head>
@@ -723,9 +727,64 @@
       <p>"Jayakan Perkhidmatan Sempurna".</p>
     
 
-    <!-- Pengenalan -->
-    <section id="pengenalan" style="margin-top:2rem;">
-        <h1>Pengenalan Jabatan Pengairan dan Saliran Daerah Kuala Nerus</h1>
+      <!-- Pengenalan -->
+      <section id="pengenalan" style="margin-top:2rem;">
+          <h1>Pengenalan Jabatan Pengairan dan Saliran Daerah Kuala Nerus</h1>
+
+        <section id="gallery-carousel" class="container my-5">
+    <h2 class="text-center mb-4">📷 Galeri Projek JPS Kuala Nerus</h2>
+    <div id="jpsGallery" class="carousel slide" data-bs-ride="carousel">
+      
+      <div class="carousel-inner">
+        <!-- Slide 1: Before -->
+        <div class="carousel-item active">
+          <img src="images/before-flood1.jpg" class="d-block w-100 rounded" alt="Sebelum Banjir">
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+            <h5>Sebelum Banjir - Kg. Tepoh</h5>
+            <p>Keadaan sungai sebelum pelaksanaan projek tebatan.</p>
+          </div>
+        </div>
+
+        <!-- Slide 2: After -->
+        <div class="carousel-item">
+          <img src="images/after-flood1.jpg" class="d-block w-100 rounded" alt="Selepas Banjir">
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+            <h5>Selepas Banjir - Kg. Tepoh</h5>
+            <p>Keadaan selepas pembinaan benteng dan saliran baharu.</p>
+          </div>
+        </div>
+
+        <!-- Slide 3: Project Video -->
+        <div class="carousel-item">
+          <div class="ratio ratio-16x9">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Projek JPS" allowfullscreen></iframe>
+          </div>
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+            <h5>Projek Tebatan Banjir Kuala Nerus</h5>
+            <p>Video penerangan projek & impaknya.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#jpsGallery" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+        <span class="visually-hidden">Sebelumnya</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#jpsGallery" data-bs-slide="next">
+        <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+        <span class="visually-hidden">Seterusnya</span>
+      </button>
+
+      <!-- Indicators -->
+      <div class="carousel-indicators mt-3">
+        <button type="button" data-bs-target="#jpsGallery" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#jpsGallery" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#jpsGallery" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+    </div>
+  </section>
+
 
   <p>
     Jabatan Pengairan dan Saliran (JPS) Daerah Kuala Nerus merupakan salah satu pejabat daerah di bawah pentadbiran 
@@ -1388,14 +1447,41 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
       </section>
       </div>
+      <!-- Bootstrap 5 JS -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </section>
+
+    <!-- Add this before your footer, after the contact section -->
+    <section id="faq" class="section" style="margin-top:2rem;">
+      <h2>❓ Soalan Lazim (Frequently Asked Question)</h2>
+      <div class="faq-list" style="display:flex;flex-direction:column;gap:1.5rem;">
+        <div class="faq-item" style="background:#f8fbff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.04);padding:1rem 1.5rem;">
+          <h4 style="margin:0 0 0.5rem 0;color:#004d99;">Adakah JPS bertanggungjawab terhadap masalah air paip?</h4>
+          <p style="margin:0;">JPS tidak bertanggungjawab terhadap bekalan air domestik atau industri anda kerana JPS hanya bertanggungjawab terhadap bekalan air pengairan untuk petani/peladang. Sila hubungi pihak berkuasa yang berkaitan seperti Jabatan Kerja Air Negeri, Jabatan Kerja Raya atau syarikat air / lembaga air yang sesuai yang bertanggungjawab terhadap bekalan air di kawasan anda.</p>
+        </div>
+        <div class="faq-item" style="background:#f8fbff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.04);padding:1rem 1.5rem;">
+          <h4 style="margin:0 0 0.5rem 0;color:#004d99;">Kepada siapakah harus saya mengadu untuk masalah saliran tempatan atau banjir kilat?</h4>
+          <p style="margin:0;">JPS dan juga pihak berkuasa tempatan bertanggungjawab yang berkenaan terhadap saliran.  Secara umum pihak berkuasa tempatan bertanggungjawab terhadap pembinaan dan penyelenggaraan sistem saliran tempatan yang sebahagian besarnya merupakan saliran utama dan saliran sekunder.  JPS bertanggungjawab terhadap sungai yang mungkin mengalir di dalam dan di luar kawasan pihak berkuasa tempatan. Banjir yang disebabkan oleh parit dan pembetung yang tersumbat jatuh di bawah tanggungjawab pihak berkuasa tempatan. Banjir yang disebabkan oleh limpahan parit dan sungai akibat keupayaan yang tidak mencukupi biasanya merupakan tanggungjawab JPS.  Sekiranya ragu-ragu sila hubungi PRO pejabat JPS yang terdekat. JPS mempunyai pejabat PRO di setiap negeri.</p>
+        </div>
+        <div class="faq-item" style="background:#f8fbff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.04);padding:1rem 1.5rem;">
+          <h4 style="margin:0 0 0.5rem 0;color:#004d99;">Di manakah saya boleh mendapatkan data tentang curahan hujan dan aliran sungai?</h4>
+          <p style="margin:0;">Maklumat ini diterbitkan setiap tahun oleh Bahagian Hidrologi Jabatan Pengairan dan Saliran yang terletak di Cawangan Ibu Pejabat di Jalan Ampang (Tel: 03-4256 2657).  Bahagian Hidrologi kini sedang membangunkan suatu sistem pangkalan data yang dikenali sebagai Sistem Maklumat Hidrografi (HIS - Hydrologic Information System) yang berupaya untuk membekalkan maklumat dalam talian. JPS juga mengumpul beberapa maklumat tentang kualiti air terutamanya tentang beban endapan. Untuk butir-butir lanjut,  http://h2o.water.gov.my/</p>
+        </div>
+        <div class="faq-item" style="background:#f8fbff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.04);padding:1rem 1.5rem;">
+          <h4 style="margin:0 0 0.5rem 0;color:#004d99;">Bolehkah sesiapa memohon untuk menggunakan tanah yang ditetapkan sebagai "Rizab Sungai"?</h4>
+          <p style="margin:0;">Secara umumnya JPS tidak menggalakkan permohonan untuk menggunakan rizab sungai kita kerana kami perlu memasukinya pada bila-bila masa untuk kerja pembaikan kecemasan dan juga untuk penyelenggaraan sungai. Walau bagaimanapun, kami mungkin mempertimbangkan permohonan tertentu berdasarkan kes demi kes.</p>
+        </div>
+        <!-- Tambah soalan lain di sini jika perlu -->
+      </div>
+    </section>
+
 <!-- Place this before your closing </body> tag, ideally above <footer> -->
 <div style="width:100%;display:flex;justify-content:center;margin:2rem 0;">
     <div class="fb-page"
       data-href="https://www.facebook.com/jabatanpengairandansaliranterengganu" 
       data-tabs="timeline"
-      data-width="340"
-      data-height="400"
+      data-width="1000"
+      data-height="300"
       data-small-header="false"
       data-adapt-container-width="true"
       data-hide-cover="false"

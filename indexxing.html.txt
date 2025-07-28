@@ -1,0 +1,231 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JPS Kuala Nerus</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+  <style>
+    /* Reset */
+    body, h1, h2, h3, p, ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background: #f2f9ff;
+      color: #333;
+    }
+
+    header {
+      background-color: #004d99;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+
+    .logo-container img {
+      height: 70px;
+    }
+
+    nav {
+      background-color: #0073e6;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    #map {
+      height: 400px;
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #0073e6;
+      color: white;
+    }
+
+    footer {
+      background-color: #004d99;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .map-toggle-btn, #toggleView {
+      background: #0073e6;
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+
+    .map-toggle-btn:hover {
+      background-color: #005bb5;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .logo-container {
+        flex-direction: column;
+      }
+
+      table {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<header>
+  <div class="logo-container">
+    <img src="jpslogo.png" alt="Logo JPS Kuala Nerus">
+    <img src="trglogo.png" alt="Logo SUK Terengganu">
+  </div>
+  <h1>JABATAN PENGAIRAN DAN SALIRAN DAERAH KUALA NERUS</h1>
+</header>
+
+<nav>
+  <a href="#about">Tentang</a>
+  <a href="#services">Perkhidmatan</a>
+  <a href="#map-section">Peta</a>
+  <a href="#hydrology-data">Taburan Hujan</a>
+  <a href="#repositori-dokumen">Dokumen</a>
+  <a href="#contact">Hubungi</a>
+</nav>
+
+<footer>
+  <p>&copy; 2025 Jabatan Pengairan dan Saliran Kuala Nerus, Terengganu</p>
+  <p>Hubungi: <a href="mailto:jps.kualanerus@terengganu.gov.my" style="color: #aad4ff;">jps.kualanerus@terengganu.gov.my</a></p>
+</footer>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Map Logic
+    const mapContainer = document.getElementById("mapContainer");
+    const toggleMapBtn = document.getElementById("toggleMap");
+    const map = L.map("map").setView([5.39448, 103.06308], 13);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+    L.marker([5.39448, 103.06308]).addTo(map).bindPopup("Pejabat JPS Kuala Nerus").openPopup();
+    L.marker([5.40788, 103.0886]).addTo(map).bindPopup("Projek Tebatan Banjir UMT");
+    toggleMapBtn.addEventListener("click", () => {
+      const isHidden = mapContainer.style.display === "none";
+      mapContainer.style.display = isHidden ? "block" : "none";
+      toggleMapBtn.textContent = isHidden ? "Sembunyikan Peta" : "Lihat Peta";
+      if (!isHidden) setTimeout(() => map.invalidateSize(), 200);
+    });
+
+    // Rainfall API
+    const API_URL = "documents/rainfall-data.json";
+    const tableBody = document.querySelector("#rainfallTable tbody");
+    const toggleBtn = document.getElementById("toggleView");
+    const chartView = document.getElementById("rainfall-chart-view");
+    const tableView = document.getElementById("rainfall-table-view");
+    let chart;
+
+    async function fetchRainfallData() {
+      try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        tableBody.innerHTML = "";
+        data.forEach(station => {
+          const row = `<tr><td>${station.station}</td><td>${station.rainfall}</td><td>${station.last_update}</td></tr>`;
+          tableBody.innerHTML += row;
+        });
+        const labels = data.map(s => s.station);
+        const values = data.map(s => s.rainfall);
+        const updates = data.map(s => s.last_update);
+
+        if (chart) chart.destroy();
+        const ctx = document.getElementById("rainChart").getContext("2d");
+        chart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Jumlah Hujan (mm)',
+              data: values,
+              backgroundColor: '#0073e6'
+            }]
+          },
+          options: {
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  afterLabel: (ctx) => `Dikemaskini: ${updates[ctx.dataIndex]}`
+                }
+              }
+            },
+            scales: { y: { beginAtZero: true } }
+          }
+        });
+      } catch (err) {
+        tableBody.innerHTML = "<tr><td colspan='3'>Gagal memuatkan data.</td></tr>";
+        console.error("API Error:", err);
+      }
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      const isTableVisible = tableView.style.display !== "none";
+      tableView.style.display = isTableVisible ? "none" : "block";
+      chartView.style.display = isTableVisible ? "block" : "none";
+      toggleBtn.textContent = isTableVisible ? "Tukar kepada Jadual 📋" : "Tukar kepada Carta 📈";
+    });
+
+    fetchRainfallData();
+    setInterval(fetchRainfallData, 300000); // Auto-refresh every 5 minutes
+  });
+</script>
