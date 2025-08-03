@@ -423,9 +423,9 @@
           padding: 0.6rem 1rem;
         }
       }
-      .responsive-table {
+      .responsive-table table {
+        min-width: 500px;
         width: 100%;
-        overflow-x: auto;
       }
       @media (max-width: 700px) {
         .responsive-table table {
@@ -1218,6 +1218,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Wait a moment after map is initialized, then add clusters
   setTimeout(addHydroClusters, 500);
 });
+
 </script>
 
 <!-- Rainfall JSON Data (place in your HTML, e.g. before your rainfall section) -->
@@ -1419,11 +1420,10 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="responsive-form-iframe">
           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScOg2tc-4SLojMGjwKtnZxazyVi4At98-2A1B13EdXc0oIebw/viewform?embedded=true" allowfullscreen>Memuatkan…</iframe>
         </div>
-      </section>
-      </div>
-      <!-- Bootstrap 5 JS -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </section>
+    </div>
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Add this before your footer, after the contact section -->
     <section id="faq" class="section" style="margin-top:2rem;">
@@ -1447,6 +1447,15 @@ document.addEventListener("DOMContentLoaded", function () {
         <!-- Tambah soalan lain di sini jika perlu -->
       </div>
     </section>
+
+    <button id="backToTop" aria-label="Kembali ke atas"
+      style="position:fixed;bottom:30px;right:30px;z-index:999;background:#0073e6;color:#fff;border:none;padding:0.8rem 1rem;border-radius:50%;font-size:1.2rem;box-shadow:0 6px 16px rgba(0,0,0,0.2);cursor:pointer;display:none;">
+      ↑
+    </button>
+    <button id="help-button" aria-label="Bantuan"
+      style="position:fixed;bottom:30px;left:30px;background:#28a745;color:#fff;padding:0.7rem 1.2rem;border-radius:22px;box-shadow:0 4px 12px rgba(0,0,0,0.10);cursor:pointer;font-weight:600;z-index:1000;">
+      Bantuan
+    </button>
 
 <footer>
   <div class="footer-main" style="width:100%;margin:0;padding:2.5rem 0 1.2rem 0;background:#004d99;">
@@ -1491,11 +1500,6 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </div>
     <div style="text-align:center;margin-top:2.2rem;">
-      <button id="backToTop" aria-label="Kembali ke atas"
-          style="position:fixed;bottom:30px;right:30px;z-index:999;background:#0073e6;color:#fff;border:none;padding:0.8rem 1rem;border-radius:50%;font-size:1.2rem;box-shadow:0 6px 16px rgba(0,0,0,0.2);cursor:pointer;display:none;"> ↑</button>
-      <button id="help-button" aria-label="Bantuan"
-        style="background:#28a745;color:#fff;padding:0.7rem 1.2rem;border-radius:22px;box-shadow:0 4px 12px rgba(0,0,0,0.10);cursor:pointer;font-weight:600;margin:0 0.5rem;">Bantuan</button>
-    </div>
     <hr style="margin:2rem 0 1rem 0;border:none;border-top:1px solid #0073e6;">
     <div style="font-size:0.98em;color:#e0e0e0;text-align:center;">
       &copy; 2025 Jabatan Pengairan dan Saliran Daerah Kuala Nerus. Hak cipta terpelihara.<br>
@@ -1641,10 +1645,50 @@ document.addEventListener("DOMContentLoaded", function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // Help Button
-    const helpButton = document.getElementById("help-button");
-    helpButton.addEventListener("click", function () {
-      alert("Untuk bantuan, sila hubungi kami melalui pautan Hubungi Kami di footer.");
+    // Help Button - Show a modal with useful info
+      const helpButton = document.getElementById("help-button");
+      helpButton.addEventListener("click", function () {
+        // Create modal if not exists
+        if (!document.getElementById("help-modal")) {
+          const modal = document.createElement("div");
+          modal.id = "help-modal";
+          modal.style.position = "fixed";
+          modal.style.top = "0";
+          modal.style.left = "0";
+          modal.style.width = "100vw";
+          modal.style.height = "100vh";
+          modal.style.background = "rgba(0,0,0,0.4)";
+          modal.style.zIndex = "2000";
+          modal.style.display = "flex";
+          modal.style.alignItems = "center";
+          modal.style.justifyContent = "center";
+          modal.innerHTML = `
+            <div style="background:#fff;padding:2rem 1.5rem;border-radius:16px;max-width:350px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.18);text-align:left;position:relative;">
+              <button id="close-help-modal" aria-label="Tutup Bantuan" style="position:absolute;top:10px;right:14px;background:none;border:none;font-size:1.5em;color:#0073e6;cursor:pointer;">&times;</button>
+              <h3 style="color:#0073e6;margin-top:0;">Bantuan Laman Web</h3>
+              <ul style="padding-left:1.2em;font-size:1em;">
+                <li>Untuk pertanyaan, klik <a href="#contact" style="color:#0073e6;">Hubungi Kami</a>.</li>
+                <li>Untuk maklum balas, klik <a href="#borang-maklum-balas" style="color:#0073e6;">Borang Maklum Balas</a>.</li>
+                <li>Untuk soalan lazim, klik <a href="#faq" style="color:#0073e6;">Soalan Lazim (FAQ)</a>.</li>
+                <li>Gunakan carian di atas untuk mencari info di laman ini.</li>
+              </ul>
+              <div style="margin-top:1.2em;font-size:0.98em;color:#666;">
+                Jika anda perlukan bantuan lanjut, sila hubungi JPS Kuala Nerus di <br>
+                <a href="mailto:jpskualanerus@terengganu.gov.my" style="color:#0073e6;">jpskualanerus@terengganu.gov.my</a>
+              </div>
+            </div>
+          `;
+          document.body.appendChild(modal);
+          document.getElementById("close-help-modal").onclick = function () {
+            modal.remove();
+          };
+          modal.onclick = function(e) {
+            if (e.target === modal) modal.remove();
+          };
+        }
+      });
+
+      // ...other code...
     });
 
     // Hamburger Menu
@@ -1658,8 +1702,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (window.innerWidth < 900) navMenu.classList.remove('open');
       });
     });
-  });
   </script>
+
   <!-- ...other scripts for map, rainfall, river-level, etc. ... -->
    <!-- Rainfall Table & Dashboard -->
   <script>
@@ -1745,30 +1789,25 @@ document.addEventListener("DOMContentLoaded", function () {
     URL.revokeObjectURL(url);
   });
   // Back to top button
-  document.addEventListener("DOMContentLoaded", function () {
-  const backToTopBtn = document.getElementById("backToTop");
-  window.addEventListener("scroll", function () {
-    backToTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
-  });
-  backToTopBtn.addEventListener("click", function () {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
+const backToTopBtn = document.getElementById("backToTop");
+window.addEventListener("scroll", function () {
+  backToTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
+});
+backToTopBtn.addEventListener("click", function () {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-  document.addEventListener("DOMContentLoaded", function () {
-  const navToggle = document.querySelector('.nav-toggle');
-  const navMenu = document.querySelector('.nav-menu');
-  navToggle.addEventListener('click', function () {
-    navMenu.classList.toggle('open');
-  });
-  navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth < 900) navMenu.classList.remove('open');
-    });
+// Hamburger Menu
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.querySelector('.nav-menu');
+navToggle.addEventListener('click', function () {
+  navMenu.classList.toggle('open');
+});
+navMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 900) navMenu.classList.remove('open');
   });
 });
-  
-
 });
 </script>
 </body>
