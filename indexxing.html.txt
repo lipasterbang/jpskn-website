@@ -218,6 +218,196 @@
       }
     }
 
+  // Live Date/Time Display and Header Buttons/Search
+  document.addEventListener("DOMContentLoaded", function () {
+    function updateClock() {
+      const now = new Date();
+      const days = ["Ahad","Isnin","Selasa","Rabu","Khamis","Jumaat","Sabtu"];
+      const months = ["Januari","Februari","Mac","April","Mei","Jun","Julai","Ogos","September","Oktober","November","Disember"];
+      const day = days[now.getDay()];
+      const date = now.getDate();
+      const month = months[now.getMonth()];
+      const year = now.getFullYear();
+      const time = now.toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      document.getElementById("date-time-text").textContent =
+        `${day}, ${date} ${month} ${year} | ${time}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Header Buttons
+    document.getElementById("faq-btn").onclick = function() {
+      window.location.href = "#faq";
+    };
+    document.getElementById("contact-btn").onclick = function() {
+      window.location.href = "#contact";
+    };
+    document.getElementById("feedback-btn").onclick = function() {
+      window.location.href = "#borang-maklum-balas";
+    };
+
+    // Header Search
+    document.getElementById("header-search-form").onsubmit = function(e) {
+      e.preventDefault();
+      const q = document.getElementById("header-search-input").value.trim().toLowerCase();
+      if (!q) return;
+      let found = false;
+      function walk(node) {
+        if (found) return;
+        if (node.nodeType === 3 && node.textContent.toLowerCase().includes(q)) {
+          node.parentElement.scrollIntoView({ behavior: "smooth", block: "center" });
+          node.parentElement.style.background = "#fff3cd";
+          setTimeout(() => node.parentElement.style.background = "", 2000);
+          found = true;
+        } else if (node.nodeType === 1 && node.childNodes) {
+          node.childNodes.forEach(walk);
+        }
+      }
+      walk(document.body);
+      if (!found) alert("Tiada padanan dijumpai.");
+    };
+
+    // Rainfall Table & CSV
+    function getRainfallDataFromHTML() {
+      const json = document.getElementById('rainfall-json').textContent;
+      return JSON.parse(json);
+    }
+    function updateRainfallTable(data) {
+      const tbody = document.getElementById("rainfallTableBody");
+      tbody.innerHTML = "";
+      data.forEach(row => {
+        tbody.innerHTML += `<tr>
+          <td>${row.station}</td>
+          <td>${row.rainfall}</td>
+          <td>${row.updated}</td>
+        </tr>`;
+      });
+    }
+    const rainfallData = getRainfallDataFromHTML();
+    updateRainfallTable(rainfallData);
+    document.getElementById("downloadRainfallCSV").addEventListener("click", function () {
+      const data = getRainfallDataFromHTML();
+      let csv = "Stesen,Jumlah Hujan (mm),Kemaskini\n";
+      data.forEach(row => {
+        csv += `"${row.station}","${row.rainfall}","${row.updated}"\n`;
+      });
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "rainfall_kuala_nerus.csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    // River Level Table & CSV
+    const riverData = [
+      { station: "Sungai Nerus", level: 1.8, status: "Normal", updated: "2025-06-18 15:00" },
+      { station: "Sungai Tepoh", level: 2.5, status: "Amaran", updated: "2025-06-18 14:45" },
+      { station: "Sungai Batu Rakit", level: 3.1, status: "Bahaya", updated: "2025-06-18 14:30" }
+    ];
+    function refreshRiverLevel() {
+      const tbody = document.querySelector("#riverLevelTable tbody");
+      tbody.innerHTML = "";
+      riverData.forEach(d => {
+        let color = "#d4edda", fontColor = "#155724", icon = "🟢";
+        if (d.status === "Amaran") { color = "#fff3cd"; fontColor = "#856404"; icon = "🟡"; }
+        if (d.status === "Bahaya") { color = "#f8d7da"; fontColor = "#721c24"; icon = "🔴"; }
+        tbody.innerHTML += `
+          <tr>
+            <td data-label="Stesen" style="font-weight:500;">${d.station}</td>
+            <td data-label="Paras Air (m)" style="font-weight:500;">${d.level.toFixed(2)}</td>
+            <td data-label="Status" style="background:${color};color:${fontColor};font-weight:bold;text-align:center;border-radius:8px;">${icon} ${d.status}</td>
+            <td data-label="Kemaskini">${d.updated}</td>
+          </tr>`;
+      });
+    }
+    refreshRiverLevel();
+    document.getElementById("downloadRiverCSV").addEventListener("click", function () {
+      let csv = "Stesen,Paras Air (m),Status,Kemaskini\n";
+      riverData.forEach(row => {
+        csv += `"${row.station}","${row.level}","${row.status}","${row.updated}"\n`;
+      });
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "aras_air_sungai_kuala_nerus.csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    // Back to Top Button
+    const backToTopBtn = document.getElementById("backToTop");
+    window.addEventListener("scroll", function () {
+      backToTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
+    });
+    backToTopBtn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Help Button - Show a modal with useful info
+      const helpButton = document.getElementById("help-button");
+      helpButton.addEventListener("click", function () {
+        // Create modal if not exists
+        if (!document.getElementById("help-modal")) {
+          const modal = document.createElement("div");
+          modal.id = "help-modal";
+          modal.style.position = "fixed";
+          modal.style.top = "0";
+          modal.style.left = "0";
+          modal.style.width = "100vw";
+          modal.style.height = "100vh";
+          modal.style.background = "rgba(0,0,0,0.4)";
+          modal.style.zIndex = "2000";
+          modal.style.display = "flex";
+          modal.style.alignItems = "center";
+          modal.style.justifyContent = "center";
+          modal.innerHTML = `
+            <div style="background:#fff;padding:2rem 1.5rem;border-radius:16px;max-width:350px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.18);text-align:left;position:relative;">
+              <button id="close-help-modal" aria-label="Tutup Bantuan" style="position:absolute;top:10px;right:14px;background:none;border:none;font-size:1.5em;color:#0073e6;cursor:pointer;">&times;</button>
+              <h3 style="color:#0073e6;margin-top:0;">Bantuan Laman Web</h3>
+              <ul style="padding-left:1.2em;font-size:1em;">
+                <li>Untuk pertanyaan, klik <a href="#contact" style="color:#0073e6;">Hubungi Kami</a>.</li>
+                <li>Untuk maklum balas, klik <a href="#borang-maklum-balas" style="color:#0073e6;">Borang Maklum Balas</a>.</li>
+                <li>Untuk soalan lazim, klik <a href="#faq" style="color:#0073e6;">Soalan Lazim (FAQ)</a>.</li>
+                <li>Gunakan carian di atas untuk mencari info di laman ini.</li>
+              </ul>
+              <div style="margin-top:1.2em;font-size:0.98em;color:#666;">
+                Jika anda perlukan bantuan lanjut, sila hubungi JPS Kuala Nerus di <br>
+                <a href="mailto:jpskualanerus@terengganu.gov.my" style="color:#0073e6;">jpskualanerus@terengganu.gov.my</a>
+              </div>
+            </div>
+          `;
+          document.body.appendChild(modal);
+          document.getElementById("close-help-modal").onclick = function () {
+            modal.remove();
+          };
+          modal.onclick = function(e) {
+            if (e.target === modal) modal.remove();
+          };
+        }
+      });
+
+      // ...other code...
+    });
+
+    // Hamburger Menu
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    navToggle.addEventListener('click', function () {
+      navMenu.classList.toggle('open');
+    });
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 900) navMenu.classList.remove('open');
+      });
+    });
+  
     toggleBtn.addEventListener("click", () => {
       const isTableVisible = tableView.style.display !== "none";
       tableView.style.display = isTableVisible ? "none" : "block";
