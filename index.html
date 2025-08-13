@@ -157,6 +157,7 @@
     /* Main Menu */
     .nav-menu {
       display: flex;
+      position: relative;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
@@ -186,8 +187,8 @@
 
     .nav-menu > li > a:hover,
     .nav-menu > li > a:focus {
-      background: #005fa3;
-      color: #ffd700;
+      background: #04528a;
+      color: #afbdff;
       outline: none;
     }
 
@@ -213,18 +214,18 @@
 
     .dropdown-content li a {
       color: #004d99;
-      padding: 0.7rem 1.2rem;
+      padding: 0.5rem 0.8rem;
       text-decoration: none;
       display: block;
       font-weight: normal;
       font-size: 1rem;
-      border-radius: 0;
+      border-radius: 0 0 8px 8px;
       transition: background 0.2s, color 0.2s;
     }
 
     .dropdown-content li a:hover {
-      background: #f0f6ff;
-      color: #0073e6;
+      background: #04528a;
+      color: #ffffff;
     }
 
     .dropdown:hover .dropdown-content,
@@ -270,7 +271,7 @@
         padding: 1rem;
         font-size: 1.05rem;
         border-radius: 0;
-        border-bottom: 1px solid #005fa3;
+        border-bottom: 1px solid #04528a;
       }
 
       .dropdown-content {
@@ -399,6 +400,7 @@
         left: 0;
         top: 60px;
         z-index: 1000;
+        padding: 2rem 0;
       }
       .nav-menu.open {
         display: flex;
@@ -419,7 +421,7 @@
         min-width: 100%;
         border-radius: 0;
         padding: 0;
-        background: #0073e6;
+        background: #04528a;
       }
       .dropdown-content li a {
         padding-left: 2rem;
@@ -456,8 +458,8 @@
           margin: 1.5rem 0;
         }
         .search-bar input[type="search"] {
-          width: 100%;
-          max-width: 340px;
+          width: 120%;
+          max-width: 500px;
           padding: 0.7rem 1.2rem;
           border-radius: 24px;
           border: 1px solid #ccc;
@@ -551,7 +553,7 @@
         }
         .responsive-form-iframe iframe {
           width: 100%;
-          min-height: 600px;
+          min-height: 700px;
           max-height: 1900px;
           border: none;
           background: #fff;
@@ -566,7 +568,7 @@
         }
 
         /* Contact Modal */
-      .contact-modal {
+        .contact-modal {
         display: none; 
         position: fixed; 
         z-index: 2000; 
@@ -578,7 +580,7 @@
         background-color: rgba(0,0,0,0.5);
       }
 
-      .contact-modal-content {
+        .contact-modal-content {
         background-color: #fff;
         margin: 10% auto;
         padding: 20px;
@@ -735,6 +737,11 @@
       .faq-question:hover {
         background: #005fa3;
       }
+      .faq-question:active {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(0, 115, 230, 0.5);
+      }
+  
 
       /* Arrow Icon */
       .faq-question::after {
@@ -760,7 +767,6 @@
       .faq-item.open .faq-answer {
         display: block;
       }
-
 
       .leaflet-control-layers {
       font-size: 14px;
@@ -847,16 +853,98 @@
         color: white;
       }
 
+      .main-nav {
+        top: 1.2rem; /* height of the date-time bar */
+        background: #0073e6;
+        z-index: 1000;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      }
+
+      .nav-menu, .dropdown-content {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav-toggle {
+        display: none;
+        background: none;
+        color: white;
+        border: none;
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+      }
+
+      /* Mobile menu */
+      @media (max-width: 900px) {
+        .nav-toggle { display: block; }
+        .nav-menu {
+          display: none;
+          flex-direction: column;
+          background: #0073e6;
+          width: 100%;
+        }
+        .nav-menu.open { display: flex; }
+        .nav-menu > li > a {
+          padding: 1rem;
+          border-bottom: 1px solid #005fa3;
+          display: block;
+          color: white;
+        }
+        .dropdown-content {
+          display: none;
+          background: #0062cc;
+        }
+        .dropdown-content li a {
+          padding: 0.8rem 1.5rem;
+          display: block;
+          color: white;
+        }
+        .dropdown.open .dropdown-content {
+          display: block;
+        }
+      }
+
+    /* Language Switch Button */
+    .lang-switch {
+      background: #ffd700;
+      color: #333;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 0.5rem;
+    }
+    .lang-switch:hover {
+      background: #ffcc00;
+    }
+    .lang-switch:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #0073e6;
+    }
+    .lang-switch:active {
+      background: #e6b800;
+    }
+    .lang-switch:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .lang-switch:disabled:hover {
+      background: #ccc;
+    }
 
   </style>
 </head>
 
 <body>
 
-  <!-- Live Date/Time Display with logo buttons and search -->
-  <div id="live-date-time"
-  style="width:100%;background:#003366;color:#fff;text-align:center;font-size:1.05rem;font-weight:500;letter-spacing:0.5px;padding:0.3rem 0;position:relative;z-index:1001;display:flex;align-items:center;justify-content:center;gap:1.2rem;flex-wrap:wrap;">
+  <!-- Top Utility Bar -->
+<div id="live-date-time" 
+  style="width:100%;background:#003366;color:#fff;text-align:center;font-size:1.05rem;font-weight:500;letter-spacing:0.5px;padding:0.3rem 0;position:relative;top:0;z-index:1001;display:flex;align-items:center;justify-content:center;gap:1.2rem;flex-wrap:wrap;">
   <span id="date-time-text" style="flex:1 1 auto;text-align:center;"></span>
+
+  <!-- Utility Icons -->
   <button id="faq-btn" title="Soalan Lazim" style="background:none;border:none;color:#ffd700;font-size:1.3em;cursor:pointer;margin:0 0.2em;">
     <span aria-label="FAQ" role="img">❓</span>
   </button>
@@ -866,17 +954,25 @@
   <button id="feedback-btn" title="Maklum Balas" style="background:none;border:none;color:#ffd700;font-size:1.3em;cursor:pointer;margin:0 0.2em;">
     <span aria-label="Maklum Balas" role="img">💬</span>
   </button>
+
+  <!-- Search -->
   <form id="header-search-form" style="display:inline-block;margin:0 0.2em;">
-    <input id="header-search-input" type="search" placeholder="Cari..." style="padding:0.3em 0.9em;border-radius:16px;border:none;font-size:1em;width:380px;max-width:60vw;">
-    <button type="submit" style="background:#ffd700;border:none;color:#003366;font-weight:bold;border-radius:16px;padding:0.3em 0.9em;margin-left:0.2em;cursor:pointer;">Cari</button>
+    <input id="header-search-input" type="search" placeholder="Cari..." 
+      style="padding:0.3em 0.9em;border-radius:16px;border:none;font-size:1em;width:280px;max-width:60vw;">
+    <button type="submit" style="background:#ffd700;border:none;color:#003366;font-weight:bold;border-radius:16px;padding:0.3em 0.9em;margin-left:0.2em;cursor:pointer;">
+      Cari
+    </button>
   </form>
+
+  <!-- Language Switch -->
   <div class="lang-switcher" style="margin-left:auto; padding:0.5rem;">
     <button class="lang-btn" data-lang="bm" style="background:#fff;color:#0073e6;border:none;padding:5px 10px;margin-right:5px;border-radius:4px;cursor:pointer;">BM</button>
     <button class="lang-btn" data-lang="en" style="background:#fff;color:#0073e6;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;">EN</button>
   </div>
-
 </div>
 
+
+</div>
   <!-- Header with Logos -->
   <header style="cursor:pointer;" onclick="window.location.href='index.html'">
     <div class="logo-container">
@@ -889,7 +985,7 @@
   <!-- Add this just before your <nav> ... </nav> -->
   <button class="nav-toggle" aria-label="Menu" style="display:none;position:absolute;right:1rem;top:1.1rem;background:none;border:none;font-size:2rem;color:#fff;z-index:1001;cursor:pointer;">&#9776;</button>
 
-  <nav style="position:relative;">
+  <nav style="position:sticky;">
     <ul class="nav-menu">
     <li class="dropdown">
       <a href="#about" aria-haspopup="true" aria-expanded="false">Profil</a>
@@ -952,7 +1048,6 @@
   </nav>
 
   <div class="container">
-
     <section id="about" class="section">
       <h2>Profil Kami</h2>
   
@@ -1095,10 +1190,11 @@
     <h3>Carta Organisasi</h3>
     <div style="text-align:center;">
       <img src="carta-organisasi-2025.png" alt="Carta Organisasi JPS Kuala Nerus 2025" style="max-width:100%;height:auto;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:1rem;">
+        <p style="text-align:center;font-size:0.95em;color:#000000;margin-top:0.5rem;">
+        (Klik kanan dan 'Save Image As...' untuk muat turun carta atau <a href="CARTA ORGANISASI JPS KUALA NERUS 2025.pdf" target="_blank">muat turun PDF</a>)
+      </p>
     </div>
-    <p style="text-align:center;font-size:0.95em;color:#666;margin-top:0.5rem;">
-      (Klik kanan dan 'Save Image As...' untuk muat turun carta atau <a href="CARTA ORGANISASI JPS KUALA NERUS 2025.pdf" target="_blank">muat turun PDF</a>)
-    </p>
+
   </section>
 
   <!-- Add this inside your #services section, after the existing content or news section -->
@@ -2057,6 +2153,32 @@
   });
   </script>
 
+<script>
+  // Mobile menu toggle
+  document.querySelector('.nav-toggle').addEventListener('click', () => {
+    document.querySelector('.nav-menu').classList.toggle('open');
+  });
+
+  // Mobile dropdown toggle
+  document.querySelectorAll('.dropdown > a').forEach(link => {
+    link.addEventListener('click', e => {
+      if (window.innerWidth <= 900) {
+        e.preventDefault();
+        link.parentElement.classList.toggle('open');
+      }
+    });
+  });
+
+  // Live Date-Time
+  function updateDateTime() {
+    const now = new Date();
+    document.getElementById("date-time-text").textContent = 
+      now.toLocaleDateString('ms-MY', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) +
+      ' | ' + now.toLocaleTimeString('ms-MY');
+  }
+  setInterval(updateDateTime, 1000);
+  updateDateTime();
+</script>
 
 </body>
 </html>
