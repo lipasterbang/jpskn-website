@@ -906,6 +906,31 @@
         }
       }
 
+      /* Facebook Section */
+      .fb-section {
+        max-width: 900px;       /* Boxed width like FAQ */
+        margin: 2rem auto;      /* Center horizontally */
+        padding: 1.5rem;        /* Inner padding */
+        background: #fff;       /* White background box */
+        border-radius: 10px;    /* Smooth rounded edges */
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Soft shadow */
+        text-align: center;
+      }
+
+      .fb-section h2 {
+        margin-bottom: 1rem;
+        color: #004d99;
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
+
+      .fb-container {
+        overflow: hidden;
+        border-radius: 8px;      /* Rounded corners for feed */
+        border: 1px solid #e0e0e0;
+      }
+
+
     /* Language Switch Button */
     .lang-switch {
       background: #ffd700;
@@ -932,6 +957,44 @@
     }
     .lang-switch:disabled:hover {
       background: #ccc;
+    }
+    .lang-switch:disabled:focus {
+      box-shadow: none;
+    }
+    .lang-switch:disabled:active {
+      background: #b3b3b3;
+    }
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: auto;
+      padding: 0.5rem;
+    }
+    .lang-btn {
+      background: #fff;
+      color: #0073e6;
+      border: none;
+      padding: 5px 10px;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .lang-btn:hover {
+      background: #0073e6;
+      color: white;
+    }
+    .lang-btn:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #0073e6;
+    }
+    .lang-btn:active {
+      background: #005bb5;
+    }
+    .lang-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
     }
 
   </style>
