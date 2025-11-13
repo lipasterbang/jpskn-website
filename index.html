@@ -235,62 +235,152 @@
       visibility: visible;
     }
 
-    /* Mobile Menu */
-    .nav-toggle {
-      display: none;
+    /* 🌊 RESPONSIVE NAVBAR + SEARCHBAR FIX */
+    .navbar {
+      background: #0073e6;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    @media (max-width: 900px) {
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 0.8rem 1rem;
+    }
+
+    /* Logo */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .nav-logo img {
+      height: 40px;
+    }
+
+    /* Search bar */
+    .nav-search {
+      display: flex;
+      align-items: center;
+      background: #005fa3;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .nav-search input {
+      border: none;
+      padding: 0.4rem 0.6rem;
+      outline: none;
+      color: white;
+      background: transparent;
+      width: 140px;
+    }
+    .nav-search input::placeholder {
+      color: #cde4ff;
+    }
+    .nav-search button {
+      background: #004b80;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 0.4rem 0.6rem;
+    }
+    .nav-search button:hover {
+      background: #003f6b;
+    }
+
+    /* Hamburger */
+    .nav-toggle {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      display: block;
+    }
+
+    /* Menu (mobile first) */
+    .nav-menu {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      background: #005fa3;
+      margin-top: 0.5rem;
+    }
+    .nav-menu.open {
+      display: flex;
+    }
+    .nav-menu li {
+      list-style: none;
+      position: relative;
+    }
+    .nav-menu li a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav-menu li a:hover {
+      background: #004b80;
+      color: #ffd700;
+    }
+
+    /* Dropdown */
+    .dropdown-content {
+      display: none;
+      flex-direction: column;
+      background: #0462b4;
+    }
+    .dropdown.open > .dropdown-content {
+      display: flex;
+    }
+    .dropdown-content li a {
+      padding-left: 2rem;
+      font-size: 0.9rem;
+    }
+
+    /* Desktop view */
+    @media (min-width: 900px) {
       .nav-toggle {
-        display: block !important;
-      }
-
-      .nav-menu {
-        flex-direction: column;
-        align-items: stretch;
-        width: 100%;
-        background: #0073e6;
-        position: absolute;
-        left: 0;
-        top: 60px;
-        z-index: 1000;
         display: none;
-        transition: max-height 0.3s ease-in-out;
       }
-
-      .nav-menu.open {
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .nav-menu {
         display: flex;
-      }
-
-      .nav-menu > li {
-        width: 100%;
-      }
-
-      .nav-menu > li > a {
+        flex-direction: row;
+        align-items: center;
+        background: none;
+        width: auto;
         margin: 0;
-        padding: 1rem;
-        font-size: 1.05rem;
-        border-radius: 0;
-        border-bottom: 1px solid #04528a;
       }
-
+      .nav-menu li a {
+        border: none;
+        padding: 0.8rem 1rem;
+      }
       .dropdown-content {
-        position: static;
-        box-shadow: none;
-        min-width: 100%;
-        border-radius: 0;
-        padding: 0;
-        display: none; /* Start hidden */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+        background: #0462b4;
+        min-width: 220px;
       }
-
-      /* Show dropdown on mobile when parent clicked */
-      .dropdown.open .dropdown-content {
-        display: block;
+      .dropdown:hover > .dropdown-content {
+        display: flex;
+        flex-direction: column;
       }
-
-      .dropdown-content li a {
-        padding-left: 2rem;
-        font-size: 0.98rem;
+      .nav-search input {
+        width: 180px;
       }
     }
 
@@ -1045,70 +1135,62 @@
     <h1 class="main-title" style="cursor:pointer;">JABATAN PENGAIRAN DAN SALIRAN DAERAH KUALA NERUS</h1>
   </header>
 
-  <!-- Add this just before your <nav> ... </nav> -->
-  <button class="nav-toggle" aria-label="Menu" style="display:none;position:absolute;right:1rem;top:1.1rem;background:none;border:none;font-size:2rem;color:#fff;z-index:1001;cursor:pointer;">&#9776;</button>
 
-  <nav style="position:sticky;">
-    <ul class="nav-menu">
-    <li class="dropdown">
-      <a href="#about" aria-haspopup="true" aria-expanded="false">Profil</a>
-      <ul class="dropdown-content">
-          <li><a href="#pengenalan">Pengenalan</a></li>
-          <li><a href="#kata-aluan">Kata Aluan Jurutera Daerah</a></li>
-          <li><a href="#visi-misi">Visi Misi Objektif</a></li>
-          <li><a href="#carta-organisasi">Carta Organisasi</a></li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a href="#services">Perkhidmatan</a>
-        <ul class="dropdown-content">
-          <li><a href="#ruangan-iklan">Ruangan Iklan</a></li>
-          <li><a href="#ruangan-tender">Sebut Harga/Tender</a></li>
-          <li><a href="#news-section">Berita</a></li>
-          <li><a href="#laporan-osc">Laporan OSC</a></li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a href="#map-section">Peta</a>
-      </li>
-      <li class="dropdown">
-        <a href="#hydrology-data">Taburan Hujan</a>
-      </li>
-      <li class="dropdown">
-        <a href="#repositori-dokumen">Dokumen</a>
-      </li>
-      <li class="dropdown">
-        <a href="#">Info Banjir</a>
-        <ul class="dropdown-content">
-          <li>
-            <a href="https://publicinfobanjir.water.gov.my/aras-air/data-paras-air/?state=TRG&lang=en" target="_blank" rel="noopener">
-              Info Aras Air
-            </a>
-          </li>
-          <li>
-            <a href="https://publicinfobanjir.water.gov.my/hujan/data-hujan/?state=TRG&lang=en" target="_blank" rel="noopener">
-              Info Hujan Lebat
-            </a>
-          </li>
-          <li>
-            <a href="https://jpsweb.terengganu.gov.my/index.php/ms/info-banjir/siren-amaran-banjir" target="_blank" rel="noopener">
-              Siren Amaran Banjir
-            </a>
-          </li>
-          <li>
-            <a href="https://jpsweb.terengganu.gov.my/index.php/ms/info-banjir/stesen-lebat-hujan" target="_blank" rel="noopener">
-              Stesen Lebat Hujan
-            </a>
-          </li>
-          <li>
-            <a href="https://jpsweb.terengganu.gov.my/index.php/ms/info-banjir/stesen-paras-air-sungai" target="_blank" rel="noopener">
-              Stesen Paras Air Sungai
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
+  <!-- ✅ Responsive Navbar (Fixed Version) -->
+<header class="navbar">
+  <div class="nav-container">
+
+    <div class="nav-logo" onclick="window.location.href='index.html'">
+      <img src="images/jpslogo.png" alt="JPS Kuala Nerus Logo">
+      <span>JPS Kuala Nerus</span>
+    </div>
+
+    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+
+   <!-- Navigation Menu -->
+      <ul class="nav-menu">
+        <li class="dropdown">
+          <a href="#about">Profil</a>
+          <ul class="dropdown-content">
+            <li><a href="#pengenalan">Pengenalan</a></li>
+            <li><a href="#kata-aluan">Kata Aluan Jurutera Daerah</a></li>
+            <li><a href="#visi-misi">Visi Misi Objektif</a></li>
+            <li><a href="#carta-organisasi">Carta Organisasi</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#services">Perkhidmatan</a>
+          <ul class="dropdown-content">
+            <li><a href="#ruangan-iklan">Ruangan Iklan</a></li>
+            <li><a href="#ruangan-tender">Sebut Harga/Tender</a></li>
+            <li><a href="#news-section">Berita</a></li>
+            <li><a href="#laporan-osc">Laporan OSC</a></li>
+          </ul>
+        </li>
+
+        <li><a href="#map-section">Peta</a></li>
+        <li><a href="#hydrology-data">Taburan Hujan</a></li>
+        <li><a href="#repositori-dokumen">Dokumen</a></li>
+
+        <!-- Search (Desktop only) -->
+        <form class="nav-search" role="search">
+          <input type="search" placeholder="Cari..." aria-label="Cari">
+        </form>
+
+        <li class="dropdown">
+          <a href="#">Info Banjir</a>
+          <ul class="dropdown-content">
+            <li><a href="https://publicinfobanjir.water.gov.my/aras-air/data-paras-air/?state=TRG&lang=en" target="_blank">Info Aras Air</a></li>
+            <li><a href="https://publicinfobanjir.water.gov.my/hujan/data-hujan/?state=TRG&lang=en" target="_blank">Info Hujan Lebat</a></li>
+            <li><a href="https://jpsweb.terengganu.gov.my/index.php/ms/info-banjir/siren-amaran-banjir" target="_blank">Siren Amaran Banjir</a></li>
+            <li><a href="https://jpsweb.terengganu.gov.my/index.php/ms/info-banjir/stesen-lebat-hujan" target="_blank">Stesen Lebat Hujan</a></li>
+            <li><a href="https://jpsweb.terengganu.gov.my/index.php/ms/info-banjir/stesen-paras-air-sungai" target="_blank">Stesen Paras Air Sungai</a></li>
+          </ul>
+        </li>
+      </ul>
+  </div>
+</header>
 
   <div class="container">
     <section id="about" class="section">
@@ -1693,6 +1775,8 @@
       rainfallTableBody.appendChild(row);
     });
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     // Initialize Chart.js
     const ctx = document.getElementById("rainChart").getContext("2d");
     const rainChart = new Chart(ctx, {
@@ -1734,10 +1818,6 @@
       }
     });
     
-    // Initialize with table view
-    document.querySelector("#rainfallTable").style.display = "table";
-    document.querySelector("#rainfall-chart-view").style.display = "none";
-  </script>
 
   <!-- Enhanced River Level Section (UI/UX & Mobile Friendly) -->
   <section id="river-level" class="section">
@@ -2047,13 +2127,7 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // Hamburger Menu
-    const navToggle = document.querySelector('.nav-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-    navToggle.addEventListener('click', function () {
-      navMenu.classList.toggle('open');
-    });
-
+  
     // Add hydro stations data
     const hydroStations = [
     {
@@ -2214,18 +2288,6 @@
 </div>
 
   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const dropdowns = document.querySelectorAll(".dropdown");
-
-    dropdowns.forEach(dropdown => {
-      dropdown.querySelector("a").addEventListener("click", function (e) {
-        if (window.innerWidth <= 900) { // Only run on mobile
-          e.preventDefault(); // Prevent link navigation
-          dropdown.classList.toggle("open");
-        }
-      });
-    });
-
     // Language switcher
     const langBtns = document.querySelectorAll(".lang-btn");
     langBtns.forEach(btn => {
@@ -2236,35 +2298,57 @@
         });
       });
     });
-  });
   </script>
 
 <script>
-  // Mobile menu toggle
-  document.querySelector('.nav-toggle').addEventListener('click', () => {
-    document.querySelector('.nav-menu').classList.toggle('open');
-  });
-
-  // Mobile dropdown toggle
-  document.querySelectorAll('.dropdown > a').forEach(link => {
-    link.addEventListener('click', e => {
-      if (window.innerWidth <= 900) {
-        e.preventDefault();
-        link.parentElement.classList.toggle('open');
-      }
-    });
-  });
-
-  // Live Date-Time
-  function updateDateTime() {
-    const now = new Date();
-    document.getElementById("date-time-text").textContent = 
-      now.toLocaleDateString('ms-MY', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) +
-      ' | ' + now.toLocaleTimeString('ms-MY');
-  }
-  setInterval(updateDateTime, 1000);
-  updateDateTime();
+    // Live Date-Time
+    function updateDateTime() {
+      const now = new Date();
+      document.getElementById("date-time-text").textContent = 
+        now.toLocaleDateString('ms-MY', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) +
+        ' | ' + now.toLocaleTimeString('ms-MY');
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggle = document.querySelector(".nav-toggle");
+      const menu = document.querySelector(".nav-menu");
+      const dropdownLinks = document.querySelectorAll(".dropdown > a");
+
+      // Hamburger toggle
+      toggle.addEventListener("click", () => {
+        menu.classList.toggle("open");
+        toggle.innerHTML = menu.classList.contains("open") ? "&times;" : "&#9776;";
+      });
+
+      // Dropdown for mobile
+      dropdownLinks.forEach(link => {
+        link.addEventListener("click", e => {
+          if (window.innerWidth < 900) {
+            e.preventDefault();
+            link.parentElement.classList.toggle("open");
+          }
+        });
+      });
+    });
+</script>
+
+  <script>
+    // Mobile Menu Toggle
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggle = document.querySelector(".nav-toggle");
+      const menu = document.querySelector(".nav-menu");
+
+      toggle.addEventListener("click", () => {
+        menu.classList.toggle("open");
+        toggle.innerHTML = menu.classList.contains("open") ? "&times;" : "&#9776;";
+      });
+    });
+  </script>
+
 
 </body>
 </html>
