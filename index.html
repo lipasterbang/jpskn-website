@@ -50,7 +50,7 @@
     }
     .hero-title { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
     
-    /* Action Card (Now Search Bar) */
+    /* Search Bar Card */
     .action-card {
       background: white;
       padding: 2.5rem;
@@ -61,54 +61,20 @@
       z-index: 10;
     }
 
-    /* --- PROFILE SECTION CLASS --- */
-    .profile-section {
-      background: #ffffff;
-      padding: 4rem 0;
-      border-bottom: 1px solid #eee;
-    }
-    .org-chart-container {
-      background: #f8f9fa;
-      border: 1px solid #e9ecef;
-      padding: 10px;
-      border-radius: 8px;
-      text-align: center;
-      margin-top: 20px;
-    }
-    .org-chart-img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .org-chart-img:hover {
-      transform: scale(1.02);
-    }
+    /* Profile Section */
+    .profile-section { background: #ffffff; padding: 4rem 0; border-bottom: 1px solid #eee; }
+    .org-chart-container { background: #f8f9fa; border: 1px solid #e9ecef; padding: 10px; border-radius: 8px; text-align: center; margin-top: 20px; }
+    .org-chart-img { max-width: 100%; height: auto; border-radius: 4px; cursor: pointer; transition: transform 0.3s ease; }
+    .org-chart-img:hover { transform: scale(1.02); }
 
-    /* --- SERVICES SECTION CLASS --- */
-    .services-section {
-      padding: 4rem 0;
-      background-color: #f1f5f9;
-    }
+    /* Services Section */
+    .services-section { padding: 4rem 0; background-color: #f1f5f9; }
     .service-card {
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-      transition: transform 0.3s, box-shadow 0.3s;
-      height: 100%;
-      border-top: 4px solid var(--jps-blue);
+      background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s; height: 100%; border-top: 4px solid var(--jps-blue);
     }
-    .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-    .service-icon {
-      font-size: 2.5rem;
-      color: var(--jps-light-blue);
-      margin-bottom: 1rem;
-    }
+    .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .service-icon { font-size: 2.5rem; color: var(--jps-light-blue); margin-bottom: 1rem; }
 
     /* Map Styling */
     #map { height: 500px; width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
@@ -156,8 +122,8 @@
       <a class="navbar-brand" href="#">
         <img src="jpslogo.png" alt="JPS Logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Jps_logo.png/600px-Jps_logo.png'">
         <div>
-          <div style="font-size:0.8em; line-height:1; color:#777;">JABATAN PENGAIRAN DAN SALIRAN</div>
-          DAERAH KUALA NERUS
+          <div style="font-size:0.8em; line-height:1; color:#777;">DAERAH</div>
+          KUALA NERUS
         </div>
       </a>
       
@@ -194,7 +160,7 @@
         <div class="col-lg-8">
           <h5 class="text-center mb-3 text-muted fw-bold">Cari Maklumat (Tender, Banjir, Direktori...)</h5>
           <form class="d-flex shadow-sm rounded overflow-hidden">
-            <input class="form-control border-0 p-3" type="search" placeholder="Taip kata kunci carian di sini..." aria-label="Search" style="font-size: 1.1rem;">
+            <input class="form-control border-0 p-3" type="search" placeholder="Contoh: Sungai Nerus, Tender 2025..." aria-label="Search" style="font-size: 1.1rem;">
             <button class="btn btn-primary px-4 fw-bold" type="submit" style="background-color: var(--jps-blue);">
               <i class="fas fa-search"></i> CARI
             </button>
@@ -224,8 +190,7 @@
         <div class="col-lg-6">
           <div class="org-chart-container shadow-sm">
             <h5 class="fw-bold mb-3">Carta Organisasi 2025</h5>
-            <img src="carta-organisasi-2025.png" alt="Carta Organisasi JPS Kuala Nerus 2025" class="org-chart-img mb-3" onerror="this.src='https://via.placeholder.com/600x400?text=Carta+Organisasi+Placeholder'">
-            
+            <img src="carta-organisasi-2025.png" alt="Carta Organisasi JPS Kuala Nerus 2025" class="org-chart-img mb-3" onerror="this.src='https://via.placeholder.com/600x400?text=Carta+Organisasi+JPS'">
             <br>
             <a href="CARTA ORGANISASI JPS KUALA NERUS 2025.pdf" class="btn btn-outline-primary btn-sm" download>
               <i class="fas fa-file-pdf me-2"></i> Muat Turun Carta (PDF)
@@ -252,7 +217,6 @@
             <a href="#" class="btn btn-sm btn-outline-primary">Lihat Iklan</a>
           </div>
         </div>
-
         <div class="col-md-4">
           <div class="service-card text-center">
             <div class="service-icon"><i class="fas fa-headset"></i></div>
@@ -261,7 +225,6 @@
             <a href="#" class="btn btn-sm btn-outline-primary">Buat Aduan</a>
           </div>
         </div>
-
         <div class="col-md-4">
           <div class="service-card text-center">
             <div class="service-icon"><i class="fas fa-clipboard-check"></i></div>
@@ -278,6 +241,7 @@
     <div class="container">
       <div class="text-center mb-4">
         <h2 class="fw-bold text-primary">🗺️ Peta Interaktif & Zon Hidrologi</h2>
+        <p class="text-muted">Lokasi Stesen Hujan dan Stesen Aras Air Sungai utama di Kuala Nerus.</p>
       </div>
       <div id="map"></div>
     </div>
@@ -288,31 +252,39 @@
       <h2 class="fw-bold text-center mb-5" style="color: var(--jps-blue);">Status Hidrologi Terkini</h2>
       
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-lg-6">
           <div class="taburan-hujan-section shadow-sm">
-            <h4 class="fw-bold mb-3"><i class="fas fa-cloud-rain text-primary"></i> Taburan Hujan</h4>
-            <table class="table table-borderless">
-              <thead><tr><th>Stesen</th><th class="text-end">Bacaan (mm)</th></tr></thead>
-              <tbody>
-                <tr><td>Stesen Gong Badak</td><td class="text-end fw-bold">22 mm</td></tr>
-                <tr><td>Stesen Batu Rakit</td><td class="text-end fw-bold">8 mm</td></tr>
-              </tbody>
-            </table>
-            <small class="text-muted">Kemaskini terakhir: 10 minit lepas</small>
+            <h4 class="fw-bold mb-3"><i class="fas fa-cloud-rain text-primary"></i> Taburan Hujan (Rainfall)</h4>
+            <div class="table-responsive">
+              <table class="table table-borderless table-sm">
+                <thead class="border-bottom"><tr><th>Stesen</th><th class="text-end">Bacaan (mm)</th></tr></thead>
+                <tbody>
+                  <tr><td>Sek. Keb. Gemuruh (F1)</td><td class="text-end fw-bold">0 mm</td></tr>
+                  <tr><td>Universiti Malaysia Terengganu (F1)</td><td class="text-end fw-bold">5 mm</td></tr>
+                  <tr><td>Padang Kemunting (F1)</td><td class="text-end fw-bold">12 mm</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <small class="text-muted">Kemaskini: <span id="rain-update-time">Loading...</span></small>
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-lg-6">
           <div class="aras-air-section shadow-sm">
-            <h4 class="fw-bold mb-3"><i class="fas fa-water text-warning"></i> Aras Air Sungai</h4>
-            <table class="table table-borderless">
-              <thead><tr><th>Sungai</th><th>Status</th><th class="text-end">Aras (m)</th></tr></thead>
-              <tbody>
-                <tr><td>Sg. Nerus</td><td><span class="badge bg-danger">Bahaya</span></td><td class="text-end fw-bold">4.50 m</td></tr>
-                <tr><td>Sg. Tepoh</td><td><span class="badge bg-success">Normal</span></td><td class="text-end fw-bold">1.20 m</td></tr>
-              </tbody>
-            </table>
-            <small class="text-muted">Kemaskini terakhir: 5 minit lepas</small>
+            <h4 class="fw-bold mb-3"><i class="fas fa-water text-warning"></i> Aras Air Sungai (Water Level)</h4>
+            <div class="table-responsive">
+              <table class="table table-borderless table-sm">
+                <thead class="border-bottom"><tr><th>Stesen</th><th>Status</th><th class="text-end">Aras (m)</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td>Sungai Nerus di Kg Jeram</td>
+                    <td><span class="badge bg-success">Normal</span></td>
+                    <td class="text-end fw-bold">3.20 m</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <small class="text-muted">Kemaskini: <span id="river-update-time">Loading...</span></small>
           </div>
         </div>
       </div>
@@ -438,55 +410,90 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Map Initialization
-      const map = L.map("map").setView([5.39448, 103.06308], 12);
+      // 1. Initialize Map
+      const map = L.map("map").setView([5.40, 103.07], 11); // Centered on Kuala Nerus area
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: '© OpenStreetMap' }).addTo(map);
 
-      // Icons
+      // 2. Icon Definitions
       const createIcon = (color) => new L.Icon({
         iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-${color}.png`,
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
         iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
       });
 
-      const icons = { office: createIcon("blue"), rain: createIcon("green"), siren: createIcon("red"), river: createIcon("gold") };
+      const icons = {
+        office: createIcon("blue"),
+        rain: createIcon("green"),  // For rainfall stations
+        river: createIcon("gold"),  // For river water levels
+        siren: createIcon("red")    // Optional for future use
+      };
 
-      // Layers
+      // 3. Layer Groups
       const layers = {
         office: L.layerGroup().addTo(map),
         rain: L.layerGroup().addTo(map),
-        siren: L.layerGroup().addTo(map),
         river: L.layerGroup().addTo(map),
         zone: L.layerGroup().addTo(map)
       };
 
-      // Markers
-      L.marker([5.39448, 103.06308], { icon: icons.office }).bindPopup("<b>Pejabat JPS Kuala Nerus</b>").addTo(layers.office);
-      L.marker([5.3950, 103.0850], { icon: icons.rain }).bindPopup("Stesen Gong Badak: 22mm").addTo(layers.rain);
-      L.marker([5.4600, 103.1000], { icon: icons.rain }).bindPopup("Stesen Batu Rakit: 8mm").addTo(layers.rain);
-      L.marker([5.4145, 103.0855], { icon: icons.siren }).bindPopup("Siren: Tok Jembal").addTo(layers.siren);
-      L.marker([5.4000, 103.0700], { icon: icons.river }).bindPopup("Sg. Nerus: 4.5m (Bahaya)").addTo(layers.river);
+      // 4. Add Real-World Station Markers
+      
+      // -- Pejabat JPS
+      L.marker([5.39448, 103.06308], { icon: icons.office })
+        .bindPopup("<b>Pejabat JPS Kuala Nerus</b>")
+        .addTo(layers.office);
 
-      // Zone Polygon
+      // -- Stesen Hujan (Rainfall)
+      // Sek. Keb. Gemuruh (F1)
+      L.marker([5.3220, 103.0180], { icon: icons.rain })
+        .bindPopup("<b>Sek. Keb. Gemuruh (F1)</b><br>Jenis: Stesen Hujan")
+        .addTo(layers.rain);
+        
+      // Universiti Malaysia Terengganu (F1)
+      L.marker([5.4079, 103.0906], { icon: icons.rain })
+        .bindPopup("<b>Universiti Malaysia Terengganu (F1)</b><br>Jenis: Stesen Hujan")
+        .addTo(layers.rain);
+
+      // Padang Kemunting (F1)
+      L.marker([5.4380, 103.1110], { icon: icons.rain })
+        .bindPopup("<b>Padang Kemunting (F1)</b><br>Jenis: Stesen Hujan")
+        .addTo(layers.rain);
+
+      // -- Stesen Sungai (Water Level)
+      // Sungai Nerus di Kg Jeram
+      L.marker([5.3990, 103.0670], { icon: icons.river })
+        .bindPopup("<b>Sungai Nerus di Kg Jeram</b><br>Jenis: Aras Air Sungai")
+        .addTo(layers.river);
+
+      // -- Hydrology Zone Polygon
       L.polygon([[5.407, 103.08], [5.412, 103.09], [5.409, 103.095], [5.404, 103.085]], { color: 'red', fillColor: '#f03', fillOpacity: 0.3 })
         .bindPopup("Zon Risiko Banjir").addTo(layers.zone);
 
-      // Controls
-      L.control.layers(null, { "Pejabat": layers.office, "Hujan": layers.rain, "Siren": layers.siren, "Sungai": layers.river, "Zon Risiko": layers.zone }).addTo(map);
+      // 5. Controls
+      L.control.layers(null, { 
+        "Pejabat": layers.office, 
+        "Stesen Hujan": layers.rain, 
+        "Aras Sungai": layers.river, 
+        "Zon Risiko": layers.zone 
+      }).addTo(map);
 
-      // Legend
+      // 6. Legend
       const legend = L.control({ position: "bottomright" });
       legend.onAdd = function() {
         const div = L.DomUtil.create("div", "legend");
         div.innerHTML += "<h6>Legenda</h6>";
         div.innerHTML += '<i style="background: #2A81CB"></i> Pejabat<br>';
-        div.innerHTML += '<i style="background: #2AAD27"></i> Hujan<br>';
-        div.innerHTML += '<i style="background: #CB2B3E"></i> Siren<br>';
-        div.innerHTML += '<i style="background: #FFD326"></i> Sungai<br>';
+        div.innerHTML += '<i style="background: #2AAD27"></i> Stesen Hujan<br>';
+        div.innerHTML += '<i style="background: #FFD326"></i> Stesen Aras Air<br>';
         div.innerHTML += '<i style="background: #f03; opacity:0.5"></i> Zon Risiko<br>';
         return div;
       };
       legend.addTo(map);
+
+      // 7. Auto Update Time
+      const now = new Date().toLocaleTimeString();
+      document.getElementById("rain-update-time").textContent = now;
+      document.getElementById("river-update-time").textContent = now;
     });
   </script>
 </body>
