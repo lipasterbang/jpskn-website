@@ -305,33 +305,6 @@
       display: block;
     }
 
-    /* Menu (mobile first) */
-    .nav-menu {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      background: #005fa3;
-      margin-top: 0.5rem;
-    }
-    .nav-menu.open {
-      display: flex;
-    }
-    .nav-menu li {
-      list-style: none;
-      position: relative;
-    }
-    .nav-menu li a {
-      display: block;
-      color: white;
-      text-decoration: none;
-      padding: 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .nav-menu li a:hover {
-      background: #004b80;
-      color: #ffd700;
-    }
-
     /* Dropdown */
     .dropdown-content {
       display: none;
@@ -383,7 +356,6 @@
         width: 180px;
       }
     }
-
       .responsive-table {
         display: block;
         width: 100%;
@@ -474,6 +446,140 @@
           font-size: 0.98rem;
         }
       }
+
+      /* ============================================
+      FULL-WIDTH HEADER (UPDATED)
+    ============================================ */
+    .main-header {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background: #0066cc;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+    }
+
+    /* === TOP BAR — Dashboard Data === */
+    .live-data-bar {
+      width: 100%;
+      background: #004a99;
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-around;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .live-data-bar span strong {
+      color: #ffe066;
+    }
+
+    /* === DATE / TIME section === */
+    .top-info {
+      width: 100%;
+      padding: 0.6rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .datetime {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* === Buttons === */
+    .top-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .header-btn {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #ffd700;
+    }
+
+    .header-btn:hover {
+      opacity: 0.75;
+    }
+
+    /* === Search Bar === */
+    .simple-search {
+      width: 100%;
+      display: flex;
+      background: #005bb5;
+      padding: 0.5rem 1rem;
+      gap: 0.5rem;
+    }
+
+    .simple-search input {
+      flex: 1;
+      padding: 0.7rem;
+      border: none;
+      outline: none;
+      background: #004d99;
+      color: white;
+      border-radius: 4px;
+    }
+
+    .simple-search input::placeholder {
+      color: #cfe3ff;
+    }
+
+    .simple-search button {
+      background: #003f7d;
+      border: none;
+      padding: 0.7rem 1rem;
+      color: white;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .simple-search button:hover {
+      background: #003266;
+    }
+
+    /* === Mobile Behaviour === */
+    @media (max-width: 600px) {
+      .live-data-bar {
+        flex-direction: column;
+        gap: 0.3rem;
+        text-align: center;
+      }
+
+      .top-info {
+        flex-direction: column;
+        gap: 0.4rem;
+        text-align: center;
+      }
+
+      .top-buttons {
+        justify-content: center;
+      }
+    }
+
+    /* Mobile layout fix */
+    @media (max-width: 500px) {
+      .top-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+        text-align: center;
+      }
+      
+      .top-buttons {
+        justify-content: center;
+      }
+    }
+
 
         /* Hamburger button visible on mobile */
       @media (max-width: 900px) {
@@ -1092,38 +1198,38 @@
 
 <body>
 
-  <!-- Top Utility Bar -->
-<div id="live-date-time" 
-  style="width:100%;background:#003366;color:#fff;text-align:center;font-size:1.05rem;font-weight:500;letter-spacing:0.5px;padding:0.3rem 0;position:relative;top:0;z-index:1001;display:flex;align-items:center;justify-content:center;gap:1.2rem;flex-wrap:wrap;">
-  <span id="date-time-text" style="flex:1 1 auto;text-align:center;"></span>
+    <!-- =====================================================
+        FULL-WIDTH HEADER + DATA BANJIR LIVE DASHBOARD BAR
+    ====================================================== -->
+    <header class="main-header">
 
-  <!-- Utility Icons -->
-  <button id="faq-btn" title="Soalan Lazim" style="background:none;border:none;color:#ffd700;font-size:1.3em;cursor:pointer;margin:0 0.2em;">
-    <span aria-label="FAQ" role="img">❓</span>
-  </button>
-  <button id="contact-btn" title="Hubungi Kami" style="background:none;border:none;color:#ffd700;font-size:1.3em;cursor:pointer;margin:0 0.2em;">
-    <span aria-label="Contact" role="img">📞</span>
-  </button>
-  <button id="feedback-btn" title="Maklum Balas" style="background:none;border:none;color:#ffd700;font-size:1.3em;cursor:pointer;margin:0 0.2em;">
-    <span aria-label="Maklum Balas" role="img">💬</span>
-  </button>
+      <!-- === DASHBOARD LIVE DATA BAR === -->
+      <div class="live-data-bar">
+        <span>🌧️ Taburan Hujan: <strong id="rain-mm">– mm</strong></span>
+        <span>🌊 Paras Sungai: <strong id="river-level">– m</strong></span>
+        <span>🌙 Air Pasang: <strong id="tide-level">– m</strong></span>
+      </div>
 
-  <!-- Search -->
-  <form id="header-search-form" style="display:inline-block;margin:0 0.2em;">
-    <input id="header-search-input" type="search" placeholder="Cari..." 
-      style="padding:0.3em 0.9em;border-radius:16px;border:none;font-size:1em;width:280px;max-width:60vw;">
-    <button type="submit" style="background:#ffd700;border:none;color:#003366;font-weight:bold;border-radius:16px;padding:0.3em 0.9em;margin-left:0.2em;cursor:pointer;">
-      Cari
-    </button>
-  </form>
+      <!-- === DATE / TIME / BUTTONS === -->
+      <div class="top-info">
+        <div class="datetime">
+          <span id="date-time-text"></span>
+        </div>
 
-  <!-- Language Switch -->
-  <div class="lang-switcher" style="margin-left:auto; padding:0.5rem;">
-    <button class="lang-btn" data-lang="bm" style="background:#fff;color:#0073e6;border:none;padding:5px 10px;margin-right:5px;border-radius:4px;cursor:pointer;">BM</button>
-    <button class="lang-btn" data-lang="en" style="background:#fff;color:#0073e6;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;">EN</button>
-  </div>
-</div>
+        <div class="top-buttons">
+          <button id="faq-btn" class="header-btn" title="Soalan Lazim">❓</button>
+          <button id="contact-btn" class="header-btn" title="Hubungi Kami">📞</button>
+          <button id="feedback-btn" class="header-btn" title="Maklum Balas">💬</button>
+        </div>
+      </div>
 
+      <!-- === SEARCH BAR === -->
+      <form class="simple-search">
+        <input type="text" placeholder="Cari..." aria-label="Search">
+        <button type="submit">🔍</button>
+      </form>
+
+    </header>
 
 </div>
   <!-- Header with Logos -->
@@ -2030,21 +2136,37 @@
 
 <script>
   
-  // LIVE DATE/TIME DISPLAY AND HELP MODAL
+  <script>
+  // LIVE DATE/TIME DISPLAY (Malay Full Format)
   document.addEventListener("DOMContentLoaded", function () {
-    function updateClock() {
-      const now = new Date();
-      const days = ["Ahad", "Isnin", "Selasa", "Rabu", "Khamis", "Jumaat", "Sabtu"];
-      const months = ["Januari", "Februari", "Mac", "April", "Mei", "Jun", "Julai", "Ogos", "September", "Oktober", "November", "Disember"];
-      const day = days[now.getDay()];
-      const date = now.getDate();
-      const month = months[now.getMonth()];
-      const year = now.getFullYear();
-      const time = now.toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      document.getElementById("date-time-text").textContent = `${day}, ${date} ${month} ${year} | ${time}`;
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
+      function updateClock() {
+          const now = new Date();
+
+          const days = ["Ahad", "Isnin", "Selasa", "Rabu", "Khamis", "Jumaat", "Sabtu"];
+          const months = [
+              "Januari","Februari","Mac","April","Mei","Jun",
+              "Julai","Ogos","September","Oktober","November","Disember"
+          ];
+
+          const day = days[now.getDay()];
+          const date = now.getDate();
+          const month = months[now.getMonth()];
+          const year = now.getFullYear();
+          const time = now.toLocaleTimeString("ms-MY", {
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit"
+          });
+
+          document.getElementById("date-time-text").textContent =
+              `${day}, ${date} ${month} ${year} | ${time}`;
+      }
+
+      updateClock();
+      setInterval(updateClock, 1000);
+  });
+  </script>
+
 
     // HELP MODAL
     const helpButton = document.getElementById("help-button");
@@ -2073,7 +2195,6 @@
         modal.onclick = e => { if (e.target === modal) modal.remove(); };
       }
     });
-  });
 
     // Header Buttons
     document.getElementById("faq-btn").onclick = function() {
@@ -2276,31 +2397,6 @@
     </div>
   </div>
 </div>
-
-  <script>
-    // Language switcher
-    const langBtns = document.querySelectorAll(".lang-btn");
-    langBtns.forEach(btn => {
-      btn.addEventListener("click", function () {
-        const lang = this.dataset.lang;
-        document.querySelectorAll("[data-lang-bm]").forEach(el => {
-          el.textContent = el.getAttribute(`data-lang-${lang}`);
-        });
-      });
-    });
-  </script>
-
-<script>
-    // Live Date-Time
-    function updateDateTime() {
-      const now = new Date();
-      document.getElementById("date-time-text").textContent = 
-        now.toLocaleDateString('ms-MY', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) +
-        ' | ' + now.toLocaleTimeString('ms-MY');
-    }
-    setInterval(updateDateTime, 1000);
-    updateDateTime();
-</script>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {

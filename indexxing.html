@@ -1,231 +1,721 @@
+<!DOCTYPE html>
+<html lang="ms">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JPS Kuala Nerus</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>JPS Kuala Nerus - Portal Rasmi</title>
+  <meta name="description" content="Laman Rasmi JPS Kuala Nerus. Info banjir, data hujan, aras sungai, dan rumah pam.">
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
   <style>
-    /* Reset */
-    body, h1, h2, h3, p, ul {
-      margin: 0;
-      padding: 0;
+    /* ================= GLOBAL STYLES ================= */
+    :root {
+      --primary-blue: #005bb5;
+      --secondary-blue: #0073e6;
+      --dark-blue: #003366;
+      --accent-gold: #ffd700;
+      --text-dark: #333;
+      --bg-light: #f4f7f6;
+      --success: #28a745;
+      --warning: #ffc107;
+      --danger: #dc3545;
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      line-height: 1.6;
-      background: #f2f9ff;
-      color: #333;
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      padding-top: 0;
     }
 
-    header {
-      background-color: #004d99;
+    /* ================= HEADER & DASHBOARD ================= */
+    .top-bar-dashboard {
+      background-color: var(--dark-blue);
       color: white;
-      padding: 1.5rem;
-      text-align: center;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1100;
     }
 
-    .logo-container {
+    .dashboard-metrics {
       display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
+      gap: 1.5rem;
+    }
+
+    .metric-item strong {
+      color: var(--accent-gold);
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 10px;
       align-items: center;
     }
 
-    .logo-container img {
-      height: 70px;
+    .search-box input {
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: none;
+      font-size: 0.85rem;
     }
 
-    nav {
-      background-color: #0073e6;
+    /* Main Branding Header */
+    .brand-header {
+      background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+      color: white;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .logo-area {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem;
-      padding: 1rem;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
     }
 
-    nav a {
+    .logo-area img {
+      height: 60px;
+      background: white;
+      padding: 2px;
+      border-radius: 4px;
+    }
+
+    .brand-header h1 {
+      margin-top: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ================= NAVIGATION (Sticky) ================= */
+    .main-nav {
+      background-color: var(--secondary-blue);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
+    }
+
+    .nav-menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    .nav-menu > li {
+      position: relative;
+    }
+
+    .nav-menu a {
+      display: block;
+      padding: 1rem 1.2rem;
       color: white;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 500;
+      transition: background 0.3s;
     }
 
-    nav a:hover {
-      text-decoration: underline;
+    .nav-menu a:hover {
+      background-color: var(--dark-blue);
+      color: var(--accent-gold);
     }
 
+    /* Dropdown Styling */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: var(--dark-blue); /* Fixed Color */
+      min-width: 220px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 1001;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content li a {
+      padding: 10px 15px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.95rem;
+    }
+    
+    .dropdown-content li a:hover {
+      background-color: var(--secondary-blue);
+    }
+
+    /* Mobile Nav Toggle */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    /* ================= SECTIONS & CONTENT ================= */
     .container {
       max-width: 1200px;
-      margin: auto;
-      padding: 2rem;
+      margin: 2rem auto;
+      padding: 0 1rem;
     }
 
     section {
-      margin-bottom: 3rem;
+      background: white;
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
+    h2 {
+      color: var(--primary-blue);
+      border-bottom: 3px solid var(--accent-gold);
+      display: inline-block;
+      padding-bottom: 5px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Alert Box */
+    .alert-box {
+      background-color: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    /* Map */
     #map {
-      height: 400px;
+      height: 500px;
       width: 100%;
-      border-radius: 10px;
+      border-radius: 8px;
+      z-index: 1;
     }
 
-    table {
+    /* Tables */
+    .data-table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 1rem;
     }
-
-    th, td {
-      padding: 0.8rem;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-
-    th {
-      background-color: #0073e6;
-      color: white;
-    }
-
-    footer {
-      background-color: #004d99;
-      color: white;
-      padding: 2rem 1rem;
+    .data-table th, .data-table td {
+      padding: 12px;
       text-align: center;
+      border-bottom: 1px solid #ddd;
     }
-
-    .map-toggle-btn, #toggleView {
-      background: #0073e6;
+    .data-table th {
+      background-color: var(--secondary-blue);
       color: white;
-      border: none;
-      padding: 0.6rem 1rem;
-      cursor: pointer;
-      border-radius: 5px;
+    }
+    .status-badge {
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    /* Pump House Cards */
+    .pump-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .pump-card {
+      background: #f8f9fa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .pump-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .pump-icon {
+      font-size: 2.5rem;
       margin-bottom: 1rem;
+      display: block;
     }
 
-    .map-toggle-btn:hover {
-      background-color: #005bb5;
+    /* Footer */
+    footer {
+      background-color: var(--dark-blue);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+    }
+    footer a { color: var(--accent-gold); text-decoration: none; }
+
+    /* Modals */
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 2000; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      background-color: rgba(0,0,0,0.6); 
+    }
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #aaa;
     }
 
+    /* Responsive */
     @media (max-width: 768px) {
-      nav {
+      .nav-menu {
+        display: none;
         flex-direction: column;
-        align-items: center;
+        width: 100%;
+        background: var(--secondary-blue);
       }
-
-      .logo-container {
-        flex-direction: column;
-      }
-
-      table {
-        font-size: 0.9rem;
-      }
+      .nav-menu.active { display: flex; }
+      .nav-toggle { display: block; }
+      .dropdown-content { position: static; box-shadow: none; padding-left: 20px; }
+      .dashboard-metrics { display: none; } /* Hide metrics on very small screens, keep ticker in body */
+      .brand-header h1 { font-size: 1.1rem; }
     }
   </style>
 </head>
 
-<header>
-  <div class="logo-container">
-    <img src="jpslogo.png" alt="Logo JPS Kuala Nerus">
-    <img src="trglogo.png" alt="Logo SUK Terengganu">
+<body>
+
+  <div class="top-bar-dashboard">
+    <div id="live-datetime">--/--/---- --:-- --</div>
+    
+    <div class="dashboard-metrics d-none d-md-flex">
+      <span class="metric-item">🌧️ Hujan (Purata): <strong id="dash-rain">--</strong></span>
+      <span class="metric-item">🌊 Sg. Nerus: <strong id="dash-river">--</strong></span>
+      <span class="metric-item">🌙 Air Pasang: <strong id="dash-tide">--</strong></span>
+    </div>
+
+    <div class="top-actions">
+      <button class="btn btn-sm btn-outline-light" onclick="openModal('contactModal')">📞 Hubungi</button>
+      <div class="search-box">
+        <input type="text" placeholder="Cari..." id="searchInput">
+      </div>
+    </div>
   </div>
-  <h1>JABATAN PENGAIRAN DAN SALIRAN DAERAH KUALA NERUS</h1>
-</header>
 
-<nav>
-  <a href="#about">Tentang</a>
-  <a href="#services">Perkhidmatan</a>
-  <a href="#map-section">Peta</a>
-  <a href="#hydrology-data">Taburan Hujan</a>
-  <a href="#repositori-dokumen">Dokumen</a>
-  <a href="#contact">Hubungi</a>
-</nav>
+  <header class="brand-header">
+    <div class="logo-area">
+      <img src="https://jpsweb.terengganu.gov.my/images/logo/logo_jps.png" alt="Logo JPS">
+      <img src="https://jpsweb.terengganu.gov.my/images/logo/logo_suk.png" alt="Logo Terengganu">
+    </div>
+    <h1>Jabatan Pengairan dan Saliran<br>Daerah Kuala Nerus</h1>
+  </header>
 
-<footer>
-  <p>&copy; 2025 Jabatan Pengairan dan Saliran Kuala Nerus, Terengganu</p>
-  <p>Hubungi: <a href="mailto:jps.kualanerus@terengganu.gov.my" style="color: #aad4ff;">jps.kualanerus@terengganu.gov.my</a></p>
-</footer>
+  <nav class="main-nav">
+    <div class="nav-container">
+      <button class="nav-toggle" onclick="toggleMenu()">☰</button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#dashboard-laporan">Utama</a></li>
+        <li class="dropdown">
+          <a href="#">Profil ▼</a>
+          <ul class="dropdown-content">
+            <li><a href="#about">Mengenai Kami</a></li>
+            <li><a href="#carta">Carta Organisasi</a></li>
+          </ul>
+        </li>
+        <li><a href="#map-section">Peta Interaktif</a></li>
+        <li><a href="#data-hujan">Data Hujan</a></li>
+        <li><a href="#aras-sungai">Aras Sungai</a></li>
+        <li><a href="#rumah-pam">Rumah Pam</a></li>
+        <li class="dropdown">
+          <a href="#">Perkhidmatan ▼</a>
+          <ul class="dropdown-content">
+            <li><a href="#tender">Tender & Sebut Harga</a></li>
+            <li><a href="#osc">Laporan OSC</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Map Logic
-    const mapContainer = document.getElementById("mapContainer");
-    const toggleMapBtn = document.getElementById("toggleMap");
-    const map = L.map("map").setView([5.39448, 103.06308], 13);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-    L.marker([5.39448, 103.06308]).addTo(map).bindPopup("Pejabat JPS Kuala Nerus").openPopup();
-    L.marker([5.40788, 103.0886]).addTo(map).bindPopup("Projek Tebatan Banjir UMT");
-    toggleMapBtn.addEventListener("click", () => {
-      const isHidden = mapContainer.style.display === "none";
-      mapContainer.style.display = isHidden ? "block" : "none";
-      toggleMapBtn.textContent = isHidden ? "Sembunyikan Peta" : "Lihat Peta";
-      if (!isHidden) setTimeout(() => map.invalidateSize(), 200);
-    });
+  <div class="container">
 
-    // Rainfall API
-    const API_URL = "documents/rainfall-data.json";
-    const tableBody = document.querySelector("#rainfallTable tbody");
-    const toggleBtn = document.getElementById("toggleView");
-    const chartView = document.getElementById("rainfall-chart-view");
-    const tableView = document.getElementById("rainfall-table-view");
-    let chart;
+    <div class="alert-box">
+      <div style="font-size: 1.5rem;">⚠️</div>
+      <div>
+        <h4 style="margin:0; color:#856404;">Amaran Cuaca Buruk (Kategori Jingga 🟠)</h4>
+        <p style="margin:5px 0 0;">
+          Amaran hujan lebat berterusan sehingga <strong>29 November 2025</strong>. 
+          Risiko ombak tinggi (Kategori Kuning) di pesisir pantai. 
+          <br><strong>Risiko Banjir:</strong> Lembangan Sungai Tepoh & Sungai Tok Jiring.
+        </p>
+      </div>
+    </div>
 
-    async function fetchRainfallData() {
-      try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        tableBody.innerHTML = "";
-        data.forEach(station => {
-          const row = `<tr><td>${station.station}</td><td>${station.rainfall}</td><td>${station.last_update}</td></tr>`;
-          tableBody.innerHTML += row;
-        });
-        const labels = data.map(s => s.station);
-        const values = data.map(s => s.rainfall);
-        const updates = data.map(s => s.last_update);
+    <section id="dashboard-laporan">
+      <h2>📊 Laporan Semasa (29 November 2025 - 10:00 AM)</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card text-center mb-3 border-primary">
+            <div class="card-header bg-primary text-white">Taburan Hujan</div>
+            <div class="card-body">
+              <h3 id="main-rain-val">--</h3>
+              <p>Stesen Tertinggi: UMT (8.5mm)</p>
+              <span class="badge bg-warning text-dark">Waspada 🟡</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center mb-3 border-danger">
+            <div class="card-header bg-danger text-white">Aras Sungai (Hulu)</div>
+            <div class="card-body">
+              <h3 id="main-river-val">--</h3>
+              <p>Sg. Nerus (Kg. Langkap)</p>
+              <span class="badge bg-danger">BAHAYA 🔴</span>
+              <p class="small text-muted mt-2">Trend: Menaik ⬆️</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center mb-3 border-info">
+            <div class="card-header bg-info text-white">Air Pasang</div>
+            <div class="card-body">
+              <h3 id="main-tide-val">--</h3>
+              <p>Stesen Kuala Terengganu</p>
+              <span class="badge bg-success">Terkawal 🟢</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        if (chart) chart.destroy();
-        const ctx = document.getElementById("rainChart").getContext("2d");
-        chart = new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: 'Jumlah Hujan (mm)',
-              data: values,
-              backgroundColor: '#0073e6'
-            }]
-          },
-          options: {
-            plugins: {
-              tooltip: {
-                callbacks: {
-                  afterLabel: (ctx) => `Dikemaskini: ${updates[ctx.dataIndex]}`
-                }
-              }
-            },
-            scales: { y: { beginAtZero: true } }
-          }
-        });
-      } catch (err) {
-        tableBody.innerHTML = "<tr><td colspan='3'>Gagal memuatkan data.</td></tr>";
-        console.error("API Error:", err);
+    <section id="map-section">
+      <h2>🗺️ Peta Lokasi & Status</h2>
+      <div id="map"></div>
+      <small class="text-muted">Peta menunjukkan lokasi stesen hujan, aras air, dan rumah pam.</small>
+    </section>
+
+    <section id="data-hujan">
+      <h2>🌧️ Laporan Hujan (10 Jam Terakhir)</h2>
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Nama Stesen</th>
+              <th>Bacaan (mm)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="rain-table-body">
+            </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="aras-sungai">
+      <h2>🌊 Laporan Aras Sungai</h2>
+      <div class="alert alert-danger">
+        <strong>PERHATIAN:</strong> Bacaan di hulu (Kg Langkap) telah melepasi paras bahaya (21.65m). Risiko limpahan air ke kawasan hilir (Tepoh & Tok Jiring).
+      </div>
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Nama Stesen</th>
+              <th>Aras Semasa (m)</th>
+              <th>Trend</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="river-table-body">
+            </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="rumah-pam">
+      <h2>⚙️ Status Semasa Rumah Pam</h2>
+      <p>Pemantauan operasi rumah pam bagi mengurangkan risiko banjir genang di kawasan kritikal.</p>
+      
+      <div class="pump-grid">
+        <div class="pump-card">
+          <span class="pump-icon">🏭</span>
+          <h4>Rumah Pam Tok Jiring</h4>
+          <p class="text-muted">Lokasi: Tok Jiring</p>
+          <hr>
+          <div id="pump-tok-jiring-status">
+            </div>
+          <p class="mt-2 small">Bersedia untuk operasi jika paras air Sg. Nerus meningkat.</p>
+        </div>
+
+        <div class="pump-card">
+          <span class="pump-icon">🏗️</span>
+          <h4>Rumah Pam Pusu</h4>
+          <p class="text-muted">Lokasi: Gong Badak/Pusu</p>
+          <hr>
+          <div id="pump-pusu-status">
+            </div>
+          <p class="mt-2 small">Operasi normal. Tiada kerosakan dilaporkan.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>Mengenai JPS Kuala Nerus</h2>
+      <p>JPS Kuala Nerus bertanggungjawab dalam pengurusan sumber air, tebatan banjir, dan saliran bandar. Misi kami adalah memastikan kesejahteraan penduduk melalui pengurusan lembangan sungai yang cekap.</p>
+      <div class="text-center mt-3">
+        <img src="images/carta-organisasi.png" alt="Carta Organisasi (Placeholder)" style="max-width:100%; height:auto; border:1px solid #ddd;">
+        <br><small>Carta Organisasi (Klik untuk muat turun PDF)</small>
+      </div>
+    </section>
+
+  </div> <footer>
+    <p>&copy; 2025 Jabatan Pengairan dan Saliran Daerah Kuala Nerus.</p>
+    <p>
+      <a href="#">Dasar Privasi</a> | <a href="#">Penafian</a> | <a href="#" onclick="openModal('contactModal')">Hubungi Kami</a>
+    </p>
+  </footer>
+
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('contactModal')">&times;</span>
+      <h3>📞 Hubungi Kami</h3>
+      <p><strong>JPS Daerah Kuala Nerus</strong></p>
+      <p>Alamat: Bangunan Gunasama, Kompleks Pentadbiran Bandar Al Wathiqu Billah, 21300 Kuala Nerus.</p>
+      <p>Tel: +609-665 3010</p>
+      <p>Email: jpskualanerus@terengganu.gov.my</p>
+      <button class="btn btn-primary w-100" onclick="closeModal('contactModal')">Tutup</button>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <script>
+    /* =========================================
+       1. CENTRALIZED DATA (SOURCE OF TRUTH)
+       Based on Report: 29 NOVEMBER 2025, 10:00 AM
+    ========================================= */
+    const latestReport = {
+      meta: {
+        date: "29 November 2025",
+        time: "10:00 AM",
+        warningLevel: "Orange (Jingga)"
+      },
+      rain: {
+        summary: "1.0 - 9.0 mm",
+        stations: [
+          { name: "Stn S.k Kg. Gemuruh", val: 1.0, status: "Normal" },
+          { name: "Stn UMT", val: 8.5, status: "Normal" },
+          { name: "Stn Kg. Jeram", val: 2.0, status: "Normal" },
+          { name: "Stn Kg Padang Kemunting", val: 6.0, status: "Normal" },
+          { name: "Stn Bkt Tumbuh", val: 8.5, status: "Normal" }
+        ]
+      },
+      river: {
+        hulu: { name: "Sg. Nerus (Hulu - Kg Langkap)", val: 21.65, status: "Bahaya", trend: "Menaik" }, // From text info
+        stations: [
+          { name: "Sg. Nerus (Kg. Jeram)", val: 3.41, status: "Amaran", trend: "Menurun", coords: [5.39, 103.05] },
+          { name: "Padang Kemunting", val: 2.59, status: "Normal", trend: "Menurun", coords: [5.41, 103.08] }
+        ]
+      },
+      tide: {
+        current: 1.96,
+        max: 0.97, // As per report text (though logically current is higher here)
+        location: "Kuala Terengganu"
+      },
+      pumps: {
+        tokJiring: { status: "Siaga", color: "orange" }, // Inferred from "Risiko ke Tok Jiring"
+        pusu: { status: "Operasi", color: "green" }
+      }
+    };
+
+    /* =========================================
+       2. UI UPDATER FUNCTIONS
+    ========================================= */
+    
+    // Update Header & Dashboard
+    function updateDashboard() {
+      // Date Time
+      document.getElementById('live-datetime').textContent = `${latestReport.meta.date} | ${latestReport.meta.time}`;
+      
+      // Top Bar Metrics
+      document.getElementById('dash-rain').textContent = latestReport.rain.summary;
+      document.getElementById('dash-river').textContent = latestReport.river.stations[0].val + "m";
+      document.getElementById('dash-tide').textContent = latestReport.tide.current + "m";
+
+      // Main Card Values
+      document.getElementById('main-rain-val').textContent = latestReport.rain.summary;
+      document.getElementById('main-river-val').textContent = latestReport.river.hulu.val + "m";
+      document.getElementById('main-tide-val').textContent = latestReport.tide.current + "m";
+    }
+
+    // Populate Rain Table
+    function loadRainTable() {
+      const tbody = document.getElementById('rain-table-body');
+      let html = '';
+      latestReport.rain.stations.forEach(stn => {
+        html += `
+          <tr>
+            <td style="text-align:left;">${stn.name}</td>
+            <td>${stn.val}</td>
+            <td><span class="status-badge bg-success">🟢 ${stn.status}</span></td>
+          </tr>
+        `;
+      });
+      tbody.innerHTML = html;
+    }
+
+    // Populate River Table
+    function loadRiverTable() {
+      const tbody = document.getElementById('river-table-body');
+      let html = '';
+      
+      // Add the Danger Station (Hulu) first manually
+      html += `
+        <tr style="background-color: #ffe6e6;">
+          <td style="text-align:left;"><strong>${latestReport.river.hulu.name}</strong></td>
+          <td><strong>${latestReport.river.hulu.val}</strong></td>
+          <td>⬆️ ${latestReport.river.hulu.trend}</td>
+          <td><span class="status-badge bg-danger">🔴 ${latestReport.river.hulu.status}</span></td>
+        </tr>
+      `;
+
+      // Add normal stations
+      latestReport.river.stations.forEach(stn => {
+        const badgeColor = stn.status === 'Amaran' ? 'bg-warning text-dark' : 'bg-success';
+        const icon = stn.status === 'Amaran' ? '🟡' : '🟢';
+        const trendIcon = stn.trend === 'Menurun' ? '⬇️' : '⬆️';
+        
+        html += `
+          <tr>
+            <td style="text-align:left;">${stn.name}</td>
+            <td>${stn.val}</td>
+            <td>${trendIcon} ${stn.trend}</td>
+            <td><span class="status-badge ${badgeColor}">${icon} ${stn.status}</span></td>
+          </tr>
+        `;
+      });
+      tbody.innerHTML = html;
+    }
+
+    // Update Pump Status
+    function updatePumpStatus() {
+      // Tok Jiring
+      const tj = latestReport.pumps.tokJiring;
+      const tjHtml = `<button class="btn btn-lg w-100" style="background-color:${tj.color}; color:white; pointer-events:none;">Status: ${tj.status.toUpperCase()}</button>`;
+      document.getElementById('pump-tok-jiring-status').innerHTML = tjHtml;
+
+      // Pusu
+      const pusu = latestReport.pumps.pusu;
+      const pusuHtml = `<button class="btn btn-lg w-100" style="background-color:${pusu.color}; color:white; pointer-events:none;">Status: ${pusu.status.toUpperCase()}</button>`;
+      document.getElementById('pump-pusu-status').innerHTML = pusuHtml;
+    }
+
+    /* =========================================
+       3. MAP INITIALIZATION
+    ========================================= */
+    function initMap() {
+      // Center on Kuala Nerus
+      const map = L.map('map').setView([5.40, 103.09], 11);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
+
+      // Define Icons
+      const greenIcon = new L.Icon({iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34]});
+      const yellowIcon = new L.Icon({iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-gold.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34]});
+      const redIcon = new L.Icon({iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34]});
+
+      // Add River Markers
+      latestReport.river.stations.forEach(stn => {
+        const icon = stn.status === 'Amaran' ? yellowIcon : (stn.status === 'Bahaya' ? redIcon : greenIcon);
+        L.marker(stn.coords, {icon: icon})
+         .addTo(map)
+         .bindPopup(`<b>${stn.name}</b><br>Aras: ${stn.val}m<br>Status: ${stn.status}`);
+      });
+
+      // Add Pump Markers (Approx Locations)
+      L.marker([5.41, 103.07], {icon: yellowIcon}).addTo(map).bindPopup("<b>Rumah Pam Tok Jiring</b><br>Status: Siaga");
+      L.marker([5.39, 103.05], {icon: greenIcon}).addTo(map).bindPopup("<b>Rumah Pam Pusu</b><br>Status: Operasi");
+    }
+
+    /* =========================================
+       4. GENERAL UTILITIES
+    ========================================= */
+    function toggleMenu() {
+      document.getElementById("navMenu").classList.toggle("active");
+    }
+
+    function openModal(id) {
+      document.getElementById(id).style.display = "block";
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    // Close modal if clicking outside
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = "none";
       }
     }
 
-    toggleBtn.addEventListener("click", () => {
-      const isTableVisible = tableView.style.display !== "none";
-      tableView.style.display = isTableVisible ? "none" : "block";
-      chartView.style.display = isTableVisible ? "block" : "none";
-      toggleBtn.textContent = isTableVisible ? "Tukar kepada Jadual 📋" : "Tukar kepada Carta 📈";
+    /* =========================================
+       5. RUN ON LOAD
+    ========================================= */
+    document.addEventListener("DOMContentLoaded", () => {
+      updateDashboard();
+      loadRainTable();
+      loadRiverTable();
+      updatePumpStatus();
+      initMap();
     });
 
-    fetchRainfallData();
-    setInterval(fetchRainfallData, 300000); // Auto-refresh every 5 minutes
-  });
-</script>
+  </script>
+</body>
+</html>
