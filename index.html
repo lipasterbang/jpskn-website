@@ -11,12 +11,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* ================= MODERN THEME (INSPIRED BY REFERENCE) ================= */
+    /* ================= MODERN THEME ================= */
     :root {
       --jps-blue: #004a99;
       --jps-light-blue: #0073e6;
       --accent-cyan: #00d4ff;
       --text-dark: #2c3e50;
+      --tiktok-black: #000000;
+      --fb-blue: #1877F2;
     }
 
     body {
@@ -25,128 +27,137 @@
       color: var(--text-dark);
     }
 
-    /* --- 1. CLEAN HEADER --- */
-    .navbar {
-      background: #ffffff;
-      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-      padding: 1rem 0;
-    }
-    .navbar-brand {
-      font-weight: 700;
-      color: var(--jps-blue);
-      font-size: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    /* Navbar & Hero */
+    .navbar { background: #ffffff; box-shadow: 0 2px 15px rgba(0,0,0,0.05); padding: 1rem 0; }
+    .navbar-brand { font-weight: 700; color: var(--jps-blue); font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
     .navbar-brand img { height: 50px; }
-    .nav-link {
-      font-weight: 600;
-      color: #555 !important;
-      margin: 0 10px;
-      text-transform: uppercase;
-      font-size: 0.9rem;
-      transition: color 0.3s;
-    }
+    .nav-link { font-weight: 600; color: #555 !important; margin: 0 10px; text-transform: uppercase; font-size: 0.9rem; transition: color 0.3s; }
     .nav-link:hover { color: var(--jps-light-blue) !important; }
+    
     .btn-nav-cta {
       background-color: var(--jps-blue);
       color: white !important;
       padding: 0.5rem 1.2rem;
       border-radius: 4px;
+      cursor: pointer;
     }
     .btn-nav-cta:hover { background-color: #003366; }
 
-    /* --- 2. HERO SECTION (Blue Gradient like Reference) --- */
     .hero-section {
       background: linear-gradient(135deg, #004a99 0%, #0073e6 100%);
-      padding: 80px 0 120px 0; /* Extra padding bottom for the floating card */
+      padding: 80px 0 120px 0;
       color: white;
-      position: relative;
-      overflow: hidden;
     }
-    .hero-title {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-    .hero-subtitle {
-      font-size: 1.2rem;
-      opacity: 0.9;
-      margin-bottom: 2rem;
-    }
+    .hero-title { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
     
-    /* Floating Action Card (The white box in your reference) */
+    /* Action Card (Now Search Bar) */
     .action-card {
       background: white;
-      padding: 2rem;
-      border-radius: 8px;
+      padding: 2.5rem;
+      border-radius: 12px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      margin-top: -60px; /* Pulls it up into the hero */
+      margin-top: -60px;
       position: relative;
       z-index: 10;
     }
-    .action-label {
-      font-weight: 700;
-      color: var(--jps-blue);
+
+    /* --- PROFILE SECTION CLASS --- */
+    .profile-section {
+      background: #ffffff;
+      padding: 4rem 0;
+      border-bottom: 1px solid #eee;
+    }
+    .org-chart-container {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .org-chart-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .org-chart-img:hover {
+      transform: scale(1.02);
+    }
+
+    /* --- SERVICES SECTION CLASS --- */
+    .services-section {
+      padding: 4rem 0;
+      background-color: #f1f5f9;
+    }
+    .service-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+      height: 100%;
+      border-top: 4px solid var(--jps-blue);
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .service-icon {
+      font-size: 2.5rem;
+      color: var(--jps-light-blue);
       margin-bottom: 1rem;
     }
 
-    /* --- 3. MAP STYLING --- */
-    #map {
-      height: 500px;
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      z-index: 1;
+    /* Map Styling */
+    #map { height: 500px; width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .legend { background: white; padding: 10px; border-radius: 5px; box-shadow: 0 0 15px rgba(0,0,0,0.2); line-height: 1.5; }
+    .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
+
+    /* Data Classes */
+    .taburan-hujan-section {
+      background: #e3f2fd;
+      border-left: 5px solid var(--jps-light-blue);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
     }
-    
-    /* Map Legend Custom Style */
-    .legend {
-      background: white;
-      padding: 10px;
-      line-height: 1.5;
-      color: #555;
-      border-radius: 5px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    }
-    .legend i {
-      width: 18px;
-      height: 18px;
-      float: left;
-      margin-right: 8px;
-      opacity: 0.7;
+    .aras-air-section {
+      background: #fff3cd;
+      border-left: 5px solid #ffc107;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
     }
 
-    /* --- 4. CLEAN FOOTER --- */
-    footer {
-      background-color: #0b1120; /* Dark Navy */
-      color: #a0aec0;
-      padding: 4rem 0 2rem 0;
-      margin-top: 4rem;
-    }
-    footer h5 { color: white; font-weight: 700; margin-bottom: 1.5rem; }
+    /* Social Media */
+    .social-header { font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
+    .social-box { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); height: 100%; }
+    
+    /* Footer */
+    footer { background-color: #0b1120; color: #a0aec0; padding: 4rem 0 2rem 0; margin-top: 4rem; }
     footer a { color: #a0aec0; text-decoration: none; display: block; margin-bottom: 0.5rem; }
     footer a:hover { color: var(--accent-cyan); }
-    .footer-bottom {
-      border-top: 1px solid #2d3748;
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      text-align: center;
-      font-size: 0.9rem;
-    }
+    .footer-bottom { border-top: 1px solid #2d3748; margin-top: 3rem; padding-top: 1.5rem; text-align: center; }
+
+    /* Custom Modal */
+    .modal-header { background: var(--jps-blue); color: white; }
+    .btn-close { filter: invert(1); }
   </style>
 </head>
 
 <body>
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ms_MY/sdk.js#xfbml=1&version=v18.0" nonce="FbPageSDK"></script>
 
   <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container">
       <a class="navbar-brand" href="#">
         <img src="jpslogo.png" alt="JPS Logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Jps_logo.png/600px-Jps_logo.png'">
         <div>
-          <div style="font-size:0.8em; line-height:1; color:#777;">DAERAH</div>
-          KUALA NERUS
+          <div style="font-size:0.8em; line-height:1; color:#777;">JABATAN PENGAIRAN DAN SALIRAN</div>
+          DAERAH KUALA NERUS
         </div>
       </a>
       
@@ -157,18 +168,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item"><a class="nav-link" href="#profil">Profil</a></li>
-          <li class="nav-item"><a class="nav-link" href="#peta">Peta Interaktif</a></li>
-          <li class="nav-item"><a class="nav-link" href="#data">Data Hujan</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Perkhidmatan</a>
-            <ul class="dropdown-menu border-0 shadow">
-              <li><a class="dropdown-item" href="#">Tender & Sebut Harga</a></li>
-              <li><a class="dropdown-item" href="#">Aduan Awam</a></li>
-              <li><a class="dropdown-item" href="#">Laporan OSC</a></li>
-            </ul>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="#services">Perkhidmatan</a></li>
+          <li class="nav-item"><a class="nav-link" href="#peta">Peta</a></li>
+          <li class="nav-item"><a class="nav-link" href="#data">Data</a></li>
           <li class="nav-item ms-lg-3">
-            <a class="nav-link btn-nav-cta" href="#hubungi">Hubungi Kami</a>
+            <button class="btn btn-nav-cta" data-bs-toggle="modal" data-bs-target="#contactModal">
+              Hubungi Kami
+            </button>
           </li>
         </ul>
       </div>
@@ -178,194 +184,308 @@
   <section class="hero-section text-center">
     <div class="container">
       <h1 class="hero-title">Pengurusan Air & Saliran Lestari.</h1>
-      <p class="hero-subtitle">Meningkatkan kualiti hidup rakyat melalui pengurusan sumber air dan tebatan banjir yang efisien di Kuala Nerus.</p>
+      <p class="hero-subtitle">Meningkatkan kualiti hidup rakyat melalui pengurusan sumber air yang efisien.</p>
     </div>
   </section>
 
   <div class="container">
     <div class="action-card">
-      <div class="row align-items-center">
-        <div class="col-lg-4 mb-3 mb-lg-0">
-          <div class="action-label">🔍 Carian Pantas Data</div>
-          <p class="mb-0 text-muted small">Dapatkan info terkini status sungai & hujan.</p>
-        </div>
+      <div class="row justify-content-center align-items-center">
         <div class="col-lg-8">
-          <form class="row g-2">
-            <div class="col-md-5">
-              <select class="form-select border-primary" style="padding: 0.8rem;">
-                <option selected>Pilih Kawasan...</option>
-                <option>Sg. Nerus</option>
-                <option>Tok Jembal</option>
-                <option>Batu Rakit</option>
-              </select>
-            </div>
-            <div class="col-md-4">
-              <select class="form-select border-primary" style="padding: 0.8rem;">
-                <option selected>Jenis Data...</option>
-                <option>Aras Air Sungai</option>
-                <option>Taburan Hujan</option>
-              </select>
-            </div>
-            <div class="col-md-3">
-              <button type="button" class="btn btn-primary w-100 fw-bold" style="padding: 0.8rem;">Lihat Data</button>
-            </div>
+          <h5 class="text-center mb-3 text-muted fw-bold">Cari Maklumat (Tender, Banjir, Direktori...)</h5>
+          <form class="d-flex shadow-sm rounded overflow-hidden">
+            <input class="form-control border-0 p-3" type="search" placeholder="Taip kata kunci carian di sini..." aria-label="Search" style="font-size: 1.1rem;">
+            <button class="btn btn-primary px-4 fw-bold" type="submit" style="background-color: var(--jps-blue);">
+              <i class="fas fa-search"></i> CARI
+            </button>
           </form>
         </div>
       </div>
     </div>
   </div>
 
-  <section id="peta" class="py-5">
+  <section id="profil" class="profile-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h6 class="text-primary fw-bold text-uppercase">Profil Jabatan</h6>
+          <h2 class="fw-bold mb-4" style="color: var(--jps-blue);">JPS Kuala Nerus</h2>
+          <p class="lead">"Jayakan Perkhidmatan Sempurna"</p>
+          <p class="text-muted">
+            Jabatan Pengairan dan Saliran (JPS) Daerah Kuala Nerus komited memastikan pengurusan sumber air, sistem saliran bandar, dan tebatan banjir dilaksanakan dengan efisien demi kesejahteraan penduduk.
+          </p>
+          <ul class="list-unstyled mt-3">
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Pengurusan Sungai & Koridor</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Program Tebatan Banjir</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Ramalan & Amaran Banjir</li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="org-chart-container shadow-sm">
+            <h5 class="fw-bold mb-3">Carta Organisasi 2025</h5>
+            <img src="carta-organisasi-2025.png" alt="Carta Organisasi JPS Kuala Nerus 2025" class="org-chart-img mb-3" onerror="this.src='https://via.placeholder.com/600x400?text=Carta+Organisasi+Placeholder'">
+            
+            <br>
+            <a href="CARTA ORGANISASI JPS KUALA NERUS 2025.pdf" class="btn btn-outline-primary btn-sm" download>
+              <i class="fas fa-file-pdf me-2"></i> Muat Turun Carta (PDF)
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="services-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h6 class="text-primary fw-bold text-uppercase">Perkhidmatan Kami</h6>
+        <h2 class="fw-bold" style="color: var(--jps-blue);">Apa Yang Kami Tawarkan</h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="service-card text-center">
+            <div class="service-icon"><i class="fas fa-file-contract"></i></div>
+            <h4 class="fw-bold mb-3">Tender & Sebut Harga</h4>
+            <p class="text-muted mb-4">Semak iklan tawaran tender dan sebut harga terkini yang dikeluarkan oleh JPS Kuala Nerus.</p>
+            <a href="#" class="btn btn-sm btn-outline-primary">Lihat Iklan</a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="service-card text-center">
+            <div class="service-icon"><i class="fas fa-headset"></i></div>
+            <h4 class="fw-bold mb-3">Aduan Awam</h4>
+            <p class="text-muted mb-4">Salurkan aduan berkaitan kerosakan struktur, banjir kilat, atau masalah saliran di kawasan anda.</p>
+            <a href="#" class="btn btn-sm btn-outline-primary">Buat Aduan</a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="service-card text-center">
+            <div class="service-icon"><i class="fas fa-clipboard-check"></i></div>
+            <h4 class="fw-bold mb-3">Laporan OSC</h4>
+            <p class="text-muted mb-4">Semakan status ulasan teknikal bagi projek pembangunan di bawah One Stop Centre (OSC).</p>
+            <a href="#" class="btn btn-sm btn-outline-primary">Semak Laporan</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="peta" class="py-5 bg-white">
     <div class="container">
       <div class="text-center mb-4">
         <h2 class="fw-bold text-primary">🗺️ Peta Interaktif & Zon Hidrologi</h2>
-        <p class="text-muted">Paparan lokasi stesen, siren, dan zon risiko banjir di sekitar Kuala Nerus.</p>
       </div>
-
       <div id="map"></div>
     </div>
   </section>
 
-  <section id="profil" class="py-5 bg-white">
+  <section id="data" class="py-5">
     <div class="container">
-      <div class="row align-items-center">
+      <h2 class="fw-bold text-center mb-5" style="color: var(--jps-blue);">Status Hidrologi Terkini</h2>
+      
+      <div class="row">
         <div class="col-md-6">
-          <h2 class="fw-bold mb-3" style="color: var(--jps-blue);">Tentang JPS Kuala Nerus</h2>
-          <p class="lead">"Jayakan Perkhidmatan Sempurna"</p>
-          <p class="text-muted">Jabatan Pengairan dan Saliran (JPS) Daerah Kuala Nerus komited memastikan pengurusan sumber air, sistem saliran bandar, dan tebatan banjir dilaksanakan dengan efisien demi kesejahteraan penduduk.</p>
-          <a href="#" class="btn btn-outline-primary mt-3">Baca Profil Penuh</a>
+          <div class="taburan-hujan-section shadow-sm">
+            <h4 class="fw-bold mb-3"><i class="fas fa-cloud-rain text-primary"></i> Taburan Hujan</h4>
+            <table class="table table-borderless">
+              <thead><tr><th>Stesen</th><th class="text-end">Bacaan (mm)</th></tr></thead>
+              <tbody>
+                <tr><td>Stesen Gong Badak</td><td class="text-end fw-bold">22 mm</td></tr>
+                <tr><td>Stesen Batu Rakit</td><td class="text-end fw-bold">8 mm</td></tr>
+              </tbody>
+            </table>
+            <small class="text-muted">Kemaskini terakhir: 10 minit lepas</small>
+          </div>
         </div>
-        <div class="col-md-6 mt-4 mt-md-0">
-          <img src="https://images.unsplash.com/photo-1582297805177-33a598006d9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sungai" class="img-fluid rounded shadow-lg">
+
+        <div class="col-md-6">
+          <div class="aras-air-section shadow-sm">
+            <h4 class="fw-bold mb-3"><i class="fas fa-water text-warning"></i> Aras Air Sungai</h4>
+            <table class="table table-borderless">
+              <thead><tr><th>Sungai</th><th>Status</th><th class="text-end">Aras (m)</th></tr></thead>
+              <tbody>
+                <tr><td>Sg. Nerus</td><td><span class="badge bg-danger">Bahaya</span></td><td class="text-end fw-bold">4.50 m</td></tr>
+                <tr><td>Sg. Tepoh</td><td><span class="badge bg-success">Normal</span></td><td class="text-end fw-bold">1.20 m</td></tr>
+              </tbody>
+            </table>
+            <small class="text-muted">Kemaskini terakhir: 5 minit lepas</small>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <footer id="hubungi">
+  <section id="sosial" class="py-5" style="background: #f1f5f9;">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h2 class="fw-bold" style="color: var(--jps-blue);">📢 Media Sosial Rasmi</h2>
+        <p class="text-muted">Ikuti perkembangan terkini JPS Kuala Nerus di platform digital.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="social-box">
+            <div class="social-header" style="color: var(--fb-blue);">
+              <i class="fab fa-facebook fa-2x"></i> Facebook Rasmi
+            </div>
+            <div class="fb-page" 
+                 data-href="https://www.facebook.com/JPSKUALANERUS" 
+                 data-tabs="timeline" 
+                 data-width="500" 
+                 data-height="500" 
+                 data-small-header="false" 
+                 data-adapt-container-width="true" 
+                 data-hide-cover="false" 
+                 data-show-facepile="true">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="social-box">
+            <div class="social-header" style="color: var(--tiktok-black);">
+              <i class="fab fa-tiktok fa-2x"></i> TikTok Rasmi
+            </div>
+            <div class="text-center py-5">
+              <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok" style="width: 150px; margin-bottom: 20px;">
+              <h5 class="fw-bold">Lihat video operasi & projek terkini.</h5>
+              <p>Ikuti kami di TikTok untuk info pantas.</p>
+              <a href="https://www.tiktok.com/@jpskualanerus" target="_blank" class="btn btn-dark btn-lg px-4">
+                <i class="fab fa-tiktok"></i> Ikuti @jpskualanerus
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
     <div class="container">
       <div class="row">
         <div class="col-lg-4 mb-4">
           <h5 class="text-white">JPS KUALA NERUS</h5>
           <p>Kompleks Pentadbiran Bandar Al Wathiqu Billah,<br>21300 Kuala Nerus,<br>Terengganu Darul Iman.</p>
-          <p><i class="fas fa-phone me-2"></i> 09-665 3010<br><i class="fas fa-envelope me-2"></i> jpskn@terengganu.gov.my</p>
+          <button class="btn btn-outline-light btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#contactModal">
+            <i class="fas fa-map-marker-alt"></i> Lihat Lokasi
+          </button>
         </div>
-
         <div class="col-lg-2 col-6 mb-4">
           <h5>Pautan</h5>
-          <a href="#">Profil</a>
-          <a href="#">Perkhidmatan</a>
-          <a href="#">Berita</a>
-          <a href="#">Hubungi</a>
+          <a href="#profil">Profil</a>
+          <a href="#services">Perkhidmatan</a>
+          <a href="#data">Data</a>
         </div>
-
         <div class="col-lg-3 col-6 mb-4">
           <h5>Info Banjir</h5>
-          <a href="https://publicinfobanjir.water.gov.my" target="_blank">Public Infobanjir <i class="fas fa-external-link-alt small"></i></a>
-          <a href="#">Ramalan Cuaca (MET)</a>
+          <a href="https://publicinfobanjir.water.gov.my" target="_blank">Public Infobanjir</a>
           <a href="#">Portal JPS Malaysia</a>
         </div>
-
         <div class="col-lg-3 mb-4">
           <h5>Ikuti Kami</h5>
           <div class="d-flex gap-3 mt-3">
             <a href="#" class="text-white fs-4"><i class="fab fa-facebook"></i></a>
-            <a href="#" class="text-white fs-4"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="text-white fs-4"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-white fs-4"><i class="fab fa-tiktok"></i></a>
           </div>
         </div>
       </div>
-
-      <div class="footer-bottom">
-        &copy; 2025 Jabatan Pengairan dan Saliran Daerah Kuala Nerus. Hak Cipta Terpelihara.
-      </div>
+      <div class="footer-bottom">© 2025 Jabatan Pengairan dan Saliran Daerah Kuala Nerus.</div>
     </div>
   </footer>
+
+  <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="contactModalLabel">📞 Hubungi Kami</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-5 mb-4 mb-md-0">
+              <h6 class="fw-bold text-primary mb-3">Alamat Rasmi</h6>
+              <p>
+                <strong>Jabatan Pengairan dan Saliran<br>Daerah Kuala Nerus</strong><br>
+                Kompleks Pentadbiran Bandar Al Wathiqu Billah,<br>
+                21300 Kuala Nerus,<br>
+                Terengganu Darul Iman.
+              </p>
+              <hr>
+              <h6 class="fw-bold text-primary mb-3">Saluran Komunikasi</h6>
+              <p class="mb-2"><i class="fas fa-phone-alt text-success me-2"></i> <a href="tel:096653010" class="text-decoration-none text-dark fw-bold">09-665 3010</a></p>
+              <p><i class="fas fa-envelope text-danger me-2"></i> <a href="mailto:jpskn@terengganu.gov.my" class="text-decoration-none text-dark fw-bold">jpskn@terengganu.gov.my</a></p>
+            </div>
+            <div class="col-md-7">
+              <div class="ratio ratio-4x3 h-100 rounded overflow-hidden shadow-sm">
+                <iframe src="https://maps.google.com/maps?q=Kompleks%20Pentadbiran%20Bandar%20Al%20Wathiqu%20Billah%20Kuala%20Nerus&t=&z=15&ie=UTF8&iwloc=&output=embed" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Initialize Map
+      // Map Initialization
       const map = L.map("map").setView([5.39448, 103.06308], 12);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: '© OpenStreetMap' }).addTo(map);
 
-      // 2. Add Base Layer (OpenStreetMap)
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: '© OpenStreetMap contributors'
-      }).addTo(map);
-
-      // 3. Define Icons
+      // Icons
       const createIcon = (color) => new L.Icon({
         iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-${color}.png`,
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
+        iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
       });
 
-      const icons = {
-        office: createIcon("blue"),
-        rain: createIcon("green"),
-        siren: createIcon("red"),
-        river: createIcon("gold")
+      const icons = { office: createIcon("blue"), rain: createIcon("green"), siren: createIcon("red"), river: createIcon("gold") };
+
+      // Layers
+      const layers = {
+        office: L.layerGroup().addTo(map),
+        rain: L.layerGroup().addTo(map),
+        siren: L.layerGroup().addTo(map),
+        river: L.layerGroup().addTo(map),
+        zone: L.layerGroup().addTo(map)
       };
 
-      // 4. Create Layer Groups
-      const officeLayer = L.layerGroup().addTo(map);
-      const rainLayer = L.layerGroup().addTo(map);
-      const sirenLayer = L.layerGroup().addTo(map);
-      const riverLayer = L.layerGroup().addTo(map);
-      const zoneLayer = L.layerGroup().addTo(map); // Hydrology Zone
+      // Markers
+      L.marker([5.39448, 103.06308], { icon: icons.office }).bindPopup("<b>Pejabat JPS Kuala Nerus</b>").addTo(layers.office);
+      L.marker([5.3950, 103.0850], { icon: icons.rain }).bindPopup("Stesen Gong Badak: 22mm").addTo(layers.rain);
+      L.marker([5.4600, 103.1000], { icon: icons.rain }).bindPopup("Stesen Batu Rakit: 8mm").addTo(layers.rain);
+      L.marker([5.4145, 103.0855], { icon: icons.siren }).bindPopup("Siren: Tok Jembal").addTo(layers.siren);
+      L.marker([5.4000, 103.0700], { icon: icons.river }).bindPopup("Sg. Nerus: 4.5m (Bahaya)").addTo(layers.river);
 
-      // 5. Add Markers
-      L.marker([5.39448, 103.06308], { icon: icons.office }).bindPopup("<b>Pejabat JPS Kuala Nerus</b>").addTo(officeLayer);
-      
-      L.marker([5.3950, 103.0850], { icon: icons.rain }).bindPopup("Stesen Hujan Gong Badak: 22mm").addTo(rainLayer);
-      L.marker([5.4600, 103.1000], { icon: icons.rain }).bindPopup("Stesen Hujan Batu Rakit: 8mm").addTo(rainLayer);
-      
-      L.marker([5.4145, 103.0855], { icon: icons.siren }).bindPopup("Siren: Tok Jembal").addTo(sirenLayer);
-      
-      L.marker([5.4000, 103.0700], { icon: icons.river }).bindPopup("Sg. Nerus: 4.5m (Bahaya)").addTo(riverLayer);
+      // Zone Polygon
+      L.polygon([[5.407, 103.08], [5.412, 103.09], [5.409, 103.095], [5.404, 103.085]], { color: 'red', fillColor: '#f03', fillOpacity: 0.3 })
+        .bindPopup("Zon Risiko Banjir").addTo(layers.zone);
 
-      // 6. Add Hydrology Zone (Polygon)
-      const floodZone = L.polygon([
-        [5.407, 103.08],
-        [5.412, 103.09],
-        [5.409, 103.095],
-        [5.404, 103.085]
-      ], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.3
-      }).bindPopup("Zon Risiko Banjir (Hydrology Zone)");
-      floodZone.addTo(zoneLayer);
+      // Controls
+      L.control.layers(null, { "Pejabat": layers.office, "Hujan": layers.rain, "Siren": layers.siren, "Sungai": layers.river, "Zon Risiko": layers.zone }).addTo(map);
 
-      // 7. Layer Control (Top Right)
-      const overlays = {
-        "Pejabat": officeLayer,
-        "Stesen Hujan": rainLayer,
-        "Siren Amaran": sirenLayer,
-        "Aras Sungai": riverLayer,
-        "Zon Risiko": zoneLayer
-      };
-      L.control.layers(null, overlays).addTo(map);
-
-      // 8. Custom Legend Control (Bottom Right) - IMPROVISED
+      // Legend
       const legend = L.control({ position: "bottomright" });
-
-      legend.onAdd = function(map) {
+      legend.onAdd = function() {
         const div = L.DomUtil.create("div", "legend");
-        div.innerHTML += "<h4>Legenda Peta</h4>";
-        div.innerHTML += '<i style="background: #2A81CB"></i> Pejabat JPS<br>';
-        div.innerHTML += '<i style="background: #2AAD27"></i> Stesen Hujan<br>';
-        div.innerHTML += '<i style="background: #CB2B3E"></i> Siren Amaran<br>';
-        div.innerHTML += '<i style="background: #FFD326"></i> Aras Sungai<br>';
-        div.innerHTML += '<i style="background: #FF8888; opacity: 0.5"></i> Zon Risiko Banjir<br>';
+        div.innerHTML += "<h6>Legenda</h6>";
+        div.innerHTML += '<i style="background: #2A81CB"></i> Pejabat<br>';
+        div.innerHTML += '<i style="background: #2AAD27"></i> Hujan<br>';
+        div.innerHTML += '<i style="background: #CB2B3E"></i> Siren<br>';
+        div.innerHTML += '<i style="background: #FFD326"></i> Sungai<br>';
+        div.innerHTML += '<i style="background: #f03; opacity:0.5"></i> Zon Risiko<br>';
         return div;
       };
-
       legend.addTo(map);
     });
   </script>
