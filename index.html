@@ -122,8 +122,8 @@
       <a class="navbar-brand" href="#">
         <img src="jpslogo.png" alt="JPS Logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Jps_logo.png/600px-Jps_logo.png'">
         <div>
-          <div style="font-size:0.8em; line-height:1; color:#777;">JABATAN PENGAIRAN DAN SALIRAN</div>
-          DAERAH KUALA NERUS
+          <div style="font-size:0.8em; line-height:1; color:#777;">DAERAH</div>
+          KUALA NERUS
         </div>
       </a>
       
@@ -261,7 +261,6 @@
                 <tbody>
                   <tr><td>Sek. Keb. Gemuruh (F1)</td><td class="text-end fw-bold">0 mm</td></tr>
                   <tr><td>Universiti Malaysia Terengganu (F1)</td><td class="text-end fw-bold">5 mm</td></tr>
-                  <tr><td>Padang Kemunting (F1)</td><td class="text-end fw-bold">12 mm</td></tr>
                 </tbody>
               </table>
             </div>
@@ -271,7 +270,7 @@
 
         <div class="col-lg-6">
           <div class="aras-air-section shadow-sm">
-            <h4 class="fw-bold mb-3"><i class="fas fa-water text-warning"></i> Aras Air Sungai (Water Level)</h4>
+            <h4 class="fw-bold mb-3"><i class="fas fa-water text-warning"></i> Aras Air (Water Level) & Parit</h4>
             <div class="table-responsive">
               <table class="table table-borderless table-sm">
                 <thead class="border-bottom"><tr><th>Stesen</th><th>Status</th><th class="text-end">Aras (m)</th></tr></thead>
@@ -280,6 +279,11 @@
                     <td>Sungai Nerus di Kg Jeram</td>
                     <td><span class="badge bg-success">Normal</span></td>
                     <td class="text-end fw-bold">3.20 m</td>
+                  </tr>
+                  <tr>
+                    <td>Parit Utama di Padang Kemunting</td>
+                    <td><span class="badge bg-warning text-dark">Waspada</span></td>
+                    <td class="text-end fw-bold">1.50 m</td>
                   </tr>
                 </tbody>
               </table>
@@ -411,7 +415,7 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       // 1. Initialize Map
-      const map = L.map("map").setView([5.40, 103.07], 11); // Centered on Kuala Nerus area
+      const map = L.map("map").setView([5.38, 103.06], 11); 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: '© OpenStreetMap' }).addTo(map);
 
       // 2. Icon Definitions
@@ -424,8 +428,8 @@
       const icons = {
         office: createIcon("blue"),
         rain: createIcon("green"),  // For rainfall stations
-        river: createIcon("gold"),  // For river water levels
-        siren: createIcon("red")    // Optional for future use
+        river: createIcon("gold"),  // For river/drain water levels
+        siren: createIcon("red")    
       };
 
       // 3. Layer Groups
@@ -436,36 +440,34 @@
         zone: L.layerGroup().addTo(map)
       };
 
-      // 4. Add Real-World Station Markers
-      
+      // 4. Markers - WITH UPDATED COORDINATES
+
       // -- Pejabat JPS
       L.marker([5.39448, 103.06308], { icon: icons.office })
         .bindPopup("<b>Pejabat JPS Kuala Nerus</b>")
         .addTo(layers.office);
 
-      // -- Stesen Hujan (Rainfall)
-      // Sek. Keb. Gemuruh (F1)
+      // -- Stesen Hujan
       L.marker([5.3220, 103.0180], { icon: icons.rain })
         .bindPopup("<b>Sek. Keb. Gemuruh (F1)</b><br>Jenis: Stesen Hujan")
         .addTo(layers.rain);
         
-      // Universiti Malaysia Terengganu (F1)
       L.marker([5.4079, 103.0906], { icon: icons.rain })
         .bindPopup("<b>Universiti Malaysia Terengganu (F1)</b><br>Jenis: Stesen Hujan")
         .addTo(layers.rain);
 
-      // Padang Kemunting (F1)
-      L.marker([5.4380, 103.1110], { icon: icons.rain })
-        .bindPopup("<b>Padang Kemunting (F1)</b><br>Jenis: Stesen Hujan")
-        .addTo(layers.rain);
-
-      // -- Stesen Sungai (Water Level)
-      // Sungai Nerus di Kg Jeram
-      L.marker([5.3990, 103.0670], { icon: icons.river })
+      // -- Stesen Aras Air / Parit (UPDATED)
+      // Sungai Nerus di Kg Jeram (5°20'12.1"N 103°03'28.6"E => 5.33669, 103.05794)
+      L.marker([5.33669, 103.05794], { icon: icons.river })
         .bindPopup("<b>Sungai Nerus di Kg Jeram</b><br>Jenis: Aras Air Sungai")
         .addTo(layers.river);
 
-      // -- Hydrology Zone Polygon
+      // Parit Utama di Padang Kemunting (5°24'43.5"N 103°03'00.8"E => 5.41208, 103.05022)
+      L.marker([5.41208, 103.05022], { icon: icons.river })
+        .bindPopup("<b>Parit Utama di Padang Kemunting</b><br>Jenis: Aras Air Parit/Saliran")
+        .addTo(layers.river);
+
+      // -- Hydrology Zone
       L.polygon([[5.407, 103.08], [5.412, 103.09], [5.409, 103.095], [5.404, 103.085]], { color: 'red', fillColor: '#f03', fillOpacity: 0.3 })
         .bindPopup("Zon Risiko Banjir").addTo(layers.zone);
 
@@ -473,7 +475,7 @@
       L.control.layers(null, { 
         "Pejabat": layers.office, 
         "Stesen Hujan": layers.rain, 
-        "Aras Sungai": layers.river, 
+        "Aras Sungai/Parit": layers.river, 
         "Zon Risiko": layers.zone 
       }).addTo(map);
 
