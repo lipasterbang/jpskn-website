@@ -102,6 +102,52 @@
     .status-online { background-color: #28a745; box-shadow: 0 0 5px #28a745; }
     .status-offline { background-color: #6c757d; }
 
+    /* Card Hover Effect */
+    .pump-card {
+        border: none;
+        border-radius: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden; /* Supaya header tak keluar bucu */
+    }
+
+    .pump-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+    }
+
+    /* Header Gradient */
+    .pump-header {
+        background: linear-gradient(135deg, #0056b3 0%, #0073e6 100%);
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .pump-body {
+        padding: 25px;
+    }
+
+    /* Status Indicator Pulse Animation */
+    .status-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 8px;
+    }
+
+    .status-online {
+        background-color: #28a745;
+        box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+        animation: pulse-green 2s infinite;
+    }
+
+    @keyframes pulse-green {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+    }
+
     /* Map Styling */
     #map { height: 500px; width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
     .legend { background: white; padding: 10px; border-radius: 5px; box-shadow: 0 0 15px rgba(0,0,0,0.2); line-height: 1.5; }
@@ -264,56 +310,66 @@
         <p class="text-muted">Pantau status operasi infrastruktur kawalan banjir utama di daerah Kuala Nerus.</p>
       </div>
 
-      <div class="row justify-content-center g-4">
-        <div class="col-md-6 col-lg-5">
-          <div class="pump-card bg-white h-100 shadow-sm">
-            <div class="pump-header">
-              <i class="fas fa-server fa-3x mb-2"></i>
-              <h4 class="fw-bold m-0">Rumah Pam Tok Jiring</h4>
-            </div>
-            <div class="pump-body">
-              <p class="text-muted mb-4">
-                Papan pemuka (dashboard) telemetri bagi pemantauan operasi pam dan aras kolam takungan Tok Jiring secara <em>real-time</em>.
-              </p>
-              
-              <div class="d-flex justify-content-center align-items-center mb-4">
-                <span class="status-indicator status-online"></span>
-                <small class="fw-bold text-success">Sistem Atas Talian</small>
-              </div>
-
-              <a href="http://jpstokjiring.ddns.net:81/overview.htm" target="_blank" class="btn btn-primary w-100 py-2 fw-bold">
-                <i class="fas fa-desktop me-2"></i> LIHAT DASHBOARD
-              </a>
-              <small class="text-muted d-block mt-2" style="font-size:0.8rem;">*Akses mungkin terhad kepada rangkaian dalaman</small>
-            </div>
+      <section class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center g-4">
+      
+      <div class="col-md-6 col-lg-5">
+        <div class="pump-card bg-white h-100 shadow-sm">
+          <div class="pump-header">
+            <i class="fas fa-water fa-3x mb-2"></i>
+            <h4 class="fw-bold m-0">Rumah Pam Tok Jiring</h4>
           </div>
-        </div>
-
-        <div class="col-md-6 col-lg-5">
-          <div class="pump-card bg-white h-100 shadow-sm">
-            <div class="pump-header" style="background: #0073e6;">
-              <i class="fas fa-cogs fa-3x mb-2"></i>
-              <h4 class="fw-bold m-0">Rumah Pam Pusu Tiga</h4>
+          <div class="pump-body text-center">
+            <p class="text-muted mb-4">
+              Papan pemuka telemetri bagi pemantauan operasi pam dan aras kolam takungan Tok Jiring secara <em>real-time</em>.
+            </p>
+            
+            <div class="d-flex justify-content-center align-items-center mb-4 p-2 bg-light rounded-pill border" style="width: fit-content; margin: 0 auto;">
+              <span class="status-indicator status-online"></span>
+              <small class="fw-bold text-success m-0">Sistem Atas Talian</small>
             </div>
-            <div class="pump-body">
-              <p class="text-muted mb-4">
-                Stesen infrastruktur kawalan banjir utama yang menyelia aliran air bagi kawasan tadahan Pusu Tiga dan sekitarnya.
-              </p>
-              
-              <div class="d-flex justify-content-center align-items-center mb-4">
-                 <a href="http://jps-pusu3.ddns.net:82/overview.htm" target="_blank" class="btn btn-primary w-100 py-2 fw-bold">
-                <small class="fw-bold text-secondary">LIHAT DASHBOARD</small>
-              </div>
 
-              <button class="btn btn-outline-primary w-100 py-2 fw-bold" disabled>
-                <i class="fas fa-info-circle me-2"></i> Info Lokasi Sahaja
-              </button>
-            </div>
+            <a href="http://jpstokjiring.ddns.net:81/overview.htm" target="_blank" rel="noopener noreferrer" class="btn btn-primary w-100 py-2 fw-bold shadow-sm">
+              <i class="fas fa-desktop me-2"></i> LIHAT DASHBOARD
+            </a>
+            <small class="text-muted d-block mt-2 fst-italic" style="font-size:0.75rem;">
+              <i class="fas fa-lock me-1"></i> Akses Terhad (JPS Intranet)
+            </small>
           </div>
         </div>
       </div>
+
+      <div class="col-md-6 col-lg-5">
+        <div class="pump-card bg-white h-100 shadow-sm">
+          <div class="pump-header" style="background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);">
+            <i class="fas fa-cogs fa-3x mb-2"></i>
+            <h4 class="fw-bold m-0">Rumah Pam Pusu Tiga</h4>
+          </div>
+          <div class="pump-body text-center">
+            <p class="text-muted mb-4">
+              Stesen infrastruktur kawalan banjir utama yang menyelia aliran air bagi kawasan tadahan Pusu Tiga dan sekitarnya.
+            </p>
+            
+            <div class="d-flex justify-content-center align-items-center mb-4 p-2 bg-light rounded-pill border" style="width: fit-content; margin: 0 auto;">
+              <span class="status-indicator status-online"></span>
+              <small class="fw-bold text-success m-0">Sistem Atas Talian</small>
+            </div>
+
+            <a href="http://jps-pusu3.ddns.net:82/overview.htm" target="_blank" rel="noopener noreferrer" class="btn btn-info text-white w-100 py-2 fw-bold shadow-sm">
+              <i class="fas fa-desktop me-2"></i> LIHAT DASHBOARD
+            </a>
+            
+            <small class="text-muted d-block mt-2 fst-italic" style="font-size:0.75rem;">
+               <i class="fas fa-lock me-1"></i> Akses Terhad (JPS Intranet)
+            </small>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
   <section id="peta" class="py-5 bg-white">
     <div class="container">
